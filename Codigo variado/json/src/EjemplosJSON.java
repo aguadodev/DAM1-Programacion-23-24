@@ -15,7 +15,11 @@ public class EjemplosJSON {
      * Devuelve un String con el contenido del JSON o null.
      */
     public static String getJson(String textoURL) {
+        
         URL url;
+
+        System.out.println(textoURL);
+
         try {
             url = new URL(textoURL);
             try (InputStream input = url.openStream()) {
