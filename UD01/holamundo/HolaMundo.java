@@ -8,7 +8,7 @@ public class HolaMundo {
 
         double importe = 80.27;
         byte numPersonas = 5;
-        double importePersona;
+        double importePersona; //
 
         importePersona = importe / numPersonas;
 
