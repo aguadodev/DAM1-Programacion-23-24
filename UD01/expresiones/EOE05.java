@@ -68,36 +68,26 @@ public class EOE05 {
 
         
         System.out.print("T: ");
-        System.out.println(i <= j);
+        System.out.println(i <= j && i >= c);
 
         System.out.print("U: ");
-        System.out.println(i <= j);
+        System.out.println(i > 0 && j < 5);
 
         System.out.print("V: ");
-        System.out.println(i <= j);
+        System.out.println(i > 0 || j < 5);
 
         System.out.print("W: ");
-        System.out.println(i <= j);
+        System.out.println(x > y && i > 0 || j < 5);
 
         System.out.print("X: ");
-        System.out.println(i <= j);
+        System.out.println((3 * i - 2 * j) % (2 * d - c) > 3 * d);
 
         System.out.print("Y: ");
-        System.out.println(i <= j);
+        System.out.println(2 * ((i / 5) + (4 * (j - 3)) % (i + j - 2)) >= 10);
 
         System.out.print("Z: ");
-        System.out.println(i <= j);
+        System.out.println((i - 3 * j) % (c + 2 * d) / (x - y) >= 0);
 
-
-        /*
-         * i <= j && i >= c
-         * i > 0 && j < 5
-         * i > 0 || j < 5
-         * x > y && i > 0 || j < 5
-         * (3 * i – 2 * j) % (2 * d – c) > 3 * d
-         * 2 * ((i / 5) + (4 * (j – 3)) % (i + j – 2)) >= 10
-         * (i – 3 * j) % (c + 2 * d) / (x – y) >= 0
-         */
     }
 
 }
