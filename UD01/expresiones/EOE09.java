@@ -4,11 +4,16 @@ import java.time.LocalDate;
 
 public class EOE09 {
     public static void main(String[] args) {
-        int n = 123;
+        int n = 623; // número de 3 cifras
         char a = '9';
         int n2 = 43;
 
         System.out.println("Construir expresiones algorítmicas\n");
+
+        // La suma de los dígitos de un número entero N de 3 cifras
+        int v6 = (n % 10) + (n / 10 % 10) + (n / 100);
+        System.out.println("6: (" + n + ") " + v6);
+
 
         boolean v10 = n / 100 % 2 == 1;
         System.out.println("10: (" + n + ") " + v10);
@@ -27,7 +32,7 @@ public class EOE09 {
         int da = LocalDate.now().getDayOfMonth();
         int ma = LocalDate.now().getMonthValue();
         int aa = LocalDate.now().getYear();
-        boolean v28 = (aa > an + 18) || (aa - an == 18 && ma > mn) || (aa - an == 18 && ma == mn && da > dn);
+        boolean v28 = (aa > an + 18) || (aa - an == 18 && ma > mn) || (aa - an == 18 && ma == mn && da >= dn);
         System.out.println("28: Mayor de edad? " + v28);
 
         // Dado un número N de dos cifras, comprobar si las dos cifras son iguales.
