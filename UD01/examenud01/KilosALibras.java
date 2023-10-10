@@ -8,7 +8,7 @@ public class KilosALibras {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Introduce una medida de peso en kilogramos: ");
+        System.out.print("Introduce una medida de peso en kilogramos: ");
         double kilos = sc.nextDouble();
 
         double libras = kilos / KILOS_POR_LIBRA;
