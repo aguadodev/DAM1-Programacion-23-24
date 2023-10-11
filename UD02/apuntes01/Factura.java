@@ -9,8 +9,8 @@ public class Factura {
         final double UMBRAL_DESCUENTO = 100;
         final double DESCUENTO = 0.05;
 
-        double precio;
-        int unidades;
+        double precioProducto;
+        int numUnidades;
         double precioSinIva;
         double iva;
         double precioConIva;
@@ -20,13 +20,13 @@ public class Factura {
         // Entrada de datos
         Scanner sc = new Scanner(System.in);
         System.out.print("Precio del producto: ");
-        precio = sc.nextDouble();
+        precioProducto = sc.nextDouble();
         System.out.print("Número de unidades: ");
-        unidades = sc.nextInt();
+        numUnidades = sc.nextInt();
         sc.close();
 
         // Proceso
-        precioSinIva = precio * unidades;
+        precioSinIva = precioProducto * numUnidades;
         iva = precioSinIva * IVA;
         precioConIva = precioSinIva + iva;
 
