@@ -1,0 +1,27 @@
+package UD02.apuntes01;
+
+import java.util.Scanner;
+
+public class E0204 {
+    public static void main(String[] args) {
+        // Declaración de variables y constantes
+        double numero;
+        boolean casiCero;
+
+        // Entrada de datos
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce un número decimal:");
+        numero = sc.nextDouble();
+        sc.close();
+
+        // Proceso
+        casiCero = numero != 0 && numero > -1 && numero < 1;
+
+        // Salida
+        if (casiCero) {
+            System.out.println("El numero " + numero + " es casi-cero.");
+        } else {
+            System.out.println("El numero " + numero + " NO es casi-cero.");
+        }
+    }
+}
