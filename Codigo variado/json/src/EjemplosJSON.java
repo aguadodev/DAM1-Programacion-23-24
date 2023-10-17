@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
@@ -41,6 +43,41 @@ public class EjemplosJSON {
 
         }
     }
+
+
+    public static String obtenerContenidoURL(String urlString) throws IOException {
+        // Crear la URL
+        URL url = new URL(urlString);
+
+        // Abrir la conexión
+        HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
+
+        // Configurar la solicitud GET
+        conexion.setRequestMethod("GET");
+
+        // Obtener la respuesta
+        int respuestaCodigo = conexion.getResponseCode();
+
+        if (respuestaCodigo == HttpURLConnection.HTTP_OK) {
+            // Leer el contenido de la respuesta
+            BufferedReader lector = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
+            StringBuilder contenido = new StringBuilder();
+            String linea;
+
+            while ((linea = lector.readLine()) != null) {
+                contenido.append(linea);
+            }
+
+            lector.close();
+            return contenido.toString();
+        } else {
+            // Manejar el error si la respuesta no es OK
+            return "Error al obtener el contenido. Código de respuesta: " + respuestaCodigo;
+        }
+    }
+
+
+
 
     /*
      * **************
@@ -169,7 +206,12 @@ public class EjemplosJSON {
     }
 
     public static void main(String[] args) {
-
+        try {
+            System.out.println(obtenerContenidoURL("https://jsonplaceholder.typicode.com/posts/1"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println("EJEMPLO OPEN FOOD FACTS");
         System.out.println("=======================");
         final String CODIGO_EJEMPLO = "8424523060914";
