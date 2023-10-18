@@ -36,6 +36,6 @@ public class E0303 {
                 }
             }
         } while (!numeroAcertado && !usuarioRendido);
+        sc.close();
     }
-
 }
