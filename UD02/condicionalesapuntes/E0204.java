@@ -1,4 +1,4 @@
-package UD02.apuntes01;
+package UD02.condicionalesapuntes;
 
 import java.util.Scanner;
 
