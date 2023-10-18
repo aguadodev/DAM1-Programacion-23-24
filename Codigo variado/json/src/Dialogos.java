@@ -1,3 +1,8 @@
+
+/**
+ * Programa de ejemplo de uso de cuadros de diálogo con la clase JOptionPane del paquete javax.swing
+ */
+
 import javax.swing.JOptionPane;
 
 public class Dialogos {

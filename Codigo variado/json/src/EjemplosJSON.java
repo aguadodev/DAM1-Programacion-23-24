@@ -1,3 +1,8 @@
+
+/**
+ * Programa de ejemplo de acceso URLs y servicios web en formato JSON: OPEN FOOD FACTS, OPEN STREET MAPS
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,9 +85,9 @@ public class EjemplosJSON {
 
 
     /*
-     * **************
-     * OPEN FOOD FACS
-     * **************
+     * ***************
+     * OPEN FOOD FACTS
+     * ***************
      */
     public static void mostrarProductoOpenFoodFacts(String codigo) {
         // Obtiene el JSON a partir de la URL de la API que incluye el código de barras
