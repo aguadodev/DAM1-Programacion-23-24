@@ -16,6 +16,7 @@ public class EP0314 {
         for (int i = 2; i <= n; i++){
             boolean primo = true;
             for (int j = 2; j < i; j++) {
+                // TODO: Optimizar Bucle
                 if (i % j == 0)
                     primo = false;
             }
