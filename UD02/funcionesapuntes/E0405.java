@@ -14,39 +14,20 @@ public class E0405 {
         System.out.println(esVocal('Ó'));
         System.out.println(esVocal('Ú'));
         System.out.println(esVocal('f'));
-    
+
         // Salida
     }
-    
+
     static boolean esVocal(char letra) {
-        boolean vocal = false;
-    
-        // Si es una vocal..
-        switch (letra) {
-            case 'A': ;
-            case 'E': ;
-            case 'I': ;
-            case 'O': ;
-            case 'U': ;
-            case 'a': ;
-            case 'e': ;
-            case 'i': ;
-            case 'o': ;
-            case 'u': ;
-            case 'á': ;
-            case 'é': ;
-            case 'í': ;
-            case 'ó': ;
-            case 'ú': ;
-            case 'Á': ;
-            case 'É': ;
-            case 'Í': ;
-            case 'Ó': ;
-            case 'Ú':
-                vocal = true;
-        }
-    
-        return vocal;
+        return switch (letra) {
+            case 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u',
+                    'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú' -> {
+                yield true;
+            }
+            default -> {
+                yield false;
+            }
+        };
     }
-        
+
 }

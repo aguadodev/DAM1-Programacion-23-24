@@ -5,6 +5,7 @@ public class E0406 {
 
         // Salida
         System.out.println(esPrimo(23));
+        System.out.println(esPrimo(110));
     }
     
     static boolean esPrimo(int n) {

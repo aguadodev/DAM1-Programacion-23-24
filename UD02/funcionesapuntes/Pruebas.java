@@ -12,9 +12,22 @@ public class Pruebas {
         System.out.println("Número de saludos: ");
         int veces = sc.nextInt();
         saludar(nombre, veces);
-        System.out.println(veces);
+
+        saludar("Marta");
+        saludar(5);
+
         //saludar("María", 3);
         //saludar("Jaime", 5);
+    }
+
+    static void saludar(int numSaludos){
+        for(int i = 0; i < numSaludos; i++){
+            System.out.println("Hola!!!");
+        }
+    }
+
+    static void saludar(String nombre){
+        System.out.println("Hola " + nombre + "!!!");
     }
 
     static void saludar(String nombre, int numSaludos) {
