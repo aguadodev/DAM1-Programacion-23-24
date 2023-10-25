@@ -6,12 +6,12 @@ public class E0402 {
         int num1 = 6, num2 = 18;
     
         // Proceso & Salida
-        numerosEntre(num1, num2);
+        imprimirNumerosEntre(num1, num2);
     
-        numerosEntre(13, 27);
+        imprimirNumerosEntre(13, 27);
     }
     
-    static void numerosEntre(int inicio, int fin) {
+    static void imprimirNumerosEntre(int inicio, int fin) {
         // Imprime los números entre los valores pasados como parámetros, inclusive
         for (int i = inicio; i <= fin; i++) {
             System.out.println(i);
