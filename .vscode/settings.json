@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+    ],
+    "editor.inlayHints.enabled": "off" // Elimina los nombres de los parámetros al invocar métodos
+}
