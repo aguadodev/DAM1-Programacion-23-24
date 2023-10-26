@@ -11,6 +11,8 @@ public class E0108 {
         // Pedir la edad al usuario
         System.out.print("Escribe tu edad: ");
         edad = sc.nextByte();     
+        sc.close();
+
 
         String textoSalida = edad >= 18 ? "Eres mayor de edad" : "Aún no eres mayor de edad";
 

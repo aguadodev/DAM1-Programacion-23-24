@@ -10,6 +10,7 @@ public class E0109 {
         int numero; 
 
         numero = sc.nextInt();
+        sc.close();
 
         boolean esPar = numero % 2 == 0;
 

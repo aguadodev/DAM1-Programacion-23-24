@@ -12,6 +12,8 @@ public class NumerosOrdenados {
         a = sc.nextInt();
         b = sc.nextInt();
         c = sc.nextInt();
+        sc.close();
+
 
         System.out.println("RESULTADO");
 

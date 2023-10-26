@@ -11,6 +11,8 @@ public class Pruebas {
         String nombre = sc.nextLine();
         System.out.println("Número de saludos: ");
         int veces = sc.nextInt();
+        sc.close();
+
         saludar(nombre, veces);
 
         saludar("Marta");

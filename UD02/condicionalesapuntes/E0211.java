@@ -6,7 +6,9 @@ public class E0211 {
     public static void main(String[] args) {
         System.out.print("Introduce el número de día de la semana: ");
 
-        int dia = new Scanner(System.in).nextInt();
+        Scanner sc = new Scanner(System.in);
+        int dia = sc.nextInt();
+        sc.close();
 
         switch (dia) {
             case 1 -> 

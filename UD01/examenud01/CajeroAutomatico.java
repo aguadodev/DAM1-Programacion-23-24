@@ -13,6 +13,7 @@ public class CajeroAutomatico {
         Scanner sc = new Scanner(System.in);
         System.out.print("Importe en efectivo que desea retirar (€): ");
         importe = sc.nextInt();
+        sc.close();
 
         int importeNoRetirado = importe % BILLETE_5;
         int importeRetirado = importe - importeNoRetirado;

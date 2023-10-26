@@ -13,6 +13,7 @@ public class E0213 {
         minutos = sc.nextByte();
         System.out.print("Segundos (0-59): ");
         segundos = sc.nextByte();
+        sc.close();
 
 
         segundos++;

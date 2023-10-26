@@ -12,8 +12,8 @@ public class EOE10 {
 
         System.out.print("Escribe un caracter: ");
         ch = sc.nextLine().charAt(0);
-
-        
+        sc.close();
+       
 
         System.out.print(ch >= '0' && ch <= '9' ? "Es un dígito" : "");
         System.out.print(ch >= 'A' && ch <= 'Z' ? "Es una letra mayúscula" : "");

@@ -14,6 +14,7 @@ public class RaizCuadrada {
 
         System.out.printf("La raíz cuadrada de %d es %.2f", numero, Math.sqrt(numero));
 
+        sc.close();
     }
     
 }

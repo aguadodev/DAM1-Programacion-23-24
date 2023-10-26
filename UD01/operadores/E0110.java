@@ -18,6 +18,8 @@ public class E0110 {
 
         System.out.print("Tengo recados? ");
         recados = sc.nextBoolean();
+        sc.close();
+
 
         podemosSalir = recados || (!tareas && !llueve);
 

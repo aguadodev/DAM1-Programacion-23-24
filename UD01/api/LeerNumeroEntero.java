@@ -1,6 +1,5 @@
 package api;
 
-import java.time.*;
 import java.util.Scanner;
 
 public class LeerNumeroEntero {
@@ -13,5 +12,6 @@ public class LeerNumeroEntero {
 
         System.out.println("Has introducido el número " + numero);
         
+        sc.close();
     }
 }

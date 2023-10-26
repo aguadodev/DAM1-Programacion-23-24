@@ -67,7 +67,7 @@ public class E0212 {
 
         // Salida
         if (fechaCorrecta) {
-            System.out.println("La fecha es correcta");
+            System.out.printf("La fecha es correcta: %d/%d/%d", dia, mes, anho);
         } else {
             System.out.println("La fecha NO es correcta");
         }

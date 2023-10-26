@@ -1,7 +1,5 @@
 package UD02.buclesapuntes;
 
-import java.util.Scanner;
-
 public class E0307 {
     public static void main(String[] args) {
         final int MAX = 1000;

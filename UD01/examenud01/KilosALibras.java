@@ -10,6 +10,8 @@ public class KilosALibras {
 
         System.out.print("Introduce una medida de peso en kilogramos: ");
         double kilos = sc.nextDouble();
+        sc.close();
+
 
         double libras = kilos / KILOS_POR_LIBRA;
 

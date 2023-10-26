@@ -11,6 +11,8 @@ public class E0103 {
         // Pedir la edad al usuario
         System.out.print("Escribe tu edad: ");
         edad = sc.nextByte();
+        sc.close();
+
 
         // Calcular la nueva edad
         edad++;

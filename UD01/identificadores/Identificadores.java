@@ -14,6 +14,12 @@ public class Identificadores {
         byte _variable = 1;
         //...
 
+        System.out.println(numeroDeTelefono);
+        System.out.println(totalVentas);
+        System.out.println(miNombre);
+        System.out.println(young4ever);
+        System.out.println(_variable);
+
 
     }
     

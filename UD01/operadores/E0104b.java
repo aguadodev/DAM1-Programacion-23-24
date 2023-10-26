@@ -15,6 +15,8 @@ public class E0104b {
         System.out.print("Introduce el año de nacimiento: ");
         int anhoNacimiento;
         anhoNacimiento = sc.nextInt(); 
+        sc.close();
+
 
         int edad = anhoActual - anhoNacimiento;
         

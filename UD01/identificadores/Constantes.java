@@ -9,6 +9,8 @@ public class Constantes {
             Número de meses del año.
          */
         final byte NUM_ALUMNOS_PROGRAMACION = 32;
+
+        System.out.println("Número de alumnos/as: " + NUM_ALUMNOS_PROGRAMACION);
         
 
     }

@@ -1,7 +1,6 @@
 package examenud01;
 
 import java.text.DecimalFormat;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class ComidaEnGrupo {
@@ -20,6 +19,8 @@ public class ComidaEnGrupo {
 
         System.out.print("Importe total de la comida (€): ");
         importeTotal = sc.nextDouble();
+        sc.close();
+
 
         // PROCESO
         importePorPersona = importeTotal / numeroPersonas;
