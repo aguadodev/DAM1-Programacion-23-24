@@ -1,4 +1,4 @@
-package UD01.api;
+package ud01.api;
 
 import java.util.Locale;
 import java.util.Scanner;

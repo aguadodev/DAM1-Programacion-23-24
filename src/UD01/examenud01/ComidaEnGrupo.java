@@ -1,4 +1,4 @@
-package UD01.examenud01;
+package ud01.examenud01;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;

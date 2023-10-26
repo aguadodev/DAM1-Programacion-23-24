@@ -1,4 +1,4 @@
-package UD02.funcionesapuntes;
+package ud02.funcionesapuntes;
 
 import static org.junit.Assert.assertEquals;
 

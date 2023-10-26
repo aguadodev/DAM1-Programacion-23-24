@@ -1,4 +1,4 @@
-package UD01.identificadores;
+package ud01.identificadores;
 
 /**
  * identificadores

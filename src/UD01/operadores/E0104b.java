@@ -1,4 +1,4 @@
-package UD01.operadores;
+package ud01.operadores;
 
 import java.time.LocalDate;
 import java.util.Scanner;

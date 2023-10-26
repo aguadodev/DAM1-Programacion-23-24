@@ -1,4 +1,4 @@
-package UD02.funcionesapuntes;
+package ud02.funcionesapuntes;
 
 public class E0410 {
     public static void main(String[] args) {

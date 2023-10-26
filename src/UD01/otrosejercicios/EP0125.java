@@ -1,4 +1,4 @@
-package UD01.otrosejercicios;
+package ud01.otrosejercicios;
 
 public class EP0125 {
     public static void main(String[] args) {

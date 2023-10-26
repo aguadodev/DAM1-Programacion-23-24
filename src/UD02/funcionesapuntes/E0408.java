@@ -1,4 +1,4 @@
-package UD02.funcionesapuntes;
+package ud02.funcionesapuntes;
 
 public class E0408 {
     static double calculadora(double a, double b, int operacion) {

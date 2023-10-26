@@ -1,4 +1,4 @@
-package UD02.buclesejercicios;
+package ud02.buclesejercicios;
 
 public class NumerosEnTexto {
     public static void main(String[] args) {

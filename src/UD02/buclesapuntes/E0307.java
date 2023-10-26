@@ -1,4 +1,4 @@
-package UD02.buclesapuntes;
+package ud02.buclesapuntes;
 
 public class E0307 {
     public static void main(String[] args) {

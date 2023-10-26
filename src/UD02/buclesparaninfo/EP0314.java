@@ -1,4 +1,4 @@
-package UD02.buclesparaninfo;
+package ud02.buclesparaninfo;
 
 import java.util.Scanner;
 

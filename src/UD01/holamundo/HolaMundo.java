@@ -1,5 +1,5 @@
 
-package UD01.holamundo;
+package ud01.holamundo;
 
 public class HolaMundo {
 

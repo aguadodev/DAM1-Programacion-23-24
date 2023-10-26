@@ -1,4 +1,4 @@
-package UD02.buclesapuntes;
+package ud02.buclesapuntes;
 
 import java.util.Scanner;
 
