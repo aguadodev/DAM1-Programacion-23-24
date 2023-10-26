@@ -1,6 +1,6 @@
 package UD02.funcionesapuntes;
 
-public class E0403-v2 {
+public class E0403v2 {
     public static void main(String[] args) {
         // Salida
         areaVolumenCilindro(1, 2.5, 3.8);

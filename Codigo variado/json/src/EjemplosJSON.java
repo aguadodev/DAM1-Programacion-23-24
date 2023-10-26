@@ -15,6 +15,7 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
 public class EjemplosJSON {
 
     /**
@@ -211,6 +212,8 @@ public class EjemplosJSON {
     }
 
     public static void main(String[] args) {
+        System.out.println("EJEMPLOS JSON:");
+        System.out.println("##############");
         try {
             System.out.println(obtenerContenidoURL("https://jsonplaceholder.typicode.com/posts/1"));
         } catch (IOException e) {
