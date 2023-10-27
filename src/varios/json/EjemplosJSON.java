@@ -10,7 +10,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -52,9 +55,10 @@ public class EjemplosJSON {
     }
 
 
-    public static String obtenerContenidoURL(String urlString) throws IOException {
+    public static String obtenerContenidoURL(String urlString) throws Exception {
         // Crear la URL
-        URL url = new URL(urlString);
+        URI uri = new URI(urlString);
+        URL url = uri.toURL();
 
         // Abrir la conexión
         HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
@@ -216,11 +220,23 @@ public class EjemplosJSON {
         System.out.println("EJEMPLOS JSON:");
         System.out.println("##############");
         try {
-            System.out.println(obtenerContenidoURL("https://jsonplaceholder.typicode.com/posts/1"));
-        } catch (IOException e) {
+            String urlPrueba = "https://jsonplaceholder.typicode.com/posts/1";
+            System.out.println(urlPrueba);
+
+            URI uri = new URI(urlPrueba);
+            URL url = uri.toURL();
+            InputStream inputStream = url.openStream();
+
+
+
+
+            System.out.println(obtenerContenidoURL(urlPrueba));
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+
         System.out.println("EJEMPLO OPEN FOOD FACTS");
         System.out.println("=======================");
         final String CODIGO_EJEMPLO = "8424523060914";
