@@ -1,0 +1,15 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="miUnidadDePersistencia"  transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <properties>
+            <properties-file>db.properties</properties-file>
+
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://HOST:3306/DATABASE"/>
+            <property name="jakarta.persistence.jdbc.user" value="USER"/>
+            <property name="jakarta.persistence.jdbc.password" value="PASSWORD"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+        </properties>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    </persistence-unit>
+</persistence>
