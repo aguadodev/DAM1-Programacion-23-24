@@ -2,30 +2,33 @@ package ud2.funcionesapuntes;
 
 public class E0410 {
     public static void main(String[] args) {
-        // Declaración de variables y constantes
-        double pot = potencia (5, 3);
-    
         // Salida
-        System.out.println(pot);
+        System.out.println("Potencia iterativa: " + potenciaIterativa(5, 3));
+
+        System.out.println("Potencia recursiva: " + potenciaRecursiva(5, 3));
     }
-    
-    static double potencia(double b, int e) {
+
+    static double potenciaRecursiva(double a, int n) {
         double resultado = 1;
-    
+
         // Algoritmo recursivo
-        if (e == 0) {
+        if (n == 0) {
             resultado = 1;
         } else {
-            resultado = b * potencia (b, e - 1);
+            resultado = a * potenciaRecursiva(a, n - 1);
         }
-    
-        // Algoritmo iterativo
-        /*
-        for (int i = 0; i < e; i++) {
-            resultado *= b;
-        }*/              
-    
         return resultado;
     }
-        
+
+    static double potenciaIterativa(double a, int n) {
+        double resultado = 1;
+
+        // Algoritmo iterativo
+        for (int i = 0; i < n; i++) {
+            resultado *= a;
+        }
+
+        return resultado;
+    }
+
 }

@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Pruebas {
 
     public static void main(String[] args) {
+
+        System.out.println(factorial(5));
+
+        cuentaAtrasRecursiva(10);
+
         // Scanner Leer nombre.    
         Scanner sc = new Scanner(System.in);
         System.out.println("Nombre: ");
@@ -38,6 +43,21 @@ public class Pruebas {
             int j = i + 1;
             System.out.println(j + ". Hola " + nombre + "!!!");
         }
+    }
+
+    static void cuentaAtrasRecursiva(int n) {
+        System.out.println(n);
+        if (n > 0)
+            cuentaAtrasRecursiva(n-1);
+    }
+
+    static long factorial(int n){
+        if (n == 0) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }            
+
     }
 
 }
