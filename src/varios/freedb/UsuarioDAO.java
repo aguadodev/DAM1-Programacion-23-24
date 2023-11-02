@@ -1,10 +1,14 @@
 package varios.freedb;
+
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class UsuarioDAO {
     private static Connection conectar() {
@@ -59,15 +63,17 @@ public class UsuarioDAO {
         try {
             sentencia = conexion.createStatement();
 
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM user WHERE username LIKE '" + username + "' AND password LIKE '" + password + "'");
+            ResultSet resultado = sentencia.executeQuery("SELECT * FROM user WHERE username LIKE '" + username + "'");
 
-            while (resultado.next()) {
+            if (resultado.next()) {
                 // Procesa los datos
                 int id = resultado.getInt("id");
-                //String username = resultado.getString("username");
-                //String password = resultado.getString("password");
-                Timestamp createdAt = resultado.getTimestamp("createdAt");
-                loginOk = true;
+                Timestamp createdAt = resultado.getTimestamp("created_at");
+                // String username = resultado.getString("username");
+                byte[] passwordHashed = resultado.getString("password").getBytes(StandardCharsets.UTF_8);
+                BCrypt.Result resultStrict = BCrypt.verifyer(BCrypt.Version.VERSION_2Y).verifyStrict(password.getBytes(StandardCharsets.UTF_8),
+                        passwordHashed);
+                loginOk = resultStrict.verified;
 
                 // Procesa los datos
                 System.out.println(
@@ -82,6 +88,10 @@ public class UsuarioDAO {
         }
         return loginOk;
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(loginUsuario("oscar", "oscar123.,"));
     }
 
 }
