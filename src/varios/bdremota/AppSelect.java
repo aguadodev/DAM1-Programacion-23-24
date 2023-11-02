@@ -10,7 +10,7 @@ public class AppSelect {
         System.out.println("Accediendo a BD MySQL");
 
         String url = "jdbc:mysql://" + Conexion.HOST + ":3306/" + Conexion.DATABASE;
-
+        System.out.println(url);
         Connection conexion = DriverManager.getConnection(url, Conexion.USER, Conexion.PASSWORD);
 
         Statement sentencia = conexion.createStatement();
