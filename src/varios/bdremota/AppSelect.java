@@ -22,7 +22,7 @@ public class AppSelect {
             int id = resultado.getInt("id");
             String username = resultado.getString("username");
             String password = resultado.getString("password");
-            Timestamp createdAt = resultado.getTimestamp("createdAt");
+            Timestamp createdAt = resultado.getTimestamp("created_at");
 
             // Procesa los datos
             System.out.println("ID: " + id + ", username: " + username + "(" + password + "), createdAt: " + createdAt);
