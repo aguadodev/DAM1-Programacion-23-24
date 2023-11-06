@@ -30,9 +30,10 @@ public class EjemplosJSON {
         
         URL url;
 
-        System.out.println(textoURL);
-
         try {
+            // Utiliza el proxy del sistema
+            System.setProperty("java.net.useSystemProxies", "true");
+
             url = new URL(textoURL);
             try (InputStream input = url.openStream()) {
                 InputStreamReader isr = new InputStreamReader(input);
@@ -54,11 +55,13 @@ public class EjemplosJSON {
         }
     }
 
-
     public static String obtenerContenidoURL(String urlString) throws Exception {
         // Crear la URL
         URI uri = new URI(urlString);
         URL url = uri.toURL();
+
+        // Utilizar proxy del sistema
+        System.setProperty("java.net.useSystemProxies", "true");
 
         // Abrir la conexión
         HttpURLConnection conexion = (HttpURLConnection) url.openConnection();
@@ -87,9 +90,6 @@ public class EjemplosJSON {
         }
     }
 
-
-
-
     /*
      * ***************
      * OPEN FOOD FACTS
@@ -99,21 +99,41 @@ public class EjemplosJSON {
         // Obtiene el JSON a partir de la URL de la API que incluye el código de barras
         String json = getJson("https://world.openfoodfacts.org/api/v0/product/" + codigo + ".json");
 
-        // Código de producto: 8424523060914
-
-        // Muestra todo el contenido del JSON
-        // System.out.println("JSON COMPLETO: " + json);
-
-        // Obtiene y muestra algunos campos del JSON
+        // Obtiene algunos campos del JSON
         JSONObject objeto = new JSONObject(json);
         String code = objeto.getString("code");
-        System.out.println("Código: " + code);
         JSONArray keywords = objeto.getJSONObject("product").getJSONArray("_keywords");
         String marca = objeto.getJSONObject("product").getString("brands");
         String nombre = objeto.getJSONObject("product").getString("generic_name_es");
-        System.out.println(nombre + ". Marca: " + marca);
+
+        // Muestra el código de producto, nombre, la marca y las palabras clave
+        System.out.println("Código: " + code);
+        System.out.println(nombre);
+        System.out.println("Marca: " + marca);
         System.out.println("Palabras clave: " + keywords);
     }
+
+    public static void ejemploOpenFoodFacts(){
+        System.out.println("EJEMPLO OPEN FOOD FACTS");
+        System.out.println("=======================");
+        final String CODIGO_EJEMPLO = "8424523060914";
+        String codigo;
+
+        System.out.print("Introduce un código de producto para ver su información básica ["
+                + CODIGO_EJEMPLO + "]: ");
+
+        Scanner sc = new Scanner(System.in);
+        codigo = sc.nextLine();
+        if (codigo == "")
+            codigo = CODIGO_EJEMPLO;
+        mostrarProductoOpenFoodFacts(codigo);
+        sc.close();
+
+        System.out.println("-------------------------------------------------------------");
+        System.out.println();
+    }
+
+    
 
     /*
      * ****************
@@ -216,48 +236,20 @@ public class EjemplosJSON {
         return distancia;
     }
 
+
+
+
+
     public static void main(String[] args) {
         System.out.println("EJEMPLOS JSON:");
         System.out.println("##############");
-        try {
-            String urlPrueba = "https://jsonplaceholder.typicode.com/posts/1";
-            System.out.println(urlPrueba);
 
-            URI uri = new URI(urlPrueba);
-            URL url = uri.toURL();
-            InputStream inputStream = url.openStream();
-
-
-
-
-            System.out.println(obtenerContenidoURL(urlPrueba));
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-
-        System.out.println("EJEMPLO OPEN FOOD FACTS");
-        System.out.println("=======================");
-        final String CODIGO_EJEMPLO = "8424523060914";
-        String codigo;
-
-        System.out.print("Introduce un código de producto para ver su información básica ["
-                + CODIGO_EJEMPLO + "]: ");
-
-        Scanner sc = new Scanner(System.in);
-        codigo = sc.nextLine();
-        if (codigo == "")
-            codigo = CODIGO_EJEMPLO;
-        mostrarProductoOpenFoodFacts(codigo);
-        sc.close();
-
-        System.out.println("-------------------------------------------------------------");
-        System.out.println();
+        ejemploOpenFoodFacts();
 
         System.out.println("EJEMPLO OPEN STREET MAP");
         System.out.println("=======================");
-        // Obtiene la distancia entre dos direcciones en formato String
+        System.out.println("Obtiene la distancia entre dos direcciones en formato String.");
+        
         final String ORIGEN_EJEMPLO = "IES Chan do Monte, Marin";
         final String DESTINO_EJEMPLO = "Praza de Ferraria 1, Pontevedra";
         String direccionOrigen;

@@ -10,7 +10,8 @@ public class EjemploBufferedReader {
         try {
             URL url = new URL("https://world.openfoodfacts.org/api/v0/product/8424523060914.json");
             // Configuración del proxy del sistema
-            System.setProperty("java.net.useSystemProxies", "true");            
+            System.setProperty("java.net.useSystemProxies", "true");       
+                 
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
             String line;
             StringBuilder content = new StringBuilder();

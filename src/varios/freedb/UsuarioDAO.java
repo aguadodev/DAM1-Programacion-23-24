@@ -39,7 +39,7 @@ public class UsuarioDAO {
                 int id = resultado.getInt("id");
                 String username = resultado.getString("username");
                 String password = resultado.getString("password");
-                Timestamp createdAt = resultado.getTimestamp("createdAt");
+                Timestamp createdAt = resultado.getTimestamp("created_at");
 
                 // Procesa los datos
                 System.out.println(
@@ -66,18 +66,12 @@ public class UsuarioDAO {
             ResultSet resultado = sentencia.executeQuery("SELECT * FROM user WHERE username LIKE '" + username + "'");
 
             if (resultado.next()) {
-                // Procesa los datos
-                int id = resultado.getInt("id");
-                Timestamp createdAt = resultado.getTimestamp("created_at");
-                // String username = resultado.getString("username");
+                // Si existe el usuario valida la contraseña con BCrypt
                 byte[] passwordHashed = resultado.getString("password").getBytes(StandardCharsets.UTF_8);
-                BCrypt.Result resultStrict = BCrypt.verifyer(BCrypt.Version.VERSION_2Y).verifyStrict(password.getBytes(StandardCharsets.UTF_8),
+                BCrypt.Result resultStrict = BCrypt.verifyer(BCrypt.Version.VERSION_2Y).verifyStrict(
+                        password.getBytes(StandardCharsets.UTF_8),
                         passwordHashed);
                 loginOk = resultStrict.verified;
-
-                // Procesa los datos
-                System.out.println(
-                        "ID: " + id + ", username: " + username + "(" + password + "), createdAt: " + createdAt);
             }
 
             resultado.close();
@@ -91,7 +85,10 @@ public class UsuarioDAO {
     }
 
     public static void main(String[] args) {
-        System.out.println(loginUsuario("oscar", "oscar123.,"));
+        listarUsuarios();
+        System.out.println("Login OK?: " + loginUsuario("oscar", "abc123.,"));
+        System.out.println("Login OK?: " + loginUsuario("oscar", "oscar123.,"));
+
     }
 
 }

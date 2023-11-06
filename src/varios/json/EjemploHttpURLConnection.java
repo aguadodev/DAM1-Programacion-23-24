@@ -12,6 +12,7 @@ public class EjemploHttpURLConnection {
             URL url = new URL("https://world.openfoodfacts.org/api/v0/product/8424523060914.json");
             // Configuración del proxy del sistema
             System.setProperty("java.net.useSystemProxies", "true");
+            
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
