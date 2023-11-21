@@ -1,8 +1,22 @@
 package ud3.apuntes;
 
+import java.util.Scanner;
+
 public class Pruebas {
     public static void main(String[] args) {
 
+
+        DiaDeLaSemana diaSemana; 
+
+        diaSemana = DiaDeLaSemana.LUNES;
+
+        System.out.println("Escribe el día de la semana: ");
+        String diaUsuario = new Scanner(System.in).nextLine();
+        diaSemana = DiaDeLaSemana.valueOf(diaUsuario);
+
+        System.out.println(diaSemana);
+
+        
         /*Persona p1, p2, p3;
 
         p1 = new Persona("Pepa", (byte)25, 1.7);
@@ -29,7 +43,7 @@ public class Pruebas {
 
         p1.crecer(0.1);
 
-        p1.mostrar();*/
+        p1.mostrar();
 
         CuentaCorriente c1 = new CuentaCorriente("xxxxxxxx", -50);
         CuentaCorriente c2 = new CuentaCorriente("zzzzzzzz", 10000);
@@ -44,7 +58,7 @@ public class Pruebas {
 
         c1.mostrar();
         c2.mostrar();
-
+*/
 
     }
 
