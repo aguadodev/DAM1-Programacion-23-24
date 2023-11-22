@@ -1,16 +1,16 @@
-package ud3.api;
+package ud3.ejerciciosmath;
 import java.math.BigInteger;
 
-public class Factorial {
+public class FactorialBigInteger {
     public static void main(String[] args) {
         int numero = 50;
 
-        BigInteger factorial = calcularFactorial(numero);
+        BigInteger factorial = factorial(numero);
 
         System.out.println("El factorial de " + numero + " es: " + factorial);
     }
 
-    private static BigInteger calcularFactorial(int n) {
+    private static BigInteger factorial(int n) {
         BigInteger resultado = BigInteger.ONE;
 
         for (int i = 1; i <= n; i++) {
