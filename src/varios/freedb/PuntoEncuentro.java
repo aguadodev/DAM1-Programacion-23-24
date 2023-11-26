@@ -66,6 +66,7 @@ public class PuntoEncuentro {
     }
 
     public static void main(String[] args) {
+
         PuntoEncuentro centroEducativo = new PuntoEncuentro("IES Chan do Monte");
 
         System.out.println(centroEducativo);
@@ -78,7 +79,8 @@ public class PuntoEncuentro {
 
         System.out.println(destino);
 
-        System.out.println(urlRutaCoche(centroEducativo, destino));
+        System.out.println("Distancia: " + distanciaCoche(centroEducativo, destino));
+        System.out.println("Url Ruta: " + urlRutaCoche(centroEducativo, destino));
     }
 
     /*
@@ -96,6 +98,28 @@ public class PuntoEncuentro {
      * OPEN STREET MAPS
      * ****************
      */
+
+    /*
+     * Recibe dos pares de coordenadas que representan un origen y un destino
+     * Devuelve la distancia en metros de la ruta en coche entre los dos puntos.
+     */
+    public static double distanciaCoche(PuntoEncuentro origen, PuntoEncuentro destino) {
+        double distancia = -1;
+        String tipoRuta = "driving";
+        String url = "https://router.project-osrm.org/route/v1/" + tipoRuta + "/"
+                + origen.longitud + "," + origen.latitud + ";"
+                + destino.longitud + "," + destino.latitud + "?overview=false";
+
+        String json = getJson(url);
+        if (json != null) {
+            JSONObject objeto = new JSONObject(json);
+            JSONArray array = objeto.getJSONArray("routes");
+            objeto = array.getJSONObject(0);
+            distancia = objeto.getDouble("distance");
+        }
+
+        return distancia;
+    }
 
     /*
      * Recibe una dirección geográfica

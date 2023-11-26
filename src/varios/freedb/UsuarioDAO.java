@@ -72,6 +72,7 @@ public class UsuarioDAO {
                         password.getBytes(StandardCharsets.UTF_8),
                         passwordHashed);
                 loginOk = resultStrict.verified;
+                loginOk = validarHash2Y(password, resultado.getString("password"));
             }
 
             resultado.close();
@@ -84,11 +85,42 @@ public class UsuarioDAO {
 
     }
 
-    public static void main(String[] args) {
-        listarUsuarios();
-        System.out.println("Login OK?: " + loginUsuario("oscar", "abc123.,"));
-        System.out.println("Login OK?: " + loginUsuario("oscar", "oscar123.,"));
+    public static boolean validarHash2Y(String password, byte[] hash2y){
+        return BCrypt.verifyer(BCrypt.Version.VERSION_2Y)
+        .verifyStrict(password.getBytes(StandardCharsets.UTF_8), hash2y)
+        .verified;
+    }
+    public static boolean validarHash2Y(String password, String hash2y){
+        return BCrypt.verifyer(BCrypt.Version.VERSION_2Y)
+        .verifyStrict(password.getBytes(StandardCharsets.UTF_8), hash2y.getBytes(StandardCharsets.UTF_8))
+        .verified;
+    }
 
+    public static byte[] generarHash2Y(String password){
+        return BCrypt.with(BCrypt.Version.VERSION_2Y).hash(13, password.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String generarStringHash2Y(String password){
+        char[] bcryptChars = BCrypt.with(BCrypt.Version.VERSION_2Y).hashToChar(13, password.toCharArray());
+        return String.valueOf(bcryptChars);
+    }
+
+
+
+    public static void main(String[] args) {
+        /*
+        // TODO: Cronometrar el tiempo que tarda cada método. Depende del coste al generar el hash
+        String password = "abc123.,";
+        System.out.println("Hash de bytes[]: " + generarHash2Y(password));
+        System.out.println("Hash de String: " + generarStringHash2Y(password));
+        System.out.println(validarHash2Y(password, generarHash2Y(password)));
+        System.out.println(validarHash2Y(password, generarStringHash2Y(password)));*/
+
+        
+        listarUsuarios();
+        System.out.println("Login OK?: " + loginUsuario("mcostcruz", "mcostcruz"));
+        /*System.out.println("Login OK?: " + loginUsuario("oscar", "oscar123.,"));
+        */
     }
 
 }

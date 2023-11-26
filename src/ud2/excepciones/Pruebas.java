@@ -33,14 +33,29 @@ public class Pruebas {
             n = sc.nextInt();
             sc.close();
         } catch (Exception e) {
+            System.out.print("Por favor, introduce un número entero: ");
             n = leerEnteroRecursiva();
         }
-        
+
         return n;
     }
 
+        static int leerDoubleRecursiva(){
+        int n;
 
-    static int leerEntero(){
+        try {
+            Scanner sc = new Scanner(System.in);
+            n = sc.nextInt();
+            sc.close();
+        } catch (Exception e) {
+            System.out.print("Por favor, introduce un número, utilizando el punto como separador decimal: ");
+            n = leerDoubleRecursiva();
+        }
+
+        return n;
+    }
+
+    static int leerEnteroIterativo(){
         int num = 0;
         boolean numeroInvalido;
     
