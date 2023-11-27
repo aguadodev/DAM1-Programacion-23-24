@@ -85,42 +85,73 @@ public class UsuarioDAO {
 
     }
 
-    public static boolean validarHash2Y(String password, byte[] hash2y){
-        return BCrypt.verifyer(BCrypt.Version.VERSION_2Y)
-        .verifyStrict(password.getBytes(StandardCharsets.UTF_8), hash2y)
-        .verified;
-    }
-    public static boolean validarHash2Y(String password, String hash2y){
-        return BCrypt.verifyer(BCrypt.Version.VERSION_2Y)
-        .verifyStrict(password.getBytes(StandardCharsets.UTF_8), hash2y.getBytes(StandardCharsets.UTF_8))
-        .verified;
+    public static boolean cambiarPassword(String username, String password) {
+        boolean cambiarPassword = false;
+        Connection conexion = conectar();
+
+        Statement sentencia;
+        try {
+            sentencia = conexion.createStatement();
+            int resultado = sentencia.executeUpdate("UPDATE user SET password='" + generarStringHash2Y(password)
+                    + "' WHERE username LIKE '" + username + "'");
+
+            if (resultado == 1) {
+                // Si se cambió la contraseña
+                cambiarPassword = true;
+            }
+
+            sentencia.close();
+            conexion.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cambiarPassword;
+
     }
 
-    public static byte[] generarHash2Y(String password){
+    /*
+     * FUNCIONES BCRYPT: generar hash y validar hash
+     */
+
+    public static boolean validarHash2Y(String password, byte[] hash2y) {
+        return BCrypt.verifyer(BCrypt.Version.VERSION_2Y)
+                .verifyStrict(password.getBytes(StandardCharsets.UTF_8), hash2y).verified;
+    }
+
+    public static boolean validarHash2Y(String password, String hash2y) {
+        return BCrypt.verifyer(BCrypt.Version.VERSION_2Y)
+                .verifyStrict(password.getBytes(StandardCharsets.UTF_8),
+                        hash2y.getBytes(StandardCharsets.UTF_8)).verified;
+    }
+
+    public static byte[] generarHash2Y(String password) {
         return BCrypt.with(BCrypt.Version.VERSION_2Y).hash(13, password.getBytes(StandardCharsets.UTF_8));
     }
 
-    public static String generarStringHash2Y(String password){
+    public static String generarStringHash2Y(String password) {
         char[] bcryptChars = BCrypt.with(BCrypt.Version.VERSION_2Y).hashToChar(13, password.toCharArray());
         return String.valueOf(bcryptChars);
     }
 
-
-
     public static void main(String[] args) {
         /*
-        // TODO: Cronometrar el tiempo que tarda cada método. Depende del coste al generar el hash
-        String password = "abc123.,";
-        System.out.println("Hash de bytes[]: " + generarHash2Y(password));
-        System.out.println("Hash de String: " + generarStringHash2Y(password));
-        System.out.println(validarHash2Y(password, generarHash2Y(password)));
-        System.out.println(validarHash2Y(password, generarStringHash2Y(password)));*/
+         * // TODO: Cronometrar el tiempo que tarda cada método. Depende del coste al
+         * generar el hash
+         * String password = "abc123.,";
+         * System.out.println("Hash de bytes[]: " + generarHash2Y(password));
+         * System.out.println("Hash de String: " + generarStringHash2Y(password));
+         * System.out.println(validarHash2Y(password, generarHash2Y(password)));
+         * System.out.println(validarHash2Y(password, generarStringHash2Y(password)));
+         */
 
-        
         listarUsuarios();
         System.out.println("Login OK?: " + loginUsuario("mcostcruz", "mcostcruz"));
-        /*System.out.println("Login OK?: " + loginUsuario("oscar", "oscar123.,"));
-        */
+        /*
+         * System.out.println("Login OK?: " + loginUsuario("oscar", "oscar123.,"));
+         */
+        cambiarPassword("aguado", "abc123.,");
+        System.out.println(loginUsuario("aguado", "abc123.,"));
+
     }
 
 }
