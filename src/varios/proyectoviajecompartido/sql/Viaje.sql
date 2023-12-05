@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-12-2023 a las 23:34:57
+-- Tiempo de generación: 05-12-2023 a las 09:32:21
 -- Versión del servidor: 8.0.35-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Viaje`
+-- Estructura de tabla para la tabla `VIAJE`
 --
 
-CREATE TABLE `Viaje` (
+CREATE TABLE `VIAJE` (
   `id` int NOT NULL,
   `conductor` int NOT NULL,
   `fecha_hora` datetime NOT NULL,
@@ -41,9 +41,9 @@ CREATE TABLE `Viaje` (
 --
 
 --
--- Indices de la tabla `Viaje`
+-- Indices de la tabla `VIAJE`
 --
-ALTER TABLE `Viaje`
+ALTER TABLE `VIAJE`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -51,9 +51,9 @@ ALTER TABLE `Viaje`
 --
 
 --
--- AUTO_INCREMENT de la tabla `Viaje`
+-- AUTO_INCREMENT de la tabla `VIAJE`
 --
-ALTER TABLE `Viaje`
+ALTER TABLE `VIAJE`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 

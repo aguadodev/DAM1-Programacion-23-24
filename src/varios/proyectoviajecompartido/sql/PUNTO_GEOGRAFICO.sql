@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-12-2023 a las 23:33:57
+-- Tiempo de generación: 05-12-2023 a las 09:30:25
 -- Versión del servidor: 8.0.35-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `PuntoGeografico`
+-- Estructura de tabla para la tabla `PUNTO_GEOGRAFICO`
 --
 
-CREATE TABLE `PuntoGeografico` (
+CREATE TABLE `PUNTO_GEOGRAFICO` (
   `id` int NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `latitud` double NOT NULL,
@@ -35,10 +35,10 @@ CREATE TABLE `PuntoGeografico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `PuntoGeografico`
+-- Volcado de datos para la tabla `PUNTO_GEOGRAFICO`
 --
 
-INSERT INTO `PuntoGeografico` (`id`, `nombre`, `latitud`, `longitud`) VALUES
+INSERT INTO `PUNTO_GEOGRAFICO` (`id`, `nombre`, `latitud`, `longitud`) VALUES
 (1, 'IES Chan do Monte', 42.3895784, -8.7099882);
 
 --
@@ -46,9 +46,9 @@ INSERT INTO `PuntoGeografico` (`id`, `nombre`, `latitud`, `longitud`) VALUES
 --
 
 --
--- Indices de la tabla `PuntoGeografico`
+-- Indices de la tabla `PUNTO_GEOGRAFICO`
 --
-ALTER TABLE `PuntoGeografico`
+ALTER TABLE `PUNTO_GEOGRAFICO`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -56,9 +56,9 @@ ALTER TABLE `PuntoGeografico`
 --
 
 --
--- AUTO_INCREMENT de la tabla `PuntoGeografico`
+-- AUTO_INCREMENT de la tabla `PUNTO_GEOGRAFICO`
 --
-ALTER TABLE `PuntoGeografico`
+ALTER TABLE `PUNTO_GEOGRAFICO`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 

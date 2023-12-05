@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-12-2023 a las 09:38:30
+-- Tiempo de generación: 05-12-2023 a las 09:53:52
 -- Versión del servidor: 8.0.35-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `damapp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `PUNTO_GEOGRAFICO`
+--
+
+CREATE TABLE `PUNTO_GEOGRAFICO` (
+  `id` int NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `latitud` double NOT NULL,
+  `longitud` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `PUNTO_GEOGRAFICO`
+--
+
+INSERT INTO `PUNTO_GEOGRAFICO` (`id`, `nombre`, `latitud`, `longitud`) VALUES
+(1, 'IES Chan do Monte', 42.3895784, -8.7099882);
 
 -- --------------------------------------------------------
 
@@ -78,9 +98,30 @@ INSERT INTO `USER` (`id`, `email`, `roles`, `password`, `is_verified`, `username
 (7692, 'igorcerdedo2803@gmail.com', '[]', '$2y$13$4WRgDPA/GyU.HRjBfQhFUONDjgGlMJAvbE7X3EgbHU7PcMPWsGDJO', 1, 'igarcrodr', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
 (7698, 'sebasfontalvarez@gmail.com', '[]', '$2y$13$f20qcElexrfyyX3Qy/C/S.zYHEakG/2C1817VbXwvM2tNHXgNaByG', 1, 'salvafont', '2023-11-11 12:00:00', NULL, NULL, 1, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `VIAJE`
+--
+
+CREATE TABLE `VIAJE` (
+  `id` int NOT NULL,
+  `conductor` int NOT NULL,
+  `fecha_hora` datetime NOT NULL,
+  `punto_salida` int NOT NULL,
+  `punto_llegada` int NOT NULL,
+  `plazas` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `PUNTO_GEOGRAFICO`
+--
+ALTER TABLE `PUNTO_GEOGRAFICO`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `USER`
@@ -91,14 +132,47 @@ ALTER TABLE `USER`
   ADD UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`);
 
 --
+-- Indices de la tabla `VIAJE`
+--
+ALTER TABLE `VIAJE`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `conductor` (`conductor`),
+  ADD KEY `punto_salida` (`punto_salida`),
+  ADD KEY `punto_llegada` (`punto_llegada`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `PUNTO_GEOGRAFICO`
+--
+ALTER TABLE `PUNTO_GEOGRAFICO`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `USER`
 --
 ALTER TABLE `USER`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7699;
+
+--
+-- AUTO_INCREMENT de la tabla `VIAJE`
+--
+ALTER TABLE `VIAJE`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `VIAJE`
+--
+ALTER TABLE `VIAJE`
+  ADD CONSTRAINT `VIAJE_ibfk_1` FOREIGN KEY (`conductor`) REFERENCES `USER` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `VIAJE_ibfk_2` FOREIGN KEY (`punto_salida`) REFERENCES `PUNTO_GEOGRAFICO` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `VIAJE_ibfk_3` FOREIGN KEY (`punto_llegada`) REFERENCES `PUNTO_GEOGRAFICO` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
