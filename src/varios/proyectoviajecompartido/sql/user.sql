@@ -1,0 +1,106 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1deb5ubuntu1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 04-12-2023 a las 23:44:17
+-- Versión del servidor: 8.0.35-0ubuntu0.22.04.1
+-- Versión de PHP: 8.1.2-1ubuntu2.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `damapp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user`
+--
+
+CREATE TABLE `user` (
+  `id` int NOT NULL,
+  `email` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_verified` tinyint(1) NOT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '(DC2Type:datetime_immutable)',
+  `updated_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `last_login` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `enabled` tinyint(1) NOT NULL,
+  `photo_filename` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`, `username`, `created_at`, `updated_at`, `last_login`, `enabled`, `photo_filename`) VALUES
+(1, 'aguadoaudiovisual@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$ADQ5cu8QLEh079MrVchhue4EjlnV9UrYlh6JTQ/WqDiga4on0iTte', 1, 'aguado', '2023-11-11 12:00:00', '2022-08-12 14:26:26', '2023-10-30 18:46:46', 1, NULL),
+(6958, 'ale.piki.05@gmail.com', '[]', '$2y$13$FnWRojMAgk9tbwGfH4JkYeIIwpYo5CWF6pmagkPKpYhena75pVk6m', 1, 'acainrodr', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7008, 'angelbarralperez@gmail.com', '[]', '$2y$13$t2VGZxsftes/Yx0mkEvl.ucOYKcVlE4iUAH4tHQ6TDxZj3TYv.iEm', 1, 'mbarrpere', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7015, 'anton.vega.vidal@gmail.com', '[]', '$2y$13$dMnTH.eYSm62rtxGr.8DxeIowPh3W9cI/NLYXiXHcl5HL/fWzxHTm', 1, 'avegavida', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7045, 'bertoae013@gmail.com', '[]', '$2y$13$esEYKo.tCOYpyqjZyRAvKupVNHm4aJlWCo41jzabaI95KcYwqElIK', 1, 'aameneste', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7049, 'borjacastellano1@gmail.com', '[]', '$2y$13$eq6r5XKr14WlH9xZhhpZmu1ZqyGiM.vIoRjUfaxaiV8Qhw0H6xwrC', 1, 'bcastextr', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7103, 'david151003@gmail.com', '[]', '$2y$13$8EIWAzHWXCCgQo1QsrGBJe3HAtaMUAKfmetKtyrXa4edvoVGjak0m', 1, 'dperesert', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7107, 'davidsanchez92@iespontecaldelas.com', '[]', '$2y$13$YIs8NHpr5UNz.VkY3MLz9evXCpKbyqR86VUyyTdHtikHIghsTOmQi', 1, 'dsancpeso', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7116, 'diegopazos04@gmail.com', '[]', '$2y$13$wLMXrYMfK/4DvGMRy3sd8O6lYr8d3yQgpiEu0HKTLOVJk4XPUxwGK', 1, 'dpazoargi', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7126, 'eloyrodalperez@gmail.com', '[]', '$2y$13$ppRdK/7kjrpGtSn.ZCoAn.XgP.UOUlAXviZya7gCrmqg9skP8Nx9W', 1, 'erodapere', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7164, 'gonzalorodriguezaguilar08@gmail.com', '[]', '$2y$13$a.ugGPuQAvYSFX91Fj84MeVy9pW0Bvk1JJpxHtvRvvIKTiXeuHVUe', 1, 'grodragui', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7167, 'gutierrezalfonso37@gmail.com', '[]', '$2y$13$VUnB69Ta0ljmlEMVB1485unLArokwdt0qotOAP7aIFVbvWlV2MWB2', 1, 'agutivill', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7170, 'hugmanmarfer10@gmail.com', '[]', '$2y$13$ZQsRyN3we2htxqOGGxOmVueHm50tW8yUUiUoctmKZOioH/tjI0jsi', 1, 'hmartfern', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7224, 'jorgeiglesias290901@gmail.com', '[]', '$2y$13$XaQpLmXurPouUAfIN8qZK.UQPVXkyp8aYKtsKD0ZcbG693LB8pbRa', 1, 'jigleacun', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7286, 'marcoscostoya2014@gmail.com', '[]', '$2y$13$6Y5LDf.hAkagsbYK48oAsus1ldICotQp495lab63HQjvvOKBtPZ6u', 1, 'mcostcruz', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7305, 'carlafuentesbesada@gmail.com', '[]', '$2y$13$ydSwNslzH1f4Caz/qf62YejwzCWHA4KTqMUgEvBSR0.s9z30Z26DW', 1, 'cfuenbesa', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7323, 'miguelpiedras77@gmail.com', '[]', '$2y$13$Rb/xqBlJatyQOmJDOkmkO.dc2YBwmAriN1tNAN7RBklJxqW9MPGUi', 1, 'mpiedsant', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7326, 'mirna_mch@hotmail.com', '[]', '$2y$13$tKh3MVJdIzp9bfnuWwOrTONEmo2wwvPuHhjpkMfdr64YX0JIiDNnu', 1, 'pucedcorn', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7345, 'noarosaslms@gmail.com', '[]', '$2y$13$MLWLH7dNhMZ/ZaPOM0GobOCbO0N1SXSgoMncvHIGQiURSgpfM8KR6', 1, 'nrosalemo', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7481, 'oscarfdezptza94@gmail.com', '[]', '$2y$13$TiQihps7RwDUZq8xognB7ei4900rK1WhCF/RIsymtoxvH3/vBQmmm', 1, 'ofernpast', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7483, 'oscarperdizbarros@gmail.com', '[]', '$2y$13$YkxN4o..J1ITWSlPAgwCMenEXBgCdNnr3ylqlZU1YR9j8tTZZGDG.', 1, 'operdbarr', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7509, 'pazex04@gmail.com', '[]', '$2y$13$atCkb5rAgd4oyo19TjzeZuz2Ac9G/VJBsAmsBQAoorRhtQQDyauES', 1, 'apazoamoe', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7514, 'pedroparapia@gmail.com', '[]', '$2y$13$2440IGqG.63nSwAPShhvIOmjbaTMi0g4KNzXJx2W0Ar2M3k2Pxt62', 1, 'plealfern', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7543, 'rodrigopazosbarcia98@gmail.com', '[]', '$2y$13$u6sdLH/j/8i/CyFiFhpSZep.YW8ncw5a7G6KSWs6MxZMxo5yTX1/u', 1, 'rpazobarc', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7627, 'victoriarua4@gmail.com', '[]', '$2y$13$bJvGiQXevJ2r5.yJGu4/Vu9h/nfgNiYCHd5MxmtheBbABQCIqhgUm', 1, 'vruagome', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7654, 'yoni.iglesias.sampedro@gmail.com', '[]', '$2y$13$PjOt7xkqVMhnWjER572w8O9q78KMbWEqaLJ3/ZY4tW53vZNaFK1iq', 1, 'jiglesamp', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7659, 'portabales9@gmail.com', '[]', '$2y$13$V8xgvSk7HQCBz482u9YZneROIw8DE4FOdgUy1c8m8lUcNnFBqVZyq', 1, 'aportteix', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7688, 'diegosobral1997@gmail.com', '[]', '$2y$13$cjiglQ5Cq.T2qqRKwDIfbenR/4woWq84U1c6EYSYfgX6NZHE3x3ke', 1, 'dsobrpine', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7691, 'sergiiovillar89@gmail.com', '[]', '$2y$13$oODsuXrBL6uJWAoE///yMeZioeOUgJSkC3EbDac6Ku3wQObfTWz36', 1, 'svilapere', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7692, 'igorcerdedo2803@gmail.com', '[]', '$2y$13$4WRgDPA/GyU.HRjBfQhFUONDjgGlMJAvbE7X3EgbHU7PcMPWsGDJO', 1, 'igarcrodr', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
+(7698, 'sebasfontalvarez@gmail.com', '[]', '$2y$13$f20qcElexrfyyX3Qy/C/S.zYHEakG/2C1817VbXwvM2tNHXgNaByG', 1, 'salvafont', '2023-11-11 12:00:00', NULL, NULL, 1, NULL);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
+  ADD UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7699;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
