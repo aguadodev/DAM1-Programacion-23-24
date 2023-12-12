@@ -36,6 +36,22 @@ public class PuntoGeografico {
         System.out.println("Longitud: " + this.longitud);
     }
 
+    public void mostrarGradosDMS() {
+        int grados = (int) Math.abs(latitud);
+        double minutosDecimal = (Math.abs(latitud) - grados) * 60;
+        int minutos = (int) minutosDecimal;
+        double segundos = (int) ((minutosDecimal - minutos) * 60);
+        System.out.println("Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((latitud >= 0) ? "Norte" : "Sur"));
+
+        grados = (int) Math.abs(longitud);
+        minutosDecimal = (Math.abs(longitud) - grados) * 60;
+        minutos = (int) minutosDecimal;
+        segundos = (int) ((minutosDecimal - minutos) * 60);
+        System.out.println("Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((longitud >= 0) ? "Este" : "Oeste"));
+    }
+
+
+    /* URLs OSM Y GMAPS */
     public String urlGoogleMaps() {
         return "https://www.google.com/maps/search/?api=1&query=" + this.latitud + "," + this.longitud;
     }
@@ -44,6 +60,7 @@ public class PuntoGeografico {
         return "https://www.openstreetmap.org/#map=14/" + this.latitud + "/" + this.longitud;
     }
 
+    /* API OSM NOMINATIN */
     public String urlNominatimXml() {
         return "https://nominatim.openstreetmap.org/reverse?format=xml&lat=" + this.latitud + "&lon=" + this.longitud;
     }
@@ -53,7 +70,7 @@ public class PuntoGeografico {
     }
 
 
-    // RUTAS
+    /* API OSM OSRM */
     public String urlOsrmJson(PuntoGeografico puntoGeograficoDestino) {
         return "http://router.project-osrm.org/route/v1/driving/" + this.longitud + "," + this.latitud + ";"
                 + puntoGeograficoDestino.longitud + "," + puntoGeograficoDestino.latitud
@@ -70,6 +87,28 @@ public class PuntoGeografico {
         url += ";" + puntoGeograficoDestino.longitud + "," + puntoGeograficoDestino.latitud
                 + "?overview=false&geometries=geojson";
         return url;
+    }
+
+    public boolean esMar() {
+        boolean esMar = true;
+        String url = this.urlNominatimJson();
+        String json = Utilidades.leerUrl(url);
+        if (json.contains("country")) {
+            esMar = false;
+        }
+        return esMar;
+    }
+
+    public String getCountry() {
+        String url = this.urlNominatimJson();
+        String json = Utilidades.leerUrl(url);
+        String country = null;
+        int index = json.indexOf("\"country\":");
+        if (index != -1) {
+            int index2 = json.indexOf("\"", index + 11);
+            country = json.substring(index + 11, index2);
+        }
+        return country;
     }
     
 

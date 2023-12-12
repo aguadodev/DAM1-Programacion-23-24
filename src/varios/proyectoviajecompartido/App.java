@@ -20,8 +20,20 @@ public class App {
         System.out.println(CifradoBcrypt.generarHash2YString("abc123.,"));
 
         // Crea el usuario de la aplicación si los datos de login son correctos.
-        User user = User.loginUsuario("mcostcruz", "mcostcruz");
+        User user = User.loginUsuario("aguado", "aguado");
         System.out.println(user);
+    }
+
+    private static int opcionMenu(){
+        System.out.println("1. Generar punto aleatorio");
+        System.out.println("2. Mostrar punto en grados decimales");
+        System.out.println("3. Mostrar punto en Google Maps");
+        System.out.println("4. Mostrar punto en OpenStreetMaps");
+        System.out.println("5. Mostrar punto en Nominatim XML");
+        System.out.println("6. Mostrar punto en Nominatim JSON");
+        System.out.println("7. Salir");
+        System.out.print("Elige una opción: ");
+        return Integer.parseInt(System.console().readLine());
     }
 
 }

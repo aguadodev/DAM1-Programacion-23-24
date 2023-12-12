@@ -40,6 +40,11 @@ public class User {
         return username;
     }
 
+
+    /*
+     * FUNCIONES DE ACCESO A LA BASE DE DATOS
+     */
+    
     public static User loginUsuario(String username, String password) {
         User user = null;
 
@@ -49,13 +54,12 @@ public class User {
         try {
             sentencia = conexion.createStatement();
 
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM user WHERE username LIKE '" + username + "'");
+            ResultSet resultado = sentencia.executeQuery("SELECT * FROM USER WHERE username LIKE '" + username + "'");
 
             if (resultado.next()) {
                 // Si existe el usuario valida la contraseña con BCrypt
                 if (CifradoBcrypt.validarHash2Y(password, resultado.getString("password"))) {
                     // Si la contraseña es válida crea el objeto User
-                    // TODO: actualizar lastLogin
                     user = new User(resultado.getString("username"), resultado.getString("password"),
                             resultado.getString("email"), resultado.getBoolean("enabled"));
                     // Obtener createdAt
@@ -63,7 +67,7 @@ public class User {
                     // Actualizar lastLogin
                     user.lastLogin = LocalDateTime.now();
                     // Guardar lastLogin en la BD
-                    sentencia.executeUpdate("UPDATE user SET last_Login = '" + user.lastLogin + "' WHERE username LIKE '" + username + "'");
+                    sentencia.executeUpdate("UPDATE USER SET last_Login = '" + user.lastLogin + "' WHERE username LIKE '" + username + "'");
                 }
             }
 
