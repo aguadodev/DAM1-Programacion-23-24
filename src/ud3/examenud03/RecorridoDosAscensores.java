@@ -28,22 +28,10 @@ public class RecorridoDosAscensores {
             int pisoDestino = scanner.nextInt();
 
             // Compara la distancia del pisoOrigen con la posición de los dos ascensores
-            if (Math.abs(pisoOrigen - ascensor.getPisoActual()) <= Math.abs(pisoOrigen - ascensor2.getPisoActual())) {
-                // Utilizamos el primer ascensor para ir desde el pisoOrigen hasta el
-                // pisoDestino
-                recorridoTotal += Math.abs(ascensor.getPisoActual() - pisoOrigen);
-                ascensor.irAlPiso(pisoOrigen);
-
-                recorridoTotal += Math.abs(ascensor.getPisoActual() - pisoDestino);
-                ascensor.irAlPiso(pisoDestino);
+            if (ascensor.distancia(pisoOrigen) <= ascensor2.distancia(pisoOrigen)) {
+                recorridoTotal += recorridoAscensor(ascensor, pisoOrigen, pisoDestino);
             } else {
-                // Utilizamos el segundo ascensor para ir desde el pisoOrigen hasta el
-                // pisoDestino
-                recorridoTotal2 += Math.abs(ascensor2.getPisoActual() - pisoOrigen);
-                ascensor2.irAlPiso(pisoOrigen);
-
-                recorridoTotal2 += Math.abs(ascensor2.getPisoActual() - pisoDestino);
-                ascensor2.irAlPiso(pisoDestino);
+                recorridoTotal2 += recorridoAscensor(ascensor2, pisoOrigen, pisoDestino);
             }
 
             System.out.print("Ingrese el piso desde el que llama al ascensor (-1 para finalizar): ");
@@ -55,5 +43,18 @@ public class RecorridoDosAscensores {
         System.out.println("\nEl recorrido total del segundo ascensor es: " + recorridoTotal2 + " pisos.");
 
         scanner.close();
+    }
+
+    private static int recorridoAscensor(Ascensor ascensor, int pisoOrigen, int pisoDestino) {
+        // Utilizamos el primer ascensor para ir desde el pisoOrigen hasta el
+        // pisoDestino
+        int recorrido = 0;
+        recorrido += Math.abs(ascensor.getPisoActual() - pisoOrigen);
+        ascensor.irAlPiso(pisoOrigen);
+
+        recorrido += Math.abs(ascensor.getPisoActual() - pisoDestino);
+        ascensor.irAlPiso(pisoDestino);
+
+        return recorrido;
     }
 }

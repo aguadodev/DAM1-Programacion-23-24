@@ -83,4 +83,8 @@ public class Ascensor {
         ascensor.subir(); // El ascensor sube un piso
         ascensor.mostrar(); // Debería imprimir "El ascensor está en el piso: 1"
     }
+
+    public int distancia(int pisoOrigen) {
+        return Math.abs(pisoOrigen - pisoActual);
+    }
 }
