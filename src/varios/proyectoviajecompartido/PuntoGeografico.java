@@ -1,5 +1,10 @@
 package varios.proyectoviajecompartido;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class PuntoGeografico {
     private String nombre;
     private double latitud;
@@ -41,15 +46,34 @@ public class PuntoGeografico {
         double minutosDecimal = (Math.abs(latitud) - grados) * 60;
         int minutos = (int) minutosDecimal;
         double segundos = (int) ((minutosDecimal - minutos) * 60);
-        System.out.println("Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((latitud >= 0) ? "Norte" : "Sur"));
+        System.out.println(
+                "Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((latitud >= 0) ? "Norte" : "Sur"));
 
         grados = (int) Math.abs(longitud);
         minutosDecimal = (Math.abs(longitud) - grados) * 60;
         minutos = (int) minutosDecimal;
         segundos = (int) ((minutosDecimal - minutos) * 60);
-        System.out.println("Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((longitud >= 0) ? "Este" : "Oeste"));
+        System.out.println(
+                "Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((longitud >= 0) ? "Este" : "Oeste"));
     }
 
+    @Override
+    public String toString() {
+        return "PuntoGeografico [nombre=" + nombre + ", latitud=" + latitud + ", longitud=" + longitud + "]";
+    }
+
+    // GETTERS Y SETTERS
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
 
     /* URLs OSM Y GMAPS */
     public String urlGoogleMaps() {
@@ -68,7 +92,6 @@ public class PuntoGeografico {
     public String urlNominatimJson() {
         return "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + this.latitud + "&lon=" + this.longitud;
     }
-
 
     /* API OSM OSRM */
     public String urlOsrmJson(PuntoGeografico puntoGeograficoDestino) {
@@ -110,7 +133,30 @@ public class PuntoGeografico {
         }
         return country;
     }
-    
 
+    public static PuntoGeografico read(int int1) {
+
+        Connection conexion = Conexion.conectar(); // Conectamos con la base de datos
+
+        try {
+            // Consulta SQL
+            Statement sentencia = conexion.createStatement();
+            
+            String sql = "SELECT * FROM PUNTO_GEOGRAFICO WHERE id = " + int1;
+
+            ResultSet resultado = sentencia.executeQuery(sql);
+
+            if (resultado.next()) {
+                PuntoGeografico puntoGeografico = new PuntoGeografico();
+                puntoGeografico.nombre = resultado.getString("nombre");
+                puntoGeografico.latitud = resultado.getDouble("latitud");
+                puntoGeografico.longitud = resultado.getDouble("longitud");
+                return puntoGeografico;
+            }
+        } catch (SQLException e) {
+        }
+
+        return null;
+    }
 
 }

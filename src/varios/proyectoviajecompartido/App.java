@@ -17,7 +17,7 @@ public class App {
         System.out.println(chanDoMonte.urlNominatimXml());
         System.out.println(chanDoMonte.urlNominatimJson());
 
-        System.out.println(CifradoBcrypt.generarHash2YString("abc123.,"));
+        System.out.println(CifradoBcrypt.generarHash2Y("abc123.,"));
 
         // Crea el usuario de la aplicación si los datos de login son correctos.
         User user = User.loginUsuario("aguado", "aguado");

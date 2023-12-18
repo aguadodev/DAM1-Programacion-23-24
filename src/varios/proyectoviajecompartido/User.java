@@ -35,6 +35,14 @@ public class User {
         this.enabled = enabled;
     }
 
+    public User(String username, String password) {
+        this(username, password, null, true);
+    }
+
+    public User(String username) {
+        this(username, null);
+    }
+    
     @Override
     public String toString() {
         return username;
