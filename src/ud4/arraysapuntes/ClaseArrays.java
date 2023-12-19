@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 public class ClaseArrays {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
         System.out.print("Indica la cantidad de números: ");
-        int n = sc.nextInt();       
+        int n = sc.nextInt();       */
+        int n = 10;
         
         int[] numeros = new int[n];
 
@@ -16,8 +17,17 @@ public class ClaseArrays {
             numeros[i] = (int) (Math.random() * 19 - 9);
         }       
    
-        System.out.println(Arrays.toString(numeros));
+        System.out.println("Array original: " + Arrays.toString(numeros));
 
+        int[] tMayor = Arrays.copyOf(numeros, numeros.length + 1);
+        System.out.println("Array de 20 casillas: " + Arrays.toString(tMayor));
+
+        int[] tMenor = Arrays.copyOf(numeros, 5);
+        System.out.println("Array de 5 casillas: " + Arrays.toString(tMenor));
+
+
+
+        /*
         Arrays.sort(numeros);
 
         System.out.println(Arrays.toString(numeros));
@@ -29,7 +39,7 @@ public class ClaseArrays {
 
         System.out.println(Arrays.toString(rellenaPares(n, 10)));
         System.out.println(Arrays.toString(rellenaPares(n, 11)));
-
+        */
 
 
     }
