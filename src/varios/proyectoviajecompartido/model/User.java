@@ -1,4 +1,4 @@
-package varios.proyectoviajecompartido;
+package varios.proyectoviajecompartido.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 
+import varios.proyectoviajecompartido.CifradoBcrypt;
+import varios.proyectoviajecompartido.Conexion;
 
 public class User {
     private String username;
@@ -15,8 +17,6 @@ public class User {
     private LocalDateTime lastLogin;
     private boolean enabled;
 
-
-    
     public User(String username, String password, String email, LocalDateTime createdAt, LocalDateTime lastLogin,
             boolean enabled) {
         this.username = username;
@@ -42,17 +42,16 @@ public class User {
     public User(String username) {
         this(username, null);
     }
-    
+
     @Override
     public String toString() {
         return username;
     }
 
-
     /*
      * FUNCIONES DE ACCESO A LA BASE DE DATOS
      */
-    
+
     public static User loginUsuario(String username, String password) {
         User user = null;
 
@@ -75,7 +74,8 @@ public class User {
                     // Actualizar lastLogin
                     user.lastLogin = LocalDateTime.now();
                     // Guardar lastLogin en la BD
-                    sentencia.executeUpdate("UPDATE USER SET last_Login = '" + user.lastLogin + "' WHERE username LIKE '" + username + "'");
+                    sentencia.executeUpdate("UPDATE USER SET last_Login = '" + user.lastLogin
+                            + "' WHERE username LIKE '" + username + "'");
                 }
             }
 

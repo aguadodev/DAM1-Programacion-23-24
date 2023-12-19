@@ -1,4 +1,4 @@
-package varios.proyectoviajecompartido;
+package varios.proyectoviajecompartido.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
-import javax.swing.plaf.nimbus.State;
+import varios.proyectoviajecompartido.Conexion;
 
 public class Viaje {
     private User conductor;
@@ -27,11 +27,13 @@ public class Viaje {
         this.plazasPasajeros = plazasPasajeros;
     }
 
-    public Viaje(){ }
+    public Viaje() {
+    }
 
     @Override
     public String toString() {
-        return fechaHoraSalida.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " - " + conductor + " - " + puntoOrigen.getNombre() + " >> " + puntoDestino.getNombre();
+        return fechaHoraSalida.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " - " + conductor + " - "
+                + puntoOrigen.getNombre() + " >> " + puntoDestino.getNombre();
     }
 
     public void mostrarDetalle() {
@@ -43,20 +45,19 @@ public class Viaje {
         System.out.println("Detalle de la ruta: " + urlOpenStreetMaps());
     }
 
-    public String urlOpenStreetMaps(){
+    public String urlOpenStreetMaps() {
         return "https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route="
-        + puntoOrigen.getLatitud() + "%2C" + puntoOrigen.getLongitud() 
-        + "%3B" + puntoDestino.getLatitud() + "%2C" + puntoDestino.getLongitud();        
+                + puntoOrigen.getLatitud() + "%2C" + puntoOrigen.getLongitud()
+                + "%3B" + puntoDestino.getLatitud() + "%2C" + puntoDestino.getLongitud();
     }
-    
 
     public static void main(String[] args) {
         Viaje viaje = new Viaje(
-            new User("aguado"), 
-            LocalDateTime.now().plus(1, ChronoUnit.HOURS), 
-            new PuntoGeografico("IES Chan do Monte", 42.3893981, -8.7102411), 
-            new PuntoGeografico("Pontevedra", 42.427855645977, -8.64455335556701),
-            3);
+                new User("aguado"),
+                LocalDateTime.now().plus(1, ChronoUnit.HOURS),
+                new PuntoGeografico("IES Chan do Monte", 42.3893981, -8.7102411),
+                new PuntoGeografico("Pontevedra", 42.427855645977, -8.64455335556701),
+                3);
 
         System.out.println("\nVIAJE COMPARTIDO\n===========");
         System.out.println(viaje);
@@ -80,11 +81,11 @@ public class Viaje {
                 viajes = Arrays.copyOf(viajes, viajes.length + 1);
 
                 viajes[i] = new Viaje(
-                    new User(resultado.getString("conductor")), 
-                    resultado.getTimestamp("fecha_hora").toLocalDateTime(), 
-                    PuntoGeografico.read(resultado.getInt("punto_salida")), 
-                    PuntoGeografico.read(resultado.getInt("punto_llegada")),
-                    resultado.getInt("plazas"));
+                        new User(resultado.getString("conductor")),
+                        resultado.getTimestamp("fecha_hora").toLocalDateTime(),
+                        PuntoGeografico.read(resultado.getInt("punto_salida")),
+                        PuntoGeografico.read(resultado.getInt("punto_llegada")),
+                        resultado.getInt("plazas"));
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block

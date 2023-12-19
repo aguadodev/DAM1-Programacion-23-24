@@ -1,6 +1,9 @@
 package varios.proyectoviajecompartido;
 
-public class App {
+import varios.proyectoviajecompartido.model.PuntoGeografico;
+import varios.proyectoviajecompartido.model.User;
+
+public class AppPuntoGeografico {
     public static void main(String[] args) {
         PuntoGeografico puntoGeografico1 = new PuntoGeografico("Madrid", 40.4167, -3.70325);   
         PuntoGeografico puntoGeografico2 = new PuntoGeografico("Barcelona", 41.3825, 2.17694);

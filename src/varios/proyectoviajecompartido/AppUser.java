@@ -1,5 +1,8 @@
 package varios.proyectoviajecompartido;
 
+import varios.proyectoviajecompartido.model.User;
+import varios.proyectoviajecompartido.model.Viaje;
+
 public class AppUser {
     public static void main(String[] args) {
         menuPrincipal();
@@ -16,11 +19,11 @@ public class AppUser {
             opcion = leerOpcion(0, 2);
             switch (opcion) {
                 case 1:
-                    System.out.println(">>> Inicio Sesión");
+                    System.out.println("\n>>> Inicio Sesión");
                     iniciarSesion();
                     break;
                 case 2:
-                    System.out.println(">>> Registrar usuario");
+                    System.out.println("\n>>> Registrar usuario");
                     break;
                 case 0:
                     System.out.println("XXX Hasta pronto");
@@ -34,15 +37,15 @@ public class AppUser {
     }
 
     private static void iniciarSesion() {
-        System.out.println("Introduce tu nombre de usuario:");
+        System.out.print("Introduce tu nombre de usuario: ");
         String email = System.console().readLine();
-        System.out.println("Introduce tu contraseña:");
+        System.out.print("Introduce tu contraseña: ");
         String password = System.console().readLine();
         if (User.loginUsuario(email, password) != null) {
-            System.out.println("Inicio de sesión correcto");
+            System.out.println("\n>>>Inicio de sesión correcto");
             menuUsuario();
         } else {
-            System.out.println("Inicio de sesión incorrecto");
+            System.out.println("\n>>>Inicio de sesión incorrecto");
         }
     }
 

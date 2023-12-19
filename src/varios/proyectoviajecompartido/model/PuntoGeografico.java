@@ -1,9 +1,12 @@
-package varios.proyectoviajecompartido;
+package varios.proyectoviajecompartido.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import varios.proyectoviajecompartido.Conexion;
+import varios.proyectoviajecompartido.Utilidades;
 
 public class PuntoGeografico {
     private String nombre;
