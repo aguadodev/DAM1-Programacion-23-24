@@ -1,9 +1,11 @@
 package varios.proyectoviajecompartido;
 
-import varios.proyectoviajecompartido.model.User;
-import varios.proyectoviajecompartido.model.Viaje;
+import varios.proyectoviajecompartido.modelo.User;
+import varios.proyectoviajecompartido.modelo.Viaje;
 
 public class AppUser {
+    private static User usuarioLogueado = null; // Usuario logueado en la aplicación
+
     public static void main(String[] args) {
         menuPrincipal();
     }
@@ -23,7 +25,7 @@ public class AppUser {
                     iniciarSesion();
                     break;
                 case 2:
-                    System.out.println("\n>>> Registrar usuario");
+                    System.out.println("\n>>> Registrar usuario (Próximamente...)");
                     break;
                 case 0:
                     System.out.println("XXX Hasta pronto");
@@ -36,12 +38,14 @@ public class AppUser {
 
     }
 
+
     private static void iniciarSesion() {
         System.out.print("Introduce tu nombre de usuario: ");
-        String email = System.console().readLine();
+        String username = System.console().readLine();
         System.out.print("Introduce tu contraseña: ");
         String password = System.console().readLine();
-        if (User.loginUsuario(email, password) != null) {
+        usuarioLogueado = User.loginUsuario(username, password);
+        if (usuarioLogueado != null) {
             System.out.println("\n>>>Inicio de sesión correcto");
             menuUsuario();
         } else {
@@ -53,7 +57,7 @@ public class AppUser {
     private static void menuUsuario() {
         int opcion;
         do {
-            System.out.println("\nViajes compartidos. Menú Usuario");
+            System.out.println("\nViajes compartidos. Menú Usuario (" + usuarioLogueado + ")");
             System.out.println("------------------------------------------------");
             System.out.println("1. Ver viajes disponibles");
             System.out.println("2. Ver mis viajes");
@@ -66,9 +70,11 @@ public class AppUser {
                     break;
                 case 2:
                     System.out.println(">>> Ver mis viajes");
+                    verMisViajes();
                     break;
                 case 0:
                     System.out.println("XXX Cerrar sesión");
+                    usuarioLogueado = null;
                     break;
                 default:
                     System.out.println("Opción incorrecta");
@@ -76,6 +82,16 @@ public class AppUser {
             }
         } while (opcion != 0);
 
+    }
+
+
+    private static void verMisViajes() {
+        System.out.println("\nMis viajes");
+        System.out.println("------------");
+
+        for (Viaje viaje : Viaje.getViajes(usuarioLogueado)) {
+            System.out.println(viaje);
+        }        
     }
 
 
@@ -88,6 +104,7 @@ public class AppUser {
         }
     }
 
+    
     // Utilidad: Lee una opción válida del menú entre un número de opción mínimo y un máximo
     private static int leerOpcion(int min, int max) {
         int opcion = -1;

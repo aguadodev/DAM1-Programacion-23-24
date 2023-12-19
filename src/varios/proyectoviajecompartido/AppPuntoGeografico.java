@@ -1,7 +1,7 @@
 package varios.proyectoviajecompartido;
 
-import varios.proyectoviajecompartido.model.PuntoGeografico;
-import varios.proyectoviajecompartido.model.User;
+import varios.proyectoviajecompartido.modelo.PuntoGeografico;
+import varios.proyectoviajecompartido.modelo.User;
 
 public class AppPuntoGeografico {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package varios.proyectoviajecompartido.model;
+package varios.proyectoviajecompartido.modelo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -143,8 +143,10 @@ public class PuntoGeografico {
 
         try {
             // Consulta SQL
+            // TODO: Cambiar a consulta parametrizada
+
             Statement sentencia = conexion.createStatement();
-            
+
             String sql = "SELECT * FROM PUNTO_GEOGRAFICO WHERE id = " + int1;
 
             ResultSet resultado = sentencia.executeQuery(sql);

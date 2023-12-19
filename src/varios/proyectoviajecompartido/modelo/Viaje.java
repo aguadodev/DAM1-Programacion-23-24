@@ -1,4 +1,4 @@
-package varios.proyectoviajecompartido.model;
+package varios.proyectoviajecompartido.modelo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,18 +13,18 @@ import varios.proyectoviajecompartido.Conexion;
 
 public class Viaje {
     private User conductor;
-    private LocalDateTime fechaHoraSalida;
+    private LocalDateTime fechaHora; // Fecha y hora de salida
     private PuntoGeografico puntoOrigen;
     private PuntoGeografico puntoDestino;
-    private int plazasPasajeros;
+    private int plazas; // Plazas ofrecidads a pasajeros
 
-    public Viaje(User conductor, LocalDateTime fechaHoraSalida, PuntoGeografico puntoOrigen,
-            PuntoGeografico puntoDestino, int plazasPasajeros) {
+    public Viaje(User conductor, LocalDateTime fechaHora, PuntoGeografico puntoOrigen,
+            PuntoGeografico puntoDestino, int plazas) {
         this.conductor = conductor;
-        this.fechaHoraSalida = fechaHoraSalida;
+        this.fechaHora = fechaHora;
         this.puntoOrigen = puntoOrigen;
         this.puntoDestino = puntoDestino;
-        this.plazasPasajeros = plazasPasajeros;
+        this.plazas = plazas;
     }
 
     public Viaje() {
@@ -32,16 +32,17 @@ public class Viaje {
 
     @Override
     public String toString() {
-        return fechaHoraSalida.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " - " + conductor + " - "
+        return fechaHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " - " + conductor.getUsername()
+                + " - "
                 + puntoOrigen.getNombre() + " >> " + puntoDestino.getNombre();
     }
 
     public void mostrarDetalle() {
         System.out.println("Conductor: " + conductor);
-        System.out.println("Fecha/Hora Salida: " + fechaHoraSalida);
+        System.out.println("Fecha/Hora Salida: " + fechaHora);
         System.out.println("Punto Origen: " + puntoOrigen);
         System.out.println("Punto Destino: " + puntoDestino);
-        System.out.println("Plazas Pasajeros: " + plazasPasajeros);
+        System.out.println("Plazas Pasajeros: " + plazas);
         System.out.println("Detalle de la ruta: " + urlOpenStreetMaps());
     }
 
@@ -81,7 +82,37 @@ public class Viaje {
                 viajes = Arrays.copyOf(viajes, viajes.length + 1);
 
                 viajes[i] = new Viaje(
-                        new User(resultado.getString("conductor")),
+                        User.read(resultado.getInt("conductor")),
+                        resultado.getTimestamp("fecha_hora").toLocalDateTime(),
+                        PuntoGeografico.read(resultado.getInt("punto_salida")),
+                        PuntoGeografico.read(resultado.getInt("punto_llegada")),
+                        resultado.getInt("plazas"));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return viajes;
+    }
+
+    public static Viaje[] getViajes(User usuarioLogueado) {
+        Viaje[] viajes = new Viaje[0];
+
+        Connection conexion = Conexion.conectar(); // Conectamos con la base de datos
+
+        // Consulta SQL. TODO: Cambiar a consulta parametrizada
+        String sql = "SELECT * FROM VIAJE, USER WHERE conductor = USER.id AND USER.username LIKE '"
+                + usuarioLogueado.getUsername() + "'";
+        try {
+            Statement sentencia = conexion.createStatement();
+
+            ResultSet resultado = sentencia.executeQuery(sql);
+            for (int i = 0; resultado.next(); i++) {
+                viajes = Arrays.copyOf(viajes, viajes.length + 1);
+
+                viajes[i] = new Viaje(
+                        User.read(resultado.getInt("conductor")),
                         resultado.getTimestamp("fecha_hora").toLocalDateTime(),
                         PuntoGeografico.read(resultado.getInt("punto_salida")),
                         PuntoGeografico.read(resultado.getInt("punto_llegada")),

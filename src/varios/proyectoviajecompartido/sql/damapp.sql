@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-12-2023 a las 09:53:52
+-- Tiempo de generación: 19-12-2023 a las 21:40:13
 -- Versión del servidor: 8.0.35-0ubuntu0.22.04.1
 -- Versión de PHP: 8.1.2-1ubuntu2.14
 
@@ -39,7 +39,8 @@ CREATE TABLE `PUNTO_GEOGRAFICO` (
 --
 
 INSERT INTO `PUNTO_GEOGRAFICO` (`id`, `nombre`, `latitud`, `longitud`) VALUES
-(1, 'IES Chan do Monte', 42.3895784, -8.7099882);
+(1, 'IES Chan do Monte', 42.3895784, -8.7099882),
+(2, 'Plaza de Galicia. Pontevedra', 42.42787, -8.64451);
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,7 @@ CREATE TABLE `USER` (
 --
 
 INSERT INTO `USER` (`id`, `email`, `roles`, `password`, `is_verified`, `username`, `created_at`, `updated_at`, `last_login`, `enabled`, `photo_filename`) VALUES
-(1, 'aguadoaudiovisual@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$S4X31Z1qF4YGfgniESKrpu7TE5SazLNu0u3.KdEKHeZJod.Bk8GiO', 1, 'aguado', '2023-11-11 12:00:00', '2022-08-12 14:26:26', '2023-10-30 18:46:46', 1, NULL),
+(1, 'aguadoaudiovisual@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$S4X31Z1qF4YGfgniESKrpu7TE5SazLNu0u3.KdEKHeZJod.Bk8GiO', 1, 'aguado', '2023-11-11 12:00:00', '2022-08-12 14:26:26', '2023-12-19 14:29:55', 1, NULL),
 (6958, 'ale.piki.05@gmail.com', '[]', '$2y$13$FnWRojMAgk9tbwGfH4JkYeIIwpYo5CWF6pmagkPKpYhena75pVk6m', 1, 'acainrodr', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
 (7008, 'angelbarralperez@gmail.com', '[]', '$2y$13$t2VGZxsftes/Yx0mkEvl.ucOYKcVlE4iUAH4tHQ6TDxZj3TYv.iEm', 1, 'mbarrpere', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
 (7015, 'anton.vega.vidal@gmail.com', '[]', '$2y$13$dMnTH.eYSm62rtxGr.8DxeIowPh3W9cI/NLYXiXHcl5HL/fWzxHTm', 1, 'avegavida', '2023-11-11 12:00:00', NULL, NULL, 1, NULL),
@@ -114,6 +115,13 @@ CREATE TABLE `VIAJE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Volcado de datos para la tabla `VIAJE`
+--
+
+INSERT INTO `VIAJE` (`id`, `conductor`, `fecha_hora`, `punto_salida`, `punto_llegada`, `plazas`) VALUES
+(1, 1, '2023-12-21 14:30:00', 1, 2, 2);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -148,7 +156,7 @@ ALTER TABLE `VIAJE`
 -- AUTO_INCREMENT de la tabla `PUNTO_GEOGRAFICO`
 --
 ALTER TABLE `PUNTO_GEOGRAFICO`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `USER`
@@ -160,7 +168,7 @@ ALTER TABLE `USER`
 -- AUTO_INCREMENT de la tabla `VIAJE`
 --
 ALTER TABLE `VIAJE`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

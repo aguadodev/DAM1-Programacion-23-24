@@ -1,4 +1,4 @@
-package varios.proyectoviajecompartido.model;
+package varios.proyectoviajecompartido.modelo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -49,6 +49,15 @@ public class User {
     }
 
     /*
+     * Getters y Setters
+     */
+
+    public String getUsername() {
+        return username;
+    }
+
+
+    /*
      * FUNCIONES DE ACCESO A LA BASE DE DATOS
      */
 
@@ -60,7 +69,7 @@ public class User {
         Statement sentencia;
         try {
             sentencia = conexion.createStatement();
-
+            // TODO: Cambiar a consulta parametrizada
             ResultSet resultado = sentencia.executeQuery("SELECT * FROM USER WHERE username LIKE '" + username + "'");
 
             if (resultado.next()) {
@@ -88,5 +97,33 @@ public class User {
         return user;
 
     }
+
+
+    public static User read(int id) {
+
+        Connection conexion = Conexion.conectar(); // Conectamos con la base de datos
+
+        try {
+            // Consulta SQL
+            Statement sentencia = conexion.createStatement();
+            // TODO: Cambiar a consulta parametrizada
+            String sql = "SELECT * FROM USER WHERE id = " + id;
+
+            ResultSet resultado = sentencia.executeQuery(sql);
+
+            if (resultado.next()) {
+                User user = new User(resultado.getString("username"), resultado.getString("password"),
+                        resultado.getString("email"), resultado.getTimestamp("created_at").toLocalDateTime(), 
+                        resultado.getTimestamp("last_login").toLocalDateTime(),
+                        resultado.getBoolean("enabled"));
+
+                return user;
+            }
+        } catch (SQLException e) {
+        }
+
+        return null;
+    }
+  
 
 }

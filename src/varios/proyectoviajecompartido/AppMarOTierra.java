@@ -2,7 +2,7 @@ package varios.proyectoviajecompartido;
 
 import java.util.Scanner;
 
-import varios.proyectoviajecompartido.model.PuntoGeografico;
+import varios.proyectoviajecompartido.modelo.PuntoGeografico;
 
 /**
  * Juego de adivinar si un punto geográfico está en el mar o en tierra.
