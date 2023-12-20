@@ -17,12 +17,14 @@ public class E0511 {
         System.out.println("Longitud de la combinación: ");
         int longitud = sc.nextInt();
 
+        // Genera la combinación secreta
         combinacion = new int[longitud];
         for (int i = 0; i < longitud; i++) {
             combinacion[i] = (int) (Math.random() * 5 + 1);
         }
 
-        System.out.println("Combinación: " + Arrays.toString(combinacion));
+        // Muestra la combinación secreta?? Para depurar..
+        // System.out.println("Combinación: " + Arrays.toString(combinacion));
 
         // Repetir solicitar combinación hasta que acierte
         while (!combinacionOK) {
@@ -43,7 +45,11 @@ public class E0511 {
                     combinacionOK = false;
                 }
             }
-            System.out.println(Arrays.toString(pistas));
+            if (Arrays.equals(combinacion, combUsuario)) {
+                System.out.println("Enhorabuena has acertado la combinación secreta!!");
+            } else {
+                System.out.println("Sigue probando...  Pistas: " + Arrays.toString(pistas));
+            }
         }
     }
 }

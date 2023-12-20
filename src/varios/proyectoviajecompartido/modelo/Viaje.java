@@ -67,6 +67,8 @@ public class Viaje {
         viaje.mostrarDetalle();
     }
 
+
+    
     public static Viaje[] getViajesDisponibles() {
         Viaje[] viajes = new Viaje[0];
 
