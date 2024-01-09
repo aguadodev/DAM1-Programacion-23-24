@@ -13,10 +13,10 @@ public class E0512 {
         matriz = new int[FILAS][COLUMNAS];
 
         // Entrada de datos
-        for (int i = 0; i < FILAS; i++) {
-            for (int j = 0; j < COLUMNAS; j++) {
+        for (int n = 0; n < FILAS; n++) {
+            for (int m = 0; m < COLUMNAS; m++) {
                 // matriz[i][j] = (int)(Math.random()*10);
-                matriz[i][j] = 10 * i + j;
+                matriz[n][m] = 10 * n + m;
             }
         }
 
