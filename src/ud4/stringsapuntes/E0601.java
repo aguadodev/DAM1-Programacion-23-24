@@ -16,4 +16,6 @@ public class E0601 {
         }
         sc.close();
     }
+
+    // En Windows prueba a ejecutar el programa tras cambiar la página de códigos activa en el terminal con "chcp 65001"
 }

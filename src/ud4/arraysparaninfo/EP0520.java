@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Test;
+
 public class EP0520 {
     public static void main(String[] args) {
         int[] array1 = {1, 3, 5, 7};
@@ -17,6 +19,18 @@ public class EP0520 {
         System.out.println(Arrays.toString(result));
 
     }
+
+    @Test
+    public void testFusionOrdenada() {
+        int[] array1 = {1, 3, 5, 7};
+        int[] array2 = {2, 4, 6, 8};
+        int[] expected = {1, 2, 3, 4, 5, 6, 7, 8};
+
+        int[] result = fusionOrdenada(array1, array2);
+
+        assertArrayEquals(expected, result);
+    }
+
 
     public static int[] fusionOrdenada(int[] t1, int[] t2){        
         int[] tr = null; 
