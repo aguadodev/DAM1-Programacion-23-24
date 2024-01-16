@@ -6,7 +6,8 @@ public class E0604 {
         int contEspacios = 0;
 
         for (int i = 0; i < cad.length(); i++) {
-            if (cad.charAt(i) == ' ') {
+            if (Character.isWhitespace(cad.charAt(i))) {
+            //if (cad.charAt(i) == ' ') {
                 contEspacios++;
             }
         }

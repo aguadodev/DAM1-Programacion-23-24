@@ -1,6 +1,9 @@
 package ud4.stringsapuntes;
 
 public class E0605 {
+    public static void main(String[] args) {
+        System.out.println(invertirCadena("Hola mundo"));
+    }
     
     static String invertirCadena(String cad) {
         String cadInvertida = "";

@@ -34,6 +34,13 @@ public class Persona {
     }
 
 
+
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     /* GETTERS Y SETTERS */
     public String getNombre() {
         return nombre;
