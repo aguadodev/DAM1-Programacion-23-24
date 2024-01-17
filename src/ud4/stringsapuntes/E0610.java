@@ -43,17 +43,17 @@ public class E0610 {
     private static char letraSinTilde(char ch) {
         return switch (ch) {
             case 'á' -> 'a';
-            case 'é' -> 'a';
-            case 'í' -> 'a';
-            case 'ó' -> 'a';
-            case 'ú' -> 'a';
-            case 'ü' -> 'a';
-            case 'Á' -> 'a';
-            case 'É' -> 'a';
-            case 'Í' -> 'a';
-            case 'Ó' -> 'a';
-            case 'Ú' -> 'a';
-            case 'Ü' -> 'a';
+            case 'é' -> 'e';
+            case 'í' -> 'i';
+            case 'ó' -> 'o';
+            case 'ú' -> 'u';
+            case 'ü' -> 'u';
+            case 'Á' -> 'A';
+            case 'É' -> 'E';
+            case 'Í' -> 'I';
+            case 'Ó' -> 'O';
+            case 'Ú' -> 'U';
+            case 'Ü' -> 'U';
             default -> ch;
         };
     }
