@@ -129,7 +129,12 @@ public class AppAgenda {
         System.out.print("Correo electrónico: ");
         p.setEmail(sc.nextLine());
 
-        agenda = Arrays.copyOf(agenda, agenda.length + 1);
+        if (agenda == null) {
+            agenda = new Persona[1];
+        } else {
+            agenda = Arrays.copyOf(agenda, agenda.length + 1);
+        }
+        
         agenda[agenda.length - 1] = p;
     }
 

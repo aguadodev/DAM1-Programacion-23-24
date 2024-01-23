@@ -61,7 +61,7 @@ public class Util {
             buffer.close();
             reader.close();
         } catch (IOException e) {
-            System.out.println("No existe el fichero.");
+            System.out.println("No existe el fichero " + filePath + ".");
             // e.printStackTrace();
         }
 

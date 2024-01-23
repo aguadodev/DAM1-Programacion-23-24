@@ -1,5 +1,12 @@
 package ud4.praiasdegalicia;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +23,15 @@ public class PraiasBD {
 
         for(int i = 0; i < praias.length; i++){
             System.out.println(praias[i].getNome() + " - " + praias[i].getUrlPrediccionMeteogalicia());
+
+            String jsonMeteogalicia = leerUrl(praias[i].getUrlPrediccionMeteogalicia());
+            int inicioLat = jsonMeteogalicia.indexOf("lat\":") + 5;
+            int finLat = jsonMeteogalicia.indexOf(",", inicioLat);
+            String latitud = jsonMeteogalicia.substring(inicioLat, finLat);
+
+            praias[i].setLat(Double.valueOf(null));
+            praias[i].setLon(Double.valueOf(null));
+
         }
 
     }
@@ -45,7 +61,35 @@ public class PraiasBD {
         }
         return praias;        
 
-
     }
+
+    public static String leerUrl(String url) {
+        String contenido = "";
+
+        // Configuración del proxy del sistema
+        System.setProperty("java.net.useSystemProxies", "true");
+
+        try {
+            URI uri = new URI(url);
+            URLConnection conexion = uri.toURL().openConnection();
+            conexion.setRequestProperty("Accept-Language", "es");
+            BufferedReader lector = new BufferedReader(
+                    new InputStreamReader(conexion.getInputStream()));
+
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                contenido += linea + "\n";
+            }
+            lector.close();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            System.out.println("URL mal formada: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error de E/S: " + e.getMessage());
+        }
+        return contenido;
+    }
+
 
 }
