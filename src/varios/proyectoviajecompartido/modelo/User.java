@@ -112,9 +112,11 @@ public class User {
             ResultSet resultado = sentencia.executeQuery(sql);
 
             if (resultado.next()) {
+                LocalDateTime createdAt = resultado.getTimestamp("created_at") == null? null : resultado.getTimestamp("created_at").toLocalDateTime();
+                LocalDateTime lastLogin = resultado.getTimestamp("last_login") == null? null : resultado.getTimestamp("last_login").toLocalDateTime();
                 User user = new User(resultado.getString("username"), resultado.getString("password"),
-                        resultado.getString("email"), resultado.getTimestamp("created_at").toLocalDateTime(), 
-                        resultado.getTimestamp("last_login").toLocalDateTime(),
+                        resultado.getString("email"), 
+                        createdAt, lastLogin, 
                         resultado.getBoolean("enabled"));
 
                 return user;
