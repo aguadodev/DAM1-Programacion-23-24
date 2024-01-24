@@ -37,9 +37,9 @@ public class CarreraPopular {
 
     }
 
-    static int participantesHermanos(String[] participantes) {
+    static int participantesHermanos2(String[] participantes) {
         // Importante! Presupone el array ordenado, por tanto los hermanos estarán en
-        // posiciones consecutivas. Pero y las mayúsculas/minúsculas?
+        // posiciones consecutivas. Pero y las mayúsculas/minúsculas? No es Case Insensitive
         int contarHermanos = 0;
 
         if (participantes != null && participantes.length > 1) {
@@ -61,6 +61,37 @@ public class CarreraPopular {
 
         return contarHermanos;
     }
+
+    static int participantesHermanos(String[] participantes) {
+        int contarHermanos = 0;
+
+        if (participantes != null && participantes.length > 1) {
+            // Genera un array auxiliar con los apellidos caseInsensitive y los ordena
+            String[] apellidos = new String[participantes.length];
+            for (int i = 0; i < participantes.length; i++){
+                apellidos[i] = participantes[i].substring(0, participantes[i].indexOf(',')).toUpperCase();   
+            }
+            Arrays.sort(apellidos);
+            
+            // Cuenta y acumula las repeticiones de cada apellido
+            boolean hermanosAnteriores = false;
+            for (int i = 1; i < apellidos.length; i++) {
+                String apellidosAnterior = apellidos[i - 1];
+                String apellidosActual = apellidos[i];
+                if (apellidosActual.equalsIgnoreCase(apellidosAnterior)) {
+                    if (hermanosAnteriores)
+                        contarHermanos++;
+                    else
+                        contarHermanos += 2;
+                    hermanosAnteriores = true;
+                } else {
+                    hermanosAnteriores = false;
+                }
+            }
+        }
+
+        return contarHermanos;
+    }    
 
 
     // TESTS JUNIT 5
