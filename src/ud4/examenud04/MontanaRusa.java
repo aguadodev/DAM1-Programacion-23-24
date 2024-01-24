@@ -8,17 +8,20 @@ public class MontanaRusa {
     static int contarPicos(int[] alturas) {
         int contarPicos = 0;
 
-        for (int i = 0; i < alturas.length; i++) {
-            if (i == 0) { // Comprueba la primera casilla
-                if (alturas[i] > alturas[i + 1] && alturas[i] > alturas[alturas.length - 1]) {
-                    contarPicos++;
-                }
-            } else if (i == alturas.length - 1) { // Comprueba la última casilla
-                if (alturas[i] > alturas[i - 1] && alturas[i] > alturas[0]) {
-                    contarPicos++;
-                }
-            } else if (alturas[i] > alturas[i - 1] && alturas[i] > alturas[i + 1]) {
+        if (alturas.length > 2) {
+            // Comprueba la primera casilla
+            if (alturas[0] > alturas[1] && alturas[0] > alturas[alturas.length - 1]) {
                 contarPicos++;
+            }
+            // Comprueba la última casilla
+            if (alturas[alturas.length - 1] > alturas[alturas.length - 2] && alturas[alturas.length - 1] > alturas[0]) {
+                contarPicos++;
+            }
+            // Comprueba el resto
+            for (int i = 1; i < alturas.length - 1; i++) {
+                if (alturas[i] > alturas[i - 1] && alturas[i] > alturas[i + 1]) {
+                    contarPicos++;
+                }
             }
         }
 
@@ -59,6 +62,24 @@ public class MontanaRusa {
     void testContarPicos_MontañaCircularConVariosPicos() {
         int[] alturas = { 3, 2, 1, 2, 1, 2, 1, 2, 3 };
         assertEquals(2, contarPicos(alturas));
+    }
+
+    @Test
+    void testContarPicos_MontañaPequeña() {
+        int[] alturas = { 3, 2 };
+        assertEquals(0, contarPicos(alturas));
+    }
+
+    @Test
+    void testContarPicos_MontañaDeUno() {
+        int[] alturas = { 3 };
+        assertEquals(0, contarPicos(alturas));
+    }
+
+    @Test
+    void testContarPicos_MontañaVacía() {
+        int[] alturas = {};
+        assertEquals(0, contarPicos(alturas));
     }
 
 }
