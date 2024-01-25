@@ -23,13 +23,12 @@ public class RecorridoRobot {
         // Obtiene la casilla de Salida
         int filaA = -1, colA = -1;
         int i = 0;
-        while (i < mapa.length && filaA == -1) {
+        while (i < mapa.length && colA == -1) {
             colA = mapa[i].indexOf('A');
-            if (colA != -1)
-                filaA = i;
-            else
+            if (colA == -1)
                 i++;
         }
+        filaA = i;
 
         int filaRobot = filaA;
         int colRobot = colA;

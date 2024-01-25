@@ -8,7 +8,7 @@ public class MontanaRusa {
     static int contarPicos(int[] alturas) {
         int contarPicos = 0;
 
-        if (alturas.length > 2) {
+        if (alturas != null && alturas.length > 2) {
             // Comprueba la primera casilla
             if (alturas[0] > alturas[1] && alturas[0] > alturas[alturas.length - 1]) {
                 contarPicos++;
