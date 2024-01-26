@@ -1,8 +1,8 @@
-package ud4.arraysapuntes;
+package util;
 
 import java.util.Arrays;
 
-public class ArraysOperacionesBasicas {
+public class UtilArrays {
 
     /**
      * Inicializa los elementos de un array de enteros a un valor fijo que se pasa como parámetro.
