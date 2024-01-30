@@ -5,6 +5,9 @@ public class Utilidades {
     public static String leerUrl(String url) {
         String contenido = "";
 
+        // Configuración del proxy del sistema
+        System.setProperty("java.net.useSystemProxies", "true");        
+
         try {
             java.net.URL urlObjeto = new java.net.URL(url);
             java.net.URLConnection conexion = urlObjeto.openConnection();

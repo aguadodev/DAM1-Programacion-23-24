@@ -57,7 +57,7 @@ public class PuntoGeografico {
         minutos = (int) minutosDecimal;
         segundos = (int) ((minutosDecimal - minutos) * 60);
         System.out.println(
-                "Latitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((longitud >= 0) ? "Este" : "Oeste"));
+                "Longitud: " + grados + "° " + minutos + "' " + segundos + "\" " + ((longitud >= 0) ? "Este" : "Oeste"));
     }
 
     @Override

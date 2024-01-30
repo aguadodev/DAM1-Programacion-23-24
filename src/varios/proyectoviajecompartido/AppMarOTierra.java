@@ -22,8 +22,12 @@ public class AppMarOTierra {
 
         int aciertos = 0;
         int fallos = 0;
+        int numPregunta = 0;
 
         while (aciertos < MAX_ACIERTOS && fallos < MAX_FALLOS) {
+            numPregunta++;
+            System.out.println("\nPREGUNTA Nº " + numPregunta + ":");
+            System.out.println("==============\n");
             PuntoGeografico puntoGeografico = new PuntoGeografico().generarAleatorio();
             System.out.println("Coordenadas: ");
             puntoGeografico.mostrarGradosDMS();
