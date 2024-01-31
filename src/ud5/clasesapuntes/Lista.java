@@ -44,8 +44,21 @@ public class Lista {
         elementos = aux;
     }
 
-    
+    public Integer valorEn(int i){
+        return (i >= 0 && i < elementos.length) ? elementos[i] : null;
+    }
 
+    public int buscar(Integer e){
+        int i = 0;
+        int pos = -1;
+        while (i < elementos.length && pos == -1) {
+            if (elementos[i] == e) 
+                pos = i;
+            i++;
+        }
+
+        return pos;
+    }
 
     public void mostrar(){
         System.out.println(Arrays.toString(elementos));
@@ -71,6 +84,8 @@ public class Lista {
         l.insertarFinal(l2); // 66577123
 
         l.eliminarEn(4); // 6657123
+
+        System.out.println("Posición del valor 1: " + l.buscar(1));
 
 
         l.mostrar();      
