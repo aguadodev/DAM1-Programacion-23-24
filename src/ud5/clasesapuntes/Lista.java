@@ -38,10 +38,17 @@ public class Lista {
         System.arraycopy(l.elementos, 0, elementos, elementos.length - l.length(), l.length());
     }
 
-    public void eliminarEn(int i){
-        Integer[] aux = Arrays.copyOf(elementos, elementos.length - 1);
-        System.arraycopy(elementos, i + 1, aux, i, elementos.length - i - 1);
-        elementos = aux;
+    public Integer eliminarEn(int i){
+        Integer e = null;
+        
+        if (i >= 0 && i < elementos.length){
+            e = elementos[i];
+            Integer[] aux = Arrays.copyOf(elementos, elementos.length - 1);
+            System.arraycopy(elementos, i + 1, aux, i, elementos.length - i - 1);
+            elementos = aux;
+        }
+
+        return e;
     }
 
     public Integer valorEn(int i){
@@ -63,6 +70,34 @@ public class Lista {
     public void mostrar(){
         System.out.println(Arrays.toString(elementos));
     }
+
+
+
+
+    public static Lista concatena(Lista l1, Lista l2){
+        
+        // 1. CopyOf + ArrayCopy return
+
+        
+        // 2. Usando insertarFinal
+
+        Lista l = l1;
+
+        l.insertarFinal(l2);
+
+        return l;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public static void main(String[] args) {
         Lista l = new Lista();
@@ -87,6 +122,7 @@ public class Lista {
 
         System.out.println("Posición del valor 1: " + l.buscar(1));
 
+        Lista.concatena(l, l2);
 
         l.mostrar();      
 
