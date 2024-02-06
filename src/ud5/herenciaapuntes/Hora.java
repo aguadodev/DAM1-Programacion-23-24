@@ -46,6 +46,14 @@ public class Hora {
         return String.format("%02d:%02d", hora, minuto);
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        Hora otra = (Hora) obj;
+        return hora == otra.hora && minuto == otra.minuto;
+    }
+
+
     public static void main(String[] args) {
         Hora h = new Hora(22, 58);
 

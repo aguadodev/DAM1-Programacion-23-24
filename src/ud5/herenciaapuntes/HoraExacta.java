@@ -30,6 +30,13 @@ public class HoraExacta extends Hora {
 
 
 
+    
+    @Override
+    public boolean equals(Object obj) {
+        HoraExacta otro = (HoraExacta) obj;
+        return super.equals(otro) && segundo == otro.segundo;
+    }
+
     @Override
     public String toString() {
         return String.format("%s:%02d", super.toString(), segundo);
@@ -38,9 +45,12 @@ public class HoraExacta extends Hora {
     public static void main(String[] args) {
         HoraExacta h = new HoraExacta(23, 59, 59);
         HoraExacta h2 = new HoraExacta(23, 59, 59);
+        HoraExacta h3 = new HoraExacta(23, 59, 00);
 
         System.out.println(h == h2);
         System.out.println(h.equals(h2));
+        System.out.println(h.equals(h3));
+        
 
 
 
