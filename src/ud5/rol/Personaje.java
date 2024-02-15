@@ -68,15 +68,18 @@ public class Personaje {
     }
 
 
+    /**
+     * Suma al personaje la experiencia indicada y sube de nivel si es necesario.
+     * @param puntos
+     * @return número de niveles subidos.
+     */
     byte sumarExperiencia(int puntos){
-        byte nivelesQueSube = 0;
+        int uExpAntes = experiencia / 1000;
         experiencia += puntos;
+        int uExpDespues = experiencia / 1000;
 
-        // Calcula el incremento de nivel
-        while (puntos >= 1000){
-            nivelesQueSube++;
-            puntos -= 1000;
-        }
+        byte nivelesQueSube = (byte) (uExpDespues - uExpAntes);
+
         nivel += nivelesQueSube;
             
         return nivelesQueSube;
