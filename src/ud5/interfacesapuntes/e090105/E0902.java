@@ -1,4 +1,4 @@
-package ud5.interfacesapuntes.e090104;
+package ud5.interfacesapuntes.e090105;
 
 import java.util.Scanner;
 
@@ -6,6 +6,7 @@ public class E0902 {
     public static void main(String[] args) {
         Lista cola = new Lista();
         Lista pila = new Lista();
+        ColaDoble colaDoble = new Lista();
         int numero;
         Scanner sc = new Scanner(System.in);
 

@@ -1,6 +1,6 @@
 package ud5.interfacesapuntes.ejemplos;
 
-public class Leon implements Sonido{
+public class Leon extends Animal implements Sonido{
 
     @Override
     public void voz() {

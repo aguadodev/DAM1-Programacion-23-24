@@ -1,13 +1,25 @@
-package ud5.interfacesapuntes.e090104;
+package ud5.interfacesapuntes.e090105;
 
 import java.util.Arrays;
 
-public class Lista implements Cola, Pila {
+public class Lista implements ColaDoble {
     private Integer[] elementos;
 
     public Lista() {
         elementos = new Integer[0];
     }
+
+    /** Interfaz ColaDoble */
+    @Override
+    public void encolarCabeza(Integer e) {
+        insertarEn(e, 0);
+    }
+
+    @Override
+    public Integer desencolarFinal() {
+        return eliminarEn(length() - 1);
+    }
+
 
     /** Interfaz Cola */
     public void encolar(Integer e) {
@@ -19,12 +31,10 @@ public class Lista implements Cola, Pila {
     }
 
     /** Interfaz Pila */
-    @Override
     public void apilar(Integer e) {
         insertarFinal(e);
     }
 
-    @Override
     public Integer desapilar() {
         return eliminarEn(elementos.length - 1);
     }
@@ -134,5 +144,7 @@ public class Lista implements Cola, Pila {
         l.mostrar();
 
     }
+
+
 
 }

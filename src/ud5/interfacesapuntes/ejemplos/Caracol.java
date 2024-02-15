@@ -1,5 +1,5 @@
 package ud5.interfacesapuntes.ejemplos;
 
-public class Caracol {
+public class Caracol extends Animal {
     
 }
