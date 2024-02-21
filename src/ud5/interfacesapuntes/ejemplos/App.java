@@ -9,16 +9,25 @@ public static void main(String[] args) {
     Caracol caracol = new Caracol(); 
     Leon leon = new Leon();
 
+    Sonido s = gato;
+    
 
-
-    Sonido son = new Sonido() {
+    Sonido animalRaro = new Sonido() {
         public void voz() {
             System.out.println("jajajajujujijjojo");
         }
+
+        @Override
+        public void vozDurmiendo() {
+            voz();
+        }
+
+        
+
     };
 
-    son.voz();
-    son.vozDurmiendo();
+    animalRaro.voz();
+    animalRaro.vozDurmiendo();
 
     
 

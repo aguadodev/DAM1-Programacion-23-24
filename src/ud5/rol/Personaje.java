@@ -1,6 +1,8 @@
 package ud5.rol;
 
-public class Personaje {
+import java.util.Arrays;
+
+public class Personaje implements Comparable {
 
     final static byte PUNTOS_VIDA_BASE = 50;
 
@@ -87,6 +89,10 @@ public class Personaje {
 
 
 
+    @Override
+    public int compareTo(Object o) {
+        return nombre.compareTo(((Personaje) o).nombre);
+    }
 
 
 
@@ -124,14 +130,15 @@ public class Personaje {
         Personaje[] banda = {p01, p02, p03, p04, p05};
 
         for (Personaje p : banda){
-            p.mostrar();
             System.out.println(p);
         }
+        System.out.println();
+        Arrays.sort(banda);
 
-
-
+        for (Personaje p : banda){
+            System.out.println(p);
+        }        
     }
-
 
 
 }
