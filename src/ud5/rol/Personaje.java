@@ -91,7 +91,9 @@ public class Personaje implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return nombre.compareTo(((Personaje) o).nombre);
+        Personaje otro = (Personaje) o;
+
+        return nombre.compareTo(otro.nombre);
     }
 
 
@@ -112,9 +114,7 @@ public class Personaje implements Comparable {
 
     public static void main(String[] args) {
 
-
         System.out.println("Puntos de vida base de los personajes: " + Personaje.PUNTOS_VIDA_BASE);
-
 
         Personaje p01 = new Personaje("Aragorn", Raza.HUMANO, 90, 90, 90, 10, 16252, 125);
         p01.sumarExperiencia(2500);
@@ -126,14 +126,24 @@ public class Personaje implements Comparable {
         Personaje p04 = new Personaje("Lady Jet");
 
         Personaje p05 = new Personaje();
+        Personaje p06 = new Personaje();
 
-        Personaje[] banda = {p01, p02, p03, p04, p05};
+        System.out.println(p01.compareTo(p02));
+        System.out.println(p02.compareTo(p01));
+        System.out.println(p05.compareTo(p06));
+
+
+
+
+        Personaje[] banda = {p01, p02, p03, p04, p05, p06};
 
         for (Personaje p : banda){
             System.out.println(p);
         }
         System.out.println();
-        Arrays.sort(banda);
+
+        ComparadorPV comparador = new ComparadorPV();
+        Arrays.sort(banda, comparador);
 
         for (Personaje p : banda){
             System.out.println(p);
