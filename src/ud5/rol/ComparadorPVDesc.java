@@ -2,7 +2,7 @@ package ud5.rol;
 
 import java.util.Comparator;
 
-public class ComparadorPV implements Comparator {
+public class ComparadorPVDesc implements Comparator {
     // Orden descendente por puntos de vida
 
     @Override

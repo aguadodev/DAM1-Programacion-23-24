@@ -1,6 +1,7 @@
 package ud5.rol;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Personaje implements Comparable {
 
@@ -128,6 +129,9 @@ public class Personaje implements Comparable {
         Personaje p05 = new Personaje();
         Personaje p06 = new Personaje();
 
+        Personaje p07 = new Personaje("Mara2", Raza.ELFO, 100, 100, 80);
+
+
         System.out.println(p01.compareTo(p02));
         System.out.println(p02.compareTo(p01));
         System.out.println(p05.compareTo(p06));
@@ -135,19 +139,35 @@ public class Personaje implements Comparable {
 
 
 
-        Personaje[] banda = {p01, p02, p03, p04, p05, p06};
+        Personaje[] banda = {p01, p02, p03, p04, p05, p06, p07};
 
         for (Personaje p : banda){
             System.out.println(p);
         }
         System.out.println();
 
-        ComparadorPV comparador = new ComparadorPV();
-        Arrays.sort(banda, comparador);
+        ComparadorPVDesc comparadorPV = new ComparadorPVDesc();
+        //ComparadorNivelPX comparador = new ComparadorNivelPX();
+        Arrays.sort(banda, comparadorPV);
+
+        Comparator comparadorFuerza = new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((Personaje) o1).fuerza - ((Personaje) o2).fuerza;
+            }
+            
+        };
+
+        Arrays.sort(banda, comparadorFuerza.reversed().thenComparing(comparadorPV.reversed()));
 
         for (Personaje p : banda){
-            System.out.println(p);
+            p.mostrar();
+            //System.out.println(p);
         }        
+
+        System.out.println(Arrays.binarySearch(banda, new Personaje(null, null, 77, 1, 1), comparadorFuerza));
+
+
     }
 
 
