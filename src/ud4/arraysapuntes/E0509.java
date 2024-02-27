@@ -28,6 +28,7 @@ public class E0509 {
             System.out.print("Puntuación programador/a de exhibición (-1 para terminar): ");
             puntuacion = sc.nextInt();
         }
+        sc.close();
 
         // Mostrar todos ordenados
         Arrays.sort(puntuaciones);

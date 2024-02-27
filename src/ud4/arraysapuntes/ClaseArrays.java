@@ -25,6 +25,7 @@ public class ClaseArrays {
         Scanner sc = new Scanner(System.in);
         System.out.print("Escribe un número para borrar en el array: ");
         int numero = sc.nextInt();
+        sc.close();
         numeros = borrarTodosOrdenado(numeros, numero);
 
         System.out.println("Array reducido: " + Arrays.toString(numeros));

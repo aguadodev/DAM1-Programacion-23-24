@@ -23,6 +23,7 @@ public class E0609 {
             System.out.print("Palabra: ");
             palabra = sc.nextLine();
         }
+        sc.close();
 
         System.out.println("Frase: " + frase);
 

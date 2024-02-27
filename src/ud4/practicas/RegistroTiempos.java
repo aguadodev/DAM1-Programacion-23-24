@@ -33,6 +33,8 @@ public class RegistroTiempos {
             System.out.println(segundos + " segundos transcurridos");
         } while (entrada.isEmpty() || (entrada.charAt(0) != 'f' && entrada.charAt(0) != 'F'));
 
+        sc.close();
+
         System.out.println(Arrays.toString(tiempos));
 
         double media = media(tiempos);

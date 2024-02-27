@@ -23,8 +23,8 @@ public class E0614 {
 
             System.out.print("Adivina la palabra oculta: ");
             palabraUsuario = sc.nextLine();
-
         }
+        sc.close();
 
         System.out.println("Enhorabuena!! Has acertado!!");
 

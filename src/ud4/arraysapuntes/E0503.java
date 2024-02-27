@@ -18,6 +18,7 @@ public class E0503 {
         for (int i = 0; i < numeros.length; i++) {
             numeros[i] = sc.nextDouble();
         }
+        sc.close();
 
         // Salida
         for (int i = numeros.length - 1; i >= 0; i--) {

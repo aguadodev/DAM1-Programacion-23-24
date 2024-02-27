@@ -51,5 +51,6 @@ public class E0511 {
                 System.out.println("Sigue probando...  Pistas: " + Arrays.toString(pistas));
             }
         }
+        sc.close();
     }
 }

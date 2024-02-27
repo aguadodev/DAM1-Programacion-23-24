@@ -27,7 +27,8 @@ public class E0615 {
             palabraUsuario = sc.nextLine();
 
         }
-
+        sc.close();
+        
         System.out.println("Enhorabuena!! Has acertado!!");
     }
 

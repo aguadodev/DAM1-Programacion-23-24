@@ -24,7 +24,7 @@ public class PruebasChar {
 
         System.out.println(Character.isDigit(f));
         System.out.println(Character.isLowerCase('Ñ'));
-        System.out.println(Character.isEmoji('\u1F4A'));
+        //System.out.println(Character.isEmoji('\u1F4A'));
 
     }
 }
