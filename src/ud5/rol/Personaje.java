@@ -75,6 +75,7 @@ public class Personaje implements Comparable {
         System.out.println("Nivel: " + nivel);
         System.out.println("Experiencia: " + experiencia);
         System.out.println("Puntos de Vida: " + puntosVida);
+        System.out.println();
     }
 
     @Override
@@ -170,6 +171,38 @@ public class Personaje implements Comparable {
 
         return danho;
     }
+
+
+    /**
+     * Ataca a un mostruo enemigo y devuelve el daño hecho.
+     * 
+     * @param enemigo Monstruo enemigo al que atacar.
+     * @return Daño hecho.
+     */
+    public int atacar(Monstruo enemigo) {
+        int ataque = fuerza + random(1, 100);
+        int defensa = enemigo.defensa + random(1, 100);
+        int danho = ataque - defensa;
+
+        // No puede hacer daño negativo
+        if (danho < 0)
+            danho = 0;
+        else {
+            // No puede hacer más daño de los puntos de vida que le quedan al enemigo
+            if (danho > enemigo.puntosVida) {
+                danho = enemigo.puntosVida;
+            }
+            sumarExperiencia(danho);
+            enemigo.perderVida(danho);
+        }
+
+        return danho;
+    }    
+
+
+
+
+
 
     // MÉTODOS DE CLASE
     /**
