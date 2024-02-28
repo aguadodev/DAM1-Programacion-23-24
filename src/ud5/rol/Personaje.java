@@ -5,9 +5,9 @@ import java.util.Comparator;
 
 public class Personaje implements Comparable {
 
-    final static byte PUNTOS_VIDA_BASE = 50; // 50 puntos de vida base
-    final static byte PORCENTAJE_SUBIDA_NIVEL = 5; // 5%
-    final static int EXPERIENCIA_SUBIDA_NIVEL = 1000; // 1000 puntos de experiencia
+    final protected static byte PUNTOS_VIDA_BASE = 50; // 50 puntos de vida base
+    final protected static byte PORCENTAJE_SUBIDA_NIVEL = 5; // 5%
+    final protected static int EXPERIENCIA_SUBIDA_NIVEL = 1000; // 1000 puntos de experiencia
 
     enum Raza {
         HUMANO, ELFO, ENANO, HOBBIT, ORCO, TROLL
@@ -16,14 +16,14 @@ public class Personaje implements Comparable {
     /*
      * ATRIBUTOS
      */
-    String nombre;
-    Raza raza;
-    short fuerza;
-    short agilidad;
-    short constitucion;
-    byte nivel;
-    int experiencia;
-    short puntosVida;
+    protected String nombre;
+    protected Raza raza;
+    protected short fuerza;
+    protected short agilidad;
+    protected short constitucion;
+    protected byte nivel;
+    protected int experiencia;
+    protected short puntosVida;
 
     /*
      * CONSTRUCTORES
@@ -66,6 +66,9 @@ public class Personaje implements Comparable {
      * MÉTODOS PÚBLICOS: mostrar, toString
      */
 
+    /**
+     * Muestra por consola todos los datos del personaje
+     */
     public void mostrar() {
         System.out.println("PERSONAJE: " + nombre);
         System.out.println("Raza: " + raza);
