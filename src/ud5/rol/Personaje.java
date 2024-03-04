@@ -9,7 +9,7 @@ public class Personaje implements Comparable {
     final protected static byte PORCENTAJE_SUBIDA_NIVEL = 5; // 5%
     final protected static int EXPERIENCIA_SUBIDA_NIVEL = 1000; // 1000 puntos de experiencia
 
-    enum Raza {
+    public enum Raza {
         HUMANO, ELFO, ENANO, HOBBIT, ORCO, TROLL
     }
 
@@ -175,7 +175,6 @@ public class Personaje implements Comparable {
         return danho;
     }
 
-
     /**
      * Ataca a un mostruo enemigo y devuelve el daño hecho.
      * 
@@ -200,35 +199,32 @@ public class Personaje implements Comparable {
         }
 
         return danho;
-    }    
-
-
-
-
-
+    }
 
     // MÉTODOS DE CLASE
     /**
-     * Ordena un array de personajes por puntos de vida de forma descendente usando el algoritmo de la burbuja.
+     * Ordena un array de personajes por puntos de vida de forma descendente usando
+     * el algoritmo de la burbuja.
+     * 
      * @param personajes Array de personajes a ordenar.
      * @return Array de personajes ordenado.
      */
-    static Personaje[] sortPuntosVidaDesc(Personaje[] personajes){
+    static Personaje[] sortPuntosVidaDesc(Personaje[] personajes) {
         Personaje[] A = Arrays.copyOf(personajes, personajes.length);
 
         int i, j;
         Personaje aux;
         for (i = 0; i < A.length - 1; i++) {
-            for (j = 0; j < A.length - i - 1; j++) {                                                              
+            for (j = 0; j < A.length - i - 1; j++) {
                 if (A[j + 1].puntosVida > A[j].puntosVida) {
                     aux = A[j + 1];
                     A[j + 1] = A[j];
                     A[j] = aux;
                 }
             }
-        }        
+        }
         return A;
-    }    
+    }
 
     /*
      * MÉTODO DE LA INTERFAZ COMPARABLE

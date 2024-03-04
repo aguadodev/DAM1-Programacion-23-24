@@ -7,9 +7,6 @@ public class Monstruo {
     int velocidad;
     int puntosVida;
 
-    
-
-
     public Monstruo(String nombre, int ataque, int defensa, int velocidad, int puntosVida) {
         this.nombre = nombre;
         this.ataque = ataque;
@@ -17,8 +14,6 @@ public class Monstruo {
         this.velocidad = velocidad;
         this.puntosVida = puntosVida;
     }
-
-    
 
     public Monstruo(int ataque, int defensa, int velocidad, int puntosVida) {
         this(null, ataque, defensa, velocidad, puntosVida);
@@ -53,7 +48,7 @@ public class Monstruo {
      */
     public boolean estaVivo() {
         return puntosVida > 0;
-    }    
+    }
 
     /**
      * Ataca a un enemigo y devuelve el daño hecho.
@@ -82,7 +77,7 @@ public class Monstruo {
     }
 
     public void mostrar() {
-        System.out.println("MONSTRUO: " + nombre + " " + this.getClass().getSimpleName());        
+        System.out.println("MONSTRUO: " + nombreMostrar());
         System.out.println("Ataque: " + ataque);
         System.out.println("Defensa: " + defensa);
         System.out.println("Velocidad: " + velocidad);
@@ -92,17 +87,32 @@ public class Monstruo {
 
     @Override
     public String toString() {
-        return nombre + " (" + puntosVida + ")";
+        return nombreMostrar() + " (" + puntosVida + ")";
     }
 
 
-    public static Monstruo generaMonstruoAleatorio(){
+
+    private String nombreMostrar() {
+        String clase = this.getClass().getSimpleName();
+        return nombre != null ? nombre + "(" + clase + ")" : clase + " común";        
+    }
+
+    /**
+     * Genera un monstruo aleatorio.
+     * @return Monstruo aleatorio.
+     */
+    public static Monstruo generaMonstruoAleatorio() {
         switch (random(1, 10)) {
-            case 1: return new Dragon();
-            case 2, 3: return new Troll();
-            case 4, 5, 6: return new Aranha();
-            case 7, 8, 9, 10: return new Orco();
-            default: return new Dragon(); 
+            case 1:
+                return new Dragon();
+            case 2, 3:
+                return new Troll();
+            case 4, 5, 6:
+                return new Aranha();
+            case 7, 8, 9, 10:
+                return new Orco();
+            default:
+                return new Dragon();
         }
     }
 
@@ -111,7 +121,7 @@ public class Monstruo {
      */
     protected static int random(int i, int f) {
         return (int) (Math.random() * (f - i + 1) + i);
-    }    
+    }
 
     public static void main(String[] args) {
         Monstruo m = generaMonstruoAleatorio();
@@ -121,12 +131,11 @@ public class Monstruo {
         m.mostrar();
 
         System.out.println("El monstruo ataca al personaje con " + m.atacar(p) + " puntos de daño.");
-        System.out.println("El personaje ataca al monstruo con " + p.atacar(m) + " puntos de daño.");        
+        System.out.println("El personaje ataca al monstruo con " + p.atacar(m) + " puntos de daño.");
         System.out.println();
 
         p.mostrar();
-        m.mostrar();        
+        m.mostrar();
     }
-
 
 }
