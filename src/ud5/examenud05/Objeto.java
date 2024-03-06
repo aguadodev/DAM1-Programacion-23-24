@@ -28,6 +28,10 @@ public class Objeto implements Comparable {
         this.recogido = recogido;
     }
 
+    public Objeto() {
+        //TODO Auto-generated constructor stub
+    }
+
     /**
      * Devuelve el nombre del objeto y su clase
      */

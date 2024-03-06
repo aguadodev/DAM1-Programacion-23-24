@@ -18,7 +18,7 @@ public class ObjetoElectronico extends Objeto {
 
     @Override
     public String toString() {
-        return nombre + " - ObjetoElectronico [marca=" + marca + ", modelo=" + modelo + "]";
+        return nombre + " - Objeto Electrónico [marca=" + marca + ", modelo=" + modelo + "]";
     }
 
 
