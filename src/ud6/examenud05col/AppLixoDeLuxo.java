@@ -1,4 +1,4 @@
-package ud5.examenud05;
+package ud6.examenud05col;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
