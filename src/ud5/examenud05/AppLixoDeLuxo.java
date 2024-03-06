@@ -2,6 +2,7 @@ package ud5.examenud05;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class AppLixoDeLuxo {
@@ -95,8 +96,8 @@ public class AppLixoDeLuxo {
                                 case 1: // Publicar objeto encontrado
                                         publicarObjeto();
                                         break;
-                                case 2: // Listar objetos publicados anónimamente
-                                        listarObjetosAnonimos();
+                                case 2: // Listar objetos publicados 
+                                        listarObjetosNoRecogidos();
                                         break;
                                 case 3: // Recoger objeto
                                         recogerObjeto();
@@ -111,6 +112,8 @@ public class AppLixoDeLuxo {
                 System.out.println("Cerrando sesión");
                 user = null;
         }
+
+
 
         private static void publicarObjeto() {
                 Scanner sc = new Scanner(System.in);
@@ -152,6 +155,21 @@ public class AppLixoDeLuxo {
                         }
                 }
         }
+
+        private static void listarObjetosNoRecogidos() {
+                Comparator compUserPublicado = new CompUsuarioPublicacion();
+                Comparator compFechaPublicado = new CompFechaPublicado();   
+
+                Arrays.sort(objetos, compUserPublicado.thenComparing(compFechaPublicado.reversed()));
+
+                for (int i = 0; i < objetos.length; i++){
+                        if (!objetos[i].recogido) {
+                                System.out.println("Objeto nº " + i);
+                                objetos[i].mostrarDetalles();
+                        }
+                }                
+
+        }        
 
         private static void mostrarMenuPrincipal() {
                 System.out.println("=== MENÚ PRINCIPAL ===");
