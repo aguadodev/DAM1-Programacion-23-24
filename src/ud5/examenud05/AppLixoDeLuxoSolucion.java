@@ -1,4 +1,5 @@
 package ud5.examenud05;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -33,41 +34,78 @@ public class AppLixoDeLuxoSolucion {
         System.out.println("============\n");
 
         Scanner scanner = new Scanner(System.in);
-        boolean salir = false;
 
-        while (!salir) {
-            mostrarMenuPrincipal();
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer de entrada
+        mostrarMenuPrincipal();
+        int opcion = scanner.nextInt();
 
+        while (opcion != 0) {
             switch (opcion) {
                 case 1:
-                    iniciarSesion(scanner);
+                    iniciarSesion();
                     break;
                 case 2:
-                    if (usuarioActual != null) {
-                        publicarObjetoEncontrado(scanner);
-                    } else {
-                        System.out.println("Debes iniciar sesión para publicar un objeto.");
-                    }
+                    // Publicar Objeto
                     break;
                 case 3:
                     listarObjetosPublicados();
                     break;
                 case 4:
-                    if (usuarioActual != null) {
-                        recogerObjeto(scanner);
-                    } else {
-                        System.out.println("Debes iniciar sesión para recoger un objeto.");
-                    }
-                    break;
-                case 0:
-                    salir = true;
-                    System.out.println("¡Hasta luego!");
+                    // Recoger Objeto
                     break;
                 default:
                     System.out.println("Opción no válida. Inténtelo de nuevo.");
             }
+
+            mostrarMenuPrincipal();
+            opcion = scanner.nextInt();            
+        }
+
+        System.out.println("¡Hasta luego!");
+    }
+
+
+    private static void iniciarSesion() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nombre de usuario: ");
+        String nombreUsuario = scanner.nextLine();
+        System.out.print("Contraseña: ");
+        String contrasena = scanner.nextLine();
+
+        User user = User.loginUsuario(nombreUsuario, contrasena);
+
+        if (user == null) {
+            System.out.println("Usuario y/o contraseña no válidos");
+        } else {
+            menuUsuario(user);
+        }
+
+
+        //
+    }
+
+    private static void menuUsuario(User user) {
+        Scanner scanner = new Scanner(System.in);
+
+        mostrarMenuUsuario(user);
+        int opcion = scanner.nextInt();
+
+        while (opcion != 0) {
+            switch (opcion) {
+                case 1:
+                    // Publicar Objeto
+                    break;
+                case 2:
+                    listarObjetosPublicados();
+                    break;
+                case 3:
+                    // Recoger Objeto
+                    break;
+                default:
+                    System.out.println("Opción no válida. Inténtelo de nuevo.");
+            }
+
+            mostrarMenuUsuario(user);
+            opcion = scanner.nextInt();            
         }
     }
 
@@ -81,56 +119,40 @@ public class AppLixoDeLuxoSolucion {
         System.out.print("Seleccione una opción: ");
     }
 
-    private static void iniciarSesion(Scanner scanner) {
-        System.out.print("Nombre de usuario: ");
-        String nombreUsuario = scanner.nextLine();
-        System.out.print("Contraseña: ");
-        String contrasena = scanner.nextLine();
+    private static void mostrarMenuUsuario(User user) {
+        System.out.println("\n=== MENÚ USUARIO (" + user.getUsername() + ") ===");
+        System.out.println("1. Publicar objeto encontrado");
+        System.out.println("2. Listar objetos publicados anónimamente");
+        System.out.println("3. Recoger objeto");
+        System.out.println("0. SALIR");
+        System.out.print("Seleccione una opción: ");
+    }    
 
-        // Verificar si el usuario existe (aquí debes tener una lista de usuarios
-        // válidos)
-        // Si existe, establecer usuarioActual
-        // Si no, mostrar un mensaje de error
-    }
+    private static void publicarObjetoEncontrado() {
+        Scanner scanner = new Scanner(System.in);
 
-    private static void publicarObjetoEncontrado(Scanner scanner) {
         System.out.print("Nombre del objeto: ");
         String nombreObjeto = scanner.nextLine();
         System.out.print("Ubicación del objeto: ");
         String ubicacionObjeto = scanner.nextLine();
         System.out.print("Descripción detallada (opcional): ");
         String descripcion = scanner.nextLine();
-        /*
-         * Objeto objeto = new Objeto(nombreObjeto, ubicacionObjeto, descripcion,
-         * LocalDateTime.now());
-         * objetos.add(objeto);
-         */
+        // ...
         System.out.println("Objeto publicado con éxito.");
     }
 
+
+
     private static void listarObjetosPublicados() {
-        /*
-         * System.out.println("\n=== OBJETOS PUBLICADOS ===");
-         * if (objetos == null || objetos.length = 0)) {
-         * System.out.println("No hay objetos publicados.");
-         * } else {
-         * // Filtrar objetos no recogidos y ordenar por fecha de publicación
-         * descendente
-         * // (Debes implementar métodos para filtrar y ordenar objetos)
-         * for (Objeto objeto : objetos) {
-         * System.out.println(objeto);
-         * }
-         * }
-         */
+
     }
 
-    private static void recogerObjeto(Scanner scanner) {
+    private static void recogerObjeto() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Ingrese el número de objeto que desea recoger: ");
         int numeroObjeto = scanner.nextInt();
 
-        // Verificar si el objeto existe en la lista y no ha sido recogido
-        // Si existe y no ha sido recogido, marcar como recogido y registrar la fecha y
-        // hora de recogida
-        // Si no, mostrar un mensaje de error
+
     }
 }
