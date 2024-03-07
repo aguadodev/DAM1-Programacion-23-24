@@ -45,8 +45,16 @@ public class Contenedor<T> {
 
 
         Integer[] tInt = {5, null, 3, null, 5, 7, null};
-        String[] tStr = {"Hola", null, "Adiós", null, "A", "Fin", null, null};
+        Integer[] tInt2 = {null, 38, null, 50, 47, null};
 
+        System.out.println(Arrays.toString(Util.concatenar(tInt, tInt2)));
+
+
+        String[] tStr = {"Hola", null, "Adiós", null, "A", "Fin", null, null};
+        String[] tStr2 = {"Programación", null, "Marcas", "BD", null, null};
+        System.out.println(Arrays.toString(Util.concatenar(tStr, tStr2)));
+
+/*
         System.out.println(Util.numeroNulos(tInt));
         System.out.println(Util.numeroNulos(tStr));
 
@@ -56,7 +64,7 @@ public class Contenedor<T> {
         tStr = Util.add(null, tStr);
 
         System.out.println(Arrays.toString(tInt));
-        System.out.println(Arrays.toString(tStr));
+        System.out.println(Arrays.toString(tStr));*/
 
     }
     

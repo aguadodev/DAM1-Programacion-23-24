@@ -28,6 +28,13 @@ public class Util {
         return false;
     }
 
+    public static <U> U[] concatenar(U[] t1, U[] t2){
+        U[] aux = Arrays.copyOf(t1, t1.length + t2.length);
+
+        System.arraycopy(t2, 0, aux, t1.length, t2.length);
+
+        return aux;
+    }
     
 
 }
