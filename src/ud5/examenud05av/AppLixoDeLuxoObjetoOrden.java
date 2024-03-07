@@ -1,4 +1,4 @@
-package ud5.examenud05;
+package ud5.examenud05av;
 import java.time.LocalDateTime;
 
 public class AppLixoDeLuxoObjetoOrden {
@@ -36,12 +36,29 @@ public class AppLixoDeLuxoObjetoOrden {
 
                 System.out.println("Ordenados por fecha de recogida y fecha de publicación");
                 objetos = Objeto.sortFechaRecogidaPublicacion(objetos);
-                Objeto.mostrarObjetos2(objetos);
+                mostrarObjetos2(objetos);
                 System.out.println();
 
-                System.out.println("Ordenados por recogidos, usuarios de publicación y fecha de publicación\n");
+                System.out.println("Ordenados por recogidos, usuarios de publicación y fecha de publicación");
                 objetos = Objeto.sortRecogidosUsuariosFecha(objetos);
                 Objeto.mostrarObjetos(objetos);
                 System.out.println();
         }
+
+
+
+            /**
+     * Muestra los objetos en la consola (añadiendo FechaRecogida)
+     * 
+     * @param objetos Array de objetos a mostrar
+     */
+    static public void mostrarObjetos2(Objeto[] objetos) {
+        System.out.println("N. Nombre\tRecog.\tUsuario\tFecha Publicación\tFecha Recogida");
+        System.out.println("---------\t------\t-------\t-----------------\t--------------");
+        for (int i = 0; i < objetos.length; i++) {
+            System.out.println((i + 1) + ". " + objetos[i].nombre + "\t" + objetos[i].recogido + "\t"
+                    + objetos[i].usuarioPublicacion + "\t" + objetos[i].fechaHoraPublicacion + "\t"
+                    + objetos[i].fechaHoraRecogida);
+        }
+    }
 }

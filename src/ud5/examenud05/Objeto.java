@@ -143,7 +143,7 @@ public class Objeto implements Comparable {
 
         Comparator compFechaPublicado = new CompFechaPublicado();
 
-        Arrays.sort(objetos, compRecogido.thenComparing(compUserPublicado).thenComparing(compFechaPublicado));
+        Arrays.sort(objetos, compRecogido.thenComparing(compUserPublicado).thenComparing(compFechaPublicado.reversed()));
 
         return objetos;
     }

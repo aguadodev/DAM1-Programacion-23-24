@@ -1,7 +1,9 @@
-package ud5.examenud05;
-import java.time.LocalDateTime;
+package ud5.examenud05av;
 
-public class AppLixoDeLuxoObjetoOrden {
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+public class AppLixoDeLuxoObjeto {
 
         static Objeto[] objetos = {
                 new Objeto("Laptop", "Laptop en buen estado", "Calle Principal",
@@ -29,19 +31,10 @@ public class AppLixoDeLuxoObjetoOrden {
                 System.out.println("\nLIXO DE LUXO");
                 System.out.println("==============\n");
 
-                System.out.println("Ordenados por fecha de publicación");
-                objetos = Objeto.sortFechaPublicacion(objetos);
+                Arrays.sort(objetos);
                 Objeto.mostrarObjetos(objetos);
+
                 System.out.println();
 
-                System.out.println("Ordenados por fecha de recogida y fecha de publicación");
-                objetos = Objeto.sortFechaRecogidaPublicacion(objetos);
-                Objeto.mostrarObjetos2(objetos);
-                System.out.println();
-
-                System.out.println("Ordenados por recogidos, usuarios de publicación y fecha de publicación\n");
-                objetos = Objeto.sortRecogidosUsuariosFecha(objetos);
-                Objeto.mostrarObjetos(objetos);
-                System.out.println();
         }
 }
