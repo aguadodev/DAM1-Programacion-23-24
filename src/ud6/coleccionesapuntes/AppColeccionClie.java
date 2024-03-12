@@ -16,6 +16,7 @@ public class AppColeccionClie {
         coleccionClie.add(cliente);
 
         // remove
+        coleccionClie.remove(new Cliente ("111", "", ""));
         coleccionClie.remove(cliente);
 
         //clear
@@ -34,7 +35,7 @@ public class AppColeccionClie {
         // contains
         System.out.println(coleccionClie.contains(cliente));
         // La siguiente sentencia también permite buscar por dni
-        // coleccionClie.remove(new Cliente("111", "", ""));        
+        System.out.println(coleccionClie.contains(new Cliente("111", "", "")));        
 
         // toString
         System.out.println(coleccionClie);
