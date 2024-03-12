@@ -70,7 +70,7 @@ public class User {
         try {
             sentencia = conexion.createStatement();
             // TODO: Cambiar a consulta parametrizada
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM USER WHERE username LIKE '" + username + "'");
+            ResultSet resultado = sentencia.executeQuery("SELECT * FROM user WHERE username LIKE '" + username + "'");
 
             if (resultado.next()) {
                 // Si existe el usuario valida la contraseña con BCrypt
