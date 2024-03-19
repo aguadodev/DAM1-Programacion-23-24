@@ -1,7 +1,9 @@
 package ud6.coleccionesapuntes;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -13,11 +15,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class AP1214 {
+public class E1214 {
 
     static List<Temperatura> listaTemperaturas = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        // Leer, si existe, el fichero de registros del día actual
+        // 1. generar el nombre de fichero de temperaturas del día actual.
+        String nombreArchivo = "registros-" + LocalDate.now() + ".dat";
+        // 2. leerlo si existe.
+        listaTemperaturas.addAll(leerTemperaturas(nombreArchivo));
+
         Scanner sc = new Scanner(System.in);
         mostrarMenuPrincipal();   
         int opcion = sc.nextInt();
@@ -54,6 +63,17 @@ public class AP1214 {
             e.printStackTrace();
         }
     } 
+
+    static Collection<Temperatura> leerTemperaturas(String nombreArchivo) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
+            // Leer la colección de temperaturas del archivo
+            return (Collection<Temperatura>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error al leer las temperaturas del archivo: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }    
 
     private static void mostrarEstadistica() {
         Temperatura tMax = Collections.max(listaTemperaturas);
