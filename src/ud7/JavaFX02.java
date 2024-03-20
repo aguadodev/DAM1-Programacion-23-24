@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 /**
  * JavaFX01
  */
-public class JavaFX01 extends Application {
+public class JavaFX02 extends Application {
 
     int pulsaciones = 0;
     Button btn1;
