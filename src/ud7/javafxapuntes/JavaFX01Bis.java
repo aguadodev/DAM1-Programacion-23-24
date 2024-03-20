@@ -28,46 +28,20 @@ public class JavaFX01Bis extends Application {
 
         btn1.setStyle("-fx-font-size: 20; -fx-background-color: #ff0000; -fx-text-fill: #ffffff;");
 
-        btn1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                pulsaciones++;
-                String str = "¡Me has pulsado " + pulsaciones + (pulsaciones > 1 ? " veces" : " vez!");
-                str += "\n¡Púlsame otra vez!";
-                btn1.setText(str);
-            }
-        });
+        btn1.setOnAction(e -> botonpulsado());
 
         primaryStage.setScene(new Scene(btn1, 300, 250));
 
         primaryStage.show();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //btn1.setOnAction(e -> botonpulsado());
     
-    /*static void botonpulsado(){
+    private void botonpulsado() {
         pulsaciones++;
         String str = "¡Me has pulsado " + pulsaciones + (pulsaciones > 1 ? " veces" : " vez!");
         str += "\n¡Púlsame otra vez!";
         btn1.setText(str);
-    }*/
-
+    }
 }
+
+ 
