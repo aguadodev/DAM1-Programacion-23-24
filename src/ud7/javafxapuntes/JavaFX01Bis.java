@@ -1,19 +1,19 @@
-package ud7;
+package ud7.javafxapuntes;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
  * JavaFX01
  */
-public class JavaFX02 extends Application {
+public class JavaFX01Bis extends Application {
 
-    int pulsaciones = 0;
-    Button btn1;
+    static int pulsaciones = 0;
+    static Button btn1;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,7 +25,7 @@ public class JavaFX02 extends Application {
 
         btn1 = new Button("Púlsame!");
         btn1.autosize();
-        btn1.setAlignment(Pos.BASELINE_CENTER);
+
         btn1.setStyle("-fx-font-size: 20; -fx-background-color: #ff0000; -fx-text-fill: #ffffff;");
 
         btn1.setOnAction(new EventHandler<ActionEvent>() {
@@ -38,8 +38,36 @@ public class JavaFX02 extends Application {
             }
         });
 
-        primaryStage.setScene(new javafx.scene.Scene(btn1, 300, 250));
+        primaryStage.setScene(new Scene(btn1, 300, 250));
 
         primaryStage.show();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //btn1.setOnAction(e -> botonpulsado());
+    
+    /*static void botonpulsado(){
+        pulsaciones++;
+        String str = "¡Me has pulsado " + pulsaciones + (pulsaciones > 1 ? " veces" : " vez!");
+        str += "\n¡Púlsame otra vez!";
+        btn1.setText(str);
+    }*/
+
 }
