@@ -74,7 +74,7 @@ public class E1216 {
 
 // CLASE ACADÉMICO (Incluye el método estático indicado en el enunciado)
 
-class Academico {
+class Academico implements Comparable<Academico>{
     String nombre;
     int anhoIngreso;
 
@@ -96,5 +96,10 @@ class Academico {
             resultado = false;
 
         return resultado;
+    }
+
+    @Override
+    public int compareTo(Academico o) {
+        return nombre.compareTo(o.nombre);
     }
 }

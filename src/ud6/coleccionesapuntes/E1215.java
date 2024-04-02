@@ -18,6 +18,8 @@ public class E1215 {
          */
         Map<String, Integer> existencias = new TreeMap<>();
 
+
+        // LECTURA DEL FICHERO DE DATOS
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("existencias.dat"))) {
             existencias = (TreeMap<String, Integer>) in.readObject();
         } catch (IOException ex) {
@@ -26,8 +28,11 @@ public class E1215 {
             System.out.println(ex);
         }
 
+
         int opcion;
         do {
+            System.out.println("\nMENÚ PRINCIPAL");
+            System.out.println("==============");
             System.out.println("1.Alta producto");
             System.out.println("2.Baja producto");
             System.out.println("3.Cambio stock de producto");
@@ -53,20 +58,28 @@ public class E1215 {
                 case 2 -> {
                     System.out.print("Código producto: ");
                     String codigo = new Scanner(System.in).next();
-                    existencias.remove(codigo);
+                    if (existencias.remove(codigo) == null) {
+                        System.out.println("El producto no existe");
+                    }
                 }
                 case 3 -> {
                     System.out.print("Código producto: ");
                     String codigo = new Scanner(System.in).next();
-                    System.out.print("Nuevo stock: ");
-                    int stock = new Scanner(System.in).nextInt();
-                    existencias.put(codigo, stock);
+                    if (existencias.containsKey(codigo)) {
+                        System.out.print("Nuevo stock: ");
+                        int stock = new Scanner(System.in).nextInt();
+                        existencias.put(codigo, stock);    
+                    } else {
+                        System.out.println("El producto no existe");
+                    }
                 }
                 case 4 -> {
                     System.out.println(existencias);
                 }
             }
         } while (opcion != 5);
+
+        // Guarda los datos en el fichero de salida
         try (ObjectOutputStream out = new ObjectOutputStream(
                 new FileOutputStream("existencias.dat"))) {
             out.writeObject(existencias);
