@@ -8,5 +8,6 @@
         "lib/**/*.jar",
     ],
 
-    "editor.inlayHints.enabled": "off" // Elimina los nombres de los parámetros al invocar métodos
+    "editor.inlayHints.enabled": "off",
+    "java.debug.settings.onBuildFailureProceed": true // Elimina los nombres de los parámetros al invocar métodos
 }
