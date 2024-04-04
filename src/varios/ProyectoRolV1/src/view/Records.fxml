@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecordsController">
+   <children>
+      <Label layoutX="22.0" layoutY="26.0" text="Máximas Puntuaciones">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="325.0" layoutY="407.0" mnemonicParsing="false" onAction="#cerrar" text="Cerrar" />
+      <Label fx:id="recordsLabel" layoutX="169.0" layoutY="88.0" text="Label" />
+   </children>
+</AnchorPane>

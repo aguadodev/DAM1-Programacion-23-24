@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/oscar/Documentos/PROFESOR/PROGRAMACION/DAM1-Programacion-22-23/UD04/Agenda/lib/gson-2.10.jar"
+    ]
+}
