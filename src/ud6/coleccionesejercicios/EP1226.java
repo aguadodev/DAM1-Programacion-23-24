@@ -22,7 +22,7 @@ public class EP1226 {
         lista.add("Pedro");
         lista.add("Yeray");
         lista.add("Alex");
-        lista.add("Diego");
+        lista.add("Diego P");
         lista.add("Rodrigo");
         lista.add("Miguel");
         lista.add("Eloy");
