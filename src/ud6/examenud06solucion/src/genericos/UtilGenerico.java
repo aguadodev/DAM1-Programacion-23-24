@@ -16,10 +16,23 @@ import java.util.TreeSet;
  */
 public class UtilGenerico {
 
+    /**
+     * Elimina los elementos repetidos de una colección
+     * @param <T> Tipo de los elementos de la colección
+     * @param coleccion Colección de elementos
+     * @return Colección sin elementos repetidos
+     */
     static <T> Collection<T> sinRepetidos(Collection<T> coleccion) {
         return new LinkedHashSet<>(coleccion);
     }
 
+
+    /**
+     * Cuenta los elementos repetidos de una colección
+     * @param <T> Tipo de los elementos de la colección
+     * @param coleccion Colección de elementos
+     * @return Mapa con los elementos y el número de veces que se repiten
+     */
     static <T> Map<T, Integer> contarRepetidos(Collection<T> coleccion) {
         Map<T, Integer> contarRepetidos = new LinkedHashMap<>();
         for (T elemento : coleccion)
@@ -30,6 +43,14 @@ public class UtilGenerico {
         return contarRepetidos;
     }
 
+    /**
+     * Inicializa un mapa con claves y valores
+     * @param <K> Tipo de las claves
+     * @param <V> Tipo de los valores
+     * @param claves Claves del mapa
+     * @param valores Valores del mapa
+     * @return Mapa con las claves y valores
+     */
     static <K, V> Map<K, V> iniciarMapa(Set<K> claves, List<V> valores) {
         Map<K, V> mapa = new TreeMap<>();
         int i = 0;
@@ -43,7 +64,7 @@ public class UtilGenerico {
     }
 
     public static void main(String[] args) {
-
+        // Colección de ejemplo con repetidos
         Collection<Integer> coleccion = new LinkedList<>();
         coleccion.add(1);
         coleccion.add(2);
@@ -64,7 +85,8 @@ public class UtilGenerico {
         // Cuenta los elementos repetidos
         System.out.println("contarRepetidos: " + contarRepetidos(coleccion));
 
-        // Inicializa un mapa con claves y valores
+
+        // Inicializa un mapa con un conjunto de claves y una lista de valores
         Set<String> claves = new TreeSet<>();
         claves.add("a");
         claves.add("c");

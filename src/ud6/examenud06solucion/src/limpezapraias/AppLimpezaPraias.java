@@ -24,74 +24,86 @@ public class AppLimpezaPraias {
         mapaPlayasLimpiezas = Util.leerFichero("limpeza.dat",
                 new TreeMap<Praia, List<LimpezaPraia>>());
 
-        System.out.println(mapaPlayasLimpiezas);
-
         do {
             menuPrincipal();
             System.out.print("Opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
+
             switch (opcion) {
-                case 1:
-                    // Listado de limpiezas de un equipo concreto, ordenado por fecha
-                    // ascendentemente.
+                case 1 -> {
                     System.out.print("Introduce el nombre del equipo: ");
                     String equipo = sc.nextLine();
                     listadoLimpiezasEquipo(mapaPlayasLimpiezas, equipo);
-                    break;
-                case 2:
-                    // Listado de limpiezas de una playa concreta, ordenado por fecha
-                    // descendentemente.
+                }
+                case 2 -> {
                     System.out.print("Introduce el id de la playa: ");
                     int idPlaya = sc.nextInt();
                     listadoLimpiezasPlaya(mapaPlayasLimpiezas, idPlaya);
-                    break;
-                case 3:
-                    // 10 últimas limpiezas realizadas en cualquier playa.
-                    ultimasLimpiezas(mapaPlayasLimpiezas);
-                    break;
-                case 4:
-                    // 10 playas con más kilos de basura recogidos.
-                    playasMasKilos(mapaPlayasLimpiezas);
-                    break;
-                case 5:
-                    // 10 primeros equipos con más limpiezas realizadas
-                    equiposMasLimpiezas(mapaPlayasLimpiezas);
-                    break;
-                case 6:
-                    // 10 primeros equipos con más kilos recogidos
-                    // equiposMasKilos(mapaPlayasLimpiezas);
-                    break;
-                case 7:
-                    // Añadir Limpieza de playa
-                    anadirLimpieza(mapaPlayasLimpiezas, praias);
-                    break;
-                case 8:
-                    System.out.println("Hasta luego!");
-                    break;
-                default:
-                    System.out.println("Opción no válida");
-                    break;
+                }
+                case 3 -> {ultimasLimpiezas(mapaPlayasLimpiezas);}
+                case 4 -> {playasMasKilos(mapaPlayasLimpiezas);}
+                case 5 -> {equiposMasLimpiezas(mapaPlayasLimpiezas);}
+                case 6 -> {equiposMasKilos(mapaPlayasLimpiezas);}
+                case 7 -> {anadirLimpieza(mapaPlayasLimpiezas, praias);}
+                case 8 -> {System.out.println("Hasta luego!");}
+                default -> {System.out.println("Opción no válida");}
             }
         } while (opcion != 8);
 
         // Escribir el mapa de playas y limpiezas en el fichero limpeza.dat
         if (hayNuevasLimpiezas)
             Util.escribirFichero(mapaPlayasLimpiezas, "limpeza.dat");
-
     }
 
-    private static void equiposMasLimpiezas(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
+    /**
+     * Imprime los equipos con más kilos recogidos
+     * 
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
+     */
+    private static void equiposMasKilos(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
+        // Obtiene una lista con todas las limpiezas
         List<LimpezaPraia> limpiezas = getListaLimpiezas(mapaPlayasLimpiezas);
+        // Obtiene una lista con todos los equipos
         List<String> equipos = new ArrayList<>();
         for (LimpezaPraia limpieza : limpiezas) {
             if (!equipos.contains(limpieza.equipo)) {
                 equipos.add(limpieza.equipo);
             }
         }
+        // Ordena los equipos por número de kilos recogidos
+        equipos.sort((a, b) -> kilosPorEquipo(b, limpiezas) - kilosPorEquipo(a, limpiezas));
 
+        System.out.println("\nEquipos con más kilos recogidos");
+        System.out.println("---------------------------------");
+
+        // Imprime los 10 primeros equipos con más kilos recogidos
+        for (int i = 0; i < 10 && i < equipos.size(); i++) {
+            System.out.println((i + 1) + ". " + equipos.get(i) + " - " + kilosPorEquipo(equipos.get(i), limpiezas)
+                    + " kilos");
+        }
+        System.out.println();
+    }
+
+    /**
+     * Imprime los equipos con más limpiezas realizadas
+     * 
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
+     */
+    private static void equiposMasLimpiezas(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
+        // Obtiene una lista con todas las limpiezas
+        List<LimpezaPraia> limpiezas = getListaLimpiezas(mapaPlayasLimpiezas);
+        // Obtiene una lista con todos los equipos
+        List<String> equipos = new ArrayList<>();
+        for (LimpezaPraia limpieza : limpiezas) {
+            if (!equipos.contains(limpieza.equipo)) {
+                equipos.add(limpieza.equipo);
+            }
+        }
+        // Ordena los equipos por número de limpiezas realizadas
         equipos.sort((a, b) -> limpiezasPorEquipo(b, limpiezas) - limpiezasPorEquipo(a, limpiezas));
 
+        // Imprime los 10 primeros equipos con más limpiezas realizadas
         System.out.println("\nEquipos con más limpiezas realizadas");
         System.out.println("-------------------------------------");
 
@@ -102,26 +114,15 @@ public class AppLimpezaPraias {
         System.out.println();
     }
 
-    private static int limpiezasPorEquipo(String equipo, List<LimpezaPraia> limpiezas) {
-        int limpiezasEquipo = 0;
-        for (LimpezaPraia limpieza : limpiezas) {
-            if (limpieza.equipo.equals(equipo)) {
-                limpiezasEquipo++;
-            }
-        }
-        return limpiezasEquipo;
-    }
-
     /**
-     * Calcula el número de limpiezas realizadas por un equipo
-     * @param mapaPlayasLimpiezas
+     * Imprime las playas con más kilos de basura recogidos
+     * 
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
      */
     private static void playasMasKilos(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
         List<Praia> playas = new ArrayList<>(mapaPlayasLimpiezas.keySet());
 
-        playas.sort((a, b) -> 
-            kilosPorPlaya(b, mapaPlayasLimpiezas) - kilosPorPlaya(a, mapaPlayasLimpiezas)
-        );
+        playas.sort((a, b) -> kilosPorPlaya(b, mapaPlayasLimpiezas) - kilosPorPlaya(a, mapaPlayasLimpiezas));
 
         System.out.println("\nPlayas con más kilos de basura recogidos");
         System.out.println("-----------------------------------------");
@@ -135,25 +136,14 @@ public class AppLimpezaPraias {
 
     /**
      * Calcula el número de limpiezas realizadas por un equipo
-     * @param playa
-     * @param mapaPlayasLimpiezas
-     * @return
-     */
-    private static int kilosPorPlaya(Praia playa, Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
-        int kilos = 0;
-        for (LimpezaPraia limpeza : mapaPlayasLimpiezas.get(playa)) {
-            kilos += limpeza.kilosBasura;
-        }
-        return kilos;
-    }
-
-    /**
-     * Calcula el número de limpiezas realizadas por un equipo
+     * 
      * @param mapaPlayasLimpiezas
      * @param equipo
      */
     private static void listadoLimpiezasEquipo(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas, String equipo) {
+        // Obtiene una lista con todas las limpiezas
         List<LimpezaPraia> limpiezas = getListaLimpiezas(mapaPlayasLimpiezas);
+        // Obtiene una lista con todas las limpiezas de un equipo
         List<LimpezaPraia> limpiezasEquipo = new ArrayList<>();
         for (LimpezaPraia limpeza : limpiezas) {
             if (limpeza.equipo.equals(equipo)) {
@@ -161,6 +151,7 @@ public class AppLimpezaPraias {
             }
         }
 
+        // Si hay limpiezas del equipo, las muestra ordenadas por fecha
         if (limpiezasEquipo.size() > 0) {
             System.out.println("\nLimpiezas del equipo " + equipo);
             System.out.println("-----------------------------");
@@ -176,8 +167,9 @@ public class AppLimpezaPraias {
 
     /**
      * Calcula el número de limpiezas realizadas por un equipo
-     * @param mapaPlayasLimpiezas
-     * @param idPlaya
+     * 
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
+     * @param idPlaya             Id de la playa
      */
     private static void listadoLimpiezasPlaya(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas, int idPlaya) {
         Praia playa = buscarPlaya(praias, idPlaya);
@@ -198,13 +190,16 @@ public class AppLimpezaPraias {
 
     /**
      * Muestra las 10 últimas limpiezas realizadas
-     * @param mapaPlayasLimpiezas
+     * 
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
      */
     private static void ultimasLimpiezas(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
+        // Obtiene una lista con todas las limpiezas
         List<LimpezaPraia> limpiezas = getListaLimpiezas(mapaPlayasLimpiezas);
-
+        // Ordena las limpiezas por fecha descendente
         limpiezas.sort((l1, l2) -> l2.fecha.compareTo(l1.fecha));
 
+        // Muestra las 10 últimas limpiezas
         if (limpiezas.size() > 0) {
             System.out.println("\nÚltimas 10 limpiezas realizadas:");
             System.out.println("-------------------------------");
@@ -217,9 +212,11 @@ public class AppLimpezaPraias {
         }
     }
 
+    /* MÉTODOS AUXILIARES PARA IMPLEMENTAR LAS FUNCIONALIDADES DEL MENÚ PRINCIPAL */
     /**
      * Obtiene una lista de todas las limpiezas realizadas
-     * @param mapaPlayasLimpiezas
+     * 
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
      * @return Lista de limpiezas
      */
     private static List<LimpezaPraia> getListaLimpiezas(Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
@@ -228,6 +225,56 @@ public class AppLimpezaPraias {
             limpiezas.addAll(limpezasPraia);
         }
         return limpiezas;
+    }
+
+    /**
+     * Calcula el número de limpiezas realizadas por un equipo
+     * 
+     * @param equipo    Equipo
+     * @param limpiezas Lista de limpiezas del equipo
+     * @return Número de limpiezas realizadas por el equipo
+     */
+    private static int limpiezasPorEquipo(String equipo, List<LimpezaPraia> limpiezas) {
+        int limpiezasEquipo = 0;
+        for (LimpezaPraia limpieza : limpiezas) {
+            if (limpieza.equipo.equals(equipo)) {
+                limpiezasEquipo++;
+            }
+        }
+        return limpiezasEquipo;
+    }
+
+    /**
+     * Calcula el número de kilos recogidos por un equipo
+     * 
+     * @param equipob   Equipo
+     * @param limpiezas Lista de limpiezas del equipo
+     * @return Número de kilos recogidos por el equipo
+     */
+    private static int kilosPorEquipo(String equipob, List<LimpezaPraia> limpiezas) {
+        int kilos = 0;
+        for (LimpezaPraia limpeza : limpiezas) {
+            if (limpeza.equipo.equals(equipob)) {
+                kilos += limpeza.kilosBasura;
+            }
+        }
+        return kilos;
+    }
+
+    /**
+     * Calcula el número de kilos recogidos en una playa
+     * 
+     * @param playa               Playa
+     * @param mapaPlayasLimpiezas Mapa de playas y limpiezas
+     * @return Número de kilos recogidos en la playa
+     */
+    private static int kilosPorPlaya(Praia playa, Map<Praia, List<LimpezaPraia>> mapaPlayasLimpiezas) {
+        int kilos = 0;
+        // Recorre las limpiezas de la playa y suma los kilos recogidos
+        for (LimpezaPraia limpeza : mapaPlayasLimpiezas.get(playa)) {
+            kilos += limpeza.kilosBasura;
+        }
+        return kilos;
     }
 
     /**
@@ -243,6 +290,8 @@ public class AppLimpezaPraias {
         sc.nextLine();
         Praia playa = buscarPlaya(praias, nombrePlaya);
         if (playa != null) {
+            // Si la playa existe, leemos el resto de datos.
+            // TODO Validar entrada de usuario.
             System.out.print("Introduce el nombre del equipo: ");
             String equipo = sc.nextLine();
             System.out.print("Introduce la fecha (aaaa-mm-dd): ");

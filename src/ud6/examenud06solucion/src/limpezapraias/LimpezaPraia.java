@@ -23,5 +23,4 @@ public class LimpezaPraia implements Serializable {
                 + praia.getNome() + "(" + praia.getId() + ")";
     }
 
-
 }
