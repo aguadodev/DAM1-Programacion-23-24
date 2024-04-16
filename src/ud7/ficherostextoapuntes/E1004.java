@@ -10,8 +10,9 @@ public class E1004 {
         String linea = null;
         Double suma = 0.0;
         int cont = 0;
+        FileReader ficheroEntrada = null;
         try {
-            FileReader ficheroEntrada = new FileReader("src\\ud7\\ficherostextoapuntes\\NumerosReales.txt");
+            ficheroEntrada = new FileReader("src\\ud7\\ficherostextoapuntes\\NumerosReales.txt");
 
             BufferedReader bufferEntrada = new BufferedReader(ficheroEntrada);
 
@@ -29,8 +30,6 @@ public class E1004 {
 
             System.out.println("Suma: " + suma);
             System.out.println("Media: " + suma / cont);
-
-            ficheroEntrada.close();
         } catch (FileNotFoundException ex) {
             System.out.println("No se encuentra el fichero");
         } catch (IOException ex) {
@@ -41,6 +40,12 @@ public class E1004 {
         } catch (Exception ex) {
             System.out.println("Ha habido algún otro tipo de problema");
             System.out.println(ex);
+        } finally {
+            try {
+                ficheroEntrada.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

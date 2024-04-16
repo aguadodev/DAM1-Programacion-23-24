@@ -24,11 +24,16 @@ public class E1006 {
             }
 
             System.out.println("Suma = " + suma);
-            System.out.printf("Media = %.2f", ((double) suma / cont));
-            in.close();
+            System.out.printf("Media = %.2f", ((double) suma / cont));          
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                in.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
