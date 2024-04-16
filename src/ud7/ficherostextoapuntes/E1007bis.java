@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class E1007bis {
     public static void main(String[] args) {
-        try (BufferedWriter out = new BufferedWriter(new FileWriter("src\\ud7\\ficherostextoapuntes\\Quijote.txt"))) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter("src\\ud7\\ficherostextoapuntes\\Quijote.txt"));) {
 
             String linea = "En un lugar de La Mancha,";
 
