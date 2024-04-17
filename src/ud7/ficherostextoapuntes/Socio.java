@@ -1,6 +1,7 @@
 package ud7.ficherostextoapuntes;
 
 import java.io.File;
+import java.io.Serializable;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -17,7 +18,7 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "socio")
 @XmlType(propOrder = { "nombre", "direccion", "alta" })
 //@XmlAccessorType(XmlAccessType.FIELD)
-public class Socio {
+public class Socio implements Serializable{
     @XmlAttribute(name = "id", required = true)
     private Integer id;
     private String nombre;
