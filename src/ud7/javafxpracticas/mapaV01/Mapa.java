@@ -1,4 +1,4 @@
-package ud7.javafxpracticas.mapa;
+package ud7.javafxpracticas.mapaV01;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ public class Mapa {
     protected char[][] mapa;
 
     protected int numFil;
-    protected int numCol;    
+    protected int numCol;
 
     protected int filInicio;
     protected int colInicio;
@@ -20,7 +20,7 @@ public class Mapa {
 
         this.mapa = new char[numFil][numCol];
 
-        for(int i = 0; i < numFil; i++)
+        for (int i = 0; i < numFil; i++)
             Arrays.fill(mapa[i], ' ');
     }
 
@@ -30,10 +30,14 @@ public class Mapa {
         this.mapa = new char[numFil][numCol];
 
         for (int i = 0; i < numFil; i++)
-            for(int j = 0; j < numCol; j++){
-                switch(mapaStr[i].charAt(j)){
-                    case 'X' -> { mapa[i][j] = 'X';}
-                    case ' ' -> { mapa[i][j] = ' ';}
+            for (int j = 0; j < numCol; j++) {
+                switch (mapaStr[i].charAt(j)) {
+                    case 'X' -> {
+                        mapa[i][j] = 'X';
+                    }
+                    case ' ' -> {
+                        mapa[i][j] = ' ';
+                    }
                     case 'S' -> {
                         mapa[i][j] = ' ';
                         filInicio = i;
@@ -42,15 +46,25 @@ public class Mapa {
                     case 'F' -> {
                         mapa[i][j] = ' ';
                         filFin = i;
-                        colFin = j;                        
+                        colFin = j;
                     }
-                    default -> { mapa[i][j] = ' ';}
+                    default -> {
+                        mapa[i][j] = ' ';
+                    }
                 }
             }
     }
 
-    public boolean esMuro(int i, int j){
+    public boolean esMuro(int i, int j) {
         return mapa[i][j] == 'X';
+    }
+
+    public boolean esInicio(int i, int j) {
+        return i == filInicio && j == colInicio;
+    }
+
+    public boolean esFin(int i, int j) {
+        return i == filFin && j == colFin;
     }
 
     public int getFilInicio() {
@@ -61,7 +75,4 @@ public class Mapa {
         return colInicio;
     }
 
-
-
-    
 }
