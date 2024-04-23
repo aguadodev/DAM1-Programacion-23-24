@@ -66,11 +66,11 @@ public class AppLaberintoV01 extends Application {
 
         mapa = new MapaFX(mapaStr);
         personaje = new PersonajeFX(mapa.getFilInicio(), mapa.getColInicio());
-        personaje.setImagen(new Image("ud7/javafxpracticas/mapa/img/personaje.png"));
+        personaje.setImagen(new Image("ud7/javafxpracticas/mapaV01/img/personaje.png"));
         mapa.dibujarPersonaje(personaje);
 
-        mapa.dibujarImagen(new Image("ud7/javafxpracticas/mapa/img/carne.jpg"), 9, 7 );
-        mapa.dibujarImagen(new Image("ud7/javafxpracticas/mapa/img/carne.jpg"), 12, 15 );
+        mapa.dibujarImagen(new Image("ud7/javafxpracticas/mapaV01/img/carne.jpg"), 9, 7 );
+        mapa.dibujarImagen(new Image("ud7/javafxpracticas/mapaV01/img/carne.jpg"), 12, 15 );
 
 
 

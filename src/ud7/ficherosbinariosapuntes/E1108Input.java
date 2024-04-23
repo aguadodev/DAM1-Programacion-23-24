@@ -1,31 +1,13 @@
 package ud7.ficherosbinariosapuntes;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
 import ud7.ficherostextoapuntes.Socio;
 
-
-public class E1108 {
+public class E1108Input {
     public static void main(String[] args) {
-        Socio[] socios = {
-                new Socio(1, "Juan", "Calle Chan do Monte", "01/01/2021"),
-                new Socio(2, "Ana", "Calle Marín", "01/01/2022"),
-                new Socio(3, "Luis", "Calle Vigo", "01/01/2023"),
-        };
-
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("X:\\dam1\\Programación\\UD07\\socios.dat"))) {
-            out.writeByte(3);
-            out.writeObject(socios);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-
-
         // LEE EL FICHERO BINARIO E IMPRIME SUS DATOS
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("X:\\dam1\\Programación\\UD07\\socios.dat"))) {
             in.readByte();
