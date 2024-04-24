@@ -1,4 +1,4 @@
-package ud7.javafxpracticas.mapaV02;
+package ud7.javafxpracticas.mapaV03;
 
 import java.time.LocalTime;
 
@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class AppLaberintoV02 extends Application {
+public class AppLaberintoV03 extends Application {
     MapaFX mapa;
     PersonajeFX personaje;
     int platosRecogidos = 0;
