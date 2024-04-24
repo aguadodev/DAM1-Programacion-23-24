@@ -5,8 +5,14 @@ import java.time.LocalTime;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AppLaberintoV03 extends Application {
@@ -16,6 +22,8 @@ public class AppLaberintoV03 extends Application {
     boolean[][] casillasConCarne;
     LocalTime horaInicio;
     LocalTime horaFin;
+    MenuBar menuBar;
+    Label barraEstado;
 
     public static void main(String[] args) {
         launch();
@@ -60,8 +68,25 @@ public class AppLaberintoV03 extends Application {
         // Guarda la hora de inicio
         horaInicio = LocalTime.now();
 
+        // NUEVO: Menú y barra de estado
+        MenuItem menuItemCargarMapa = new MenuItem("Cargar Mapa");
+        menuItemCargarMapa.setOnAction(e -> cargarMapa(primaryStage));
+
+        MenuItem menuItemCargarPartida = new MenuItem("Cargar Partida");
+        MenuItem menuItemGuardarPartida = new MenuItem("Guardar Partida");
+        Menu menuArchivo = new Menu("Archivo");
+        menuArchivo.getItems().addAll(menuItemCargarMapa, menuItemCargarPartida, menuItemGuardarPartida);
+        MenuItem menuItemAcercaDe = new MenuItem("Acerca de...");
+        menuItemAcercaDe.setOnAction(e -> mostrarAcercaDe());
+        Menu menuAyuda = new Menu("Ayuda");
+        menuAyuda.getItems().add(menuItemAcercaDe);
+        menuBar = new MenuBar(menuArchivo, menuAyuda);
+
+        barraEstado = new Label("Platos recogidos: " + platosRecogidos);
+
+
         // Crea la escena y sus eventos de teclado
-        Scene scene = new Scene(mapa.gridPane);
+        Scene scene = new Scene(new VBox(menuBar, mapa.gridPane, barraEstado));
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
             // Mueve el personaje en la dirección indicada por la tecla pulsada
@@ -76,26 +101,100 @@ public class AppLaberintoV03 extends Application {
                 System.out.println("¡Has recogido un plato de carne en " + f + ", " + c);
                 platosRecogidos++;
                 casillasConCarne[f][c] = false;
+                // NUEVO: Actualiza la barra de estado
+                barraEstado.setText("Platos recogidos: " + platosRecogidos);
             }
 
             // Comprueba si el personaje ha llegado al final del laberinto
             if (mapa.esFin(f, c)) {
-                horaFin = LocalTime.now();
-                long segundosTranscurridos = horaFin.toSecondOfDay() - horaInicio.toSecondOfDay();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("¡Has ganado!");
-                alert.setHeaderText("¡Enhorabuena!");
-                alert.setContentText("¡Has recogido " + platosRecogidos + " platos de carne! \n" + "Has tardado "
-                        + segundosTranscurridos + " segundos en llegar al final.");
-
-                alert.showAndWait();
-                // Al cerrar la ventana, cerrar la aplicación
+                mostrarFinJuego();
+                // Cerrar la aplicación
                 primaryStage.close();
             }
         });
 
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+
+    private void cargarMapa(Stage stage) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Abrir mapa");
+        String fichero = fileChooser.showOpenDialog(stage).getAbsolutePath();
+        String[] mapaStrAux = Mapa.cargarMapaStr(fichero);
+        mapa = new MapaFX(mapaStrAux);
+        platosRecogidos = 0;
+        barraEstado.setText("Platos recogidos: " + platosRecogidos);
+        
+        Scene scene = new Scene(new VBox(menuBar, mapa.gridPane, barraEstado));
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+            // Mueve el personaje en la dirección indicada por la tecla pulsada
+            mapa.moverPersonaje(personaje, e.getCode());
+
+            int f = personaje.filJugador;
+            int c = personaje.colJugador;
+            System.out.println("Personaje en: " + f + ", " + c);
+
+            // Comprueba si el personaje está en una casilla con carne
+            if (casillasConCarne[f][c]) {
+                System.out.println("¡Has recogido un plato de carne en " + f + ", " + c);
+                platosRecogidos++;
+                casillasConCarne[f][c] = false;
+                // NUEVO: Actualiza la barra de estado
+                barraEstado.setText("Platos recogidos: " + platosRecogidos);
+            }
+
+            // Comprueba si el personaje ha llegado al final del laberinto
+            if (mapa.esFin(f, c)) {
+                mostrarFinJuego();
+                // Cerrar la aplicación
+                stage.close();
+            }
+        });
+
+        stage.setScene(scene);
+
+        
+        personaje = new PersonajeFX(mapa.getFilInicio(), mapa.getColInicio());
+        personaje.setImagen(new Image("ud7/javafxpracticas/mapaV01/img/personaje.png"));
+        mapa.dibujarPersonaje(personaje);
+
+        // Generar y dibujar en el mapa N platos de carne
+        // Genera un mapa con un 10% de casillas con carne
+        casillasConCarne = casillasConCarne(mapa, contarCasillasVacias(mapa) / 10);
+
+        dibujarPlatosDeCarne(mapa, casillasConCarne);
+
+        // Guarda la hora de inicio
+        horaInicio = LocalTime.now();
+    }
+
+    /**
+     * Muestra un diálogo con información de fin de juego.
+     */
+    private void mostrarFinJuego() {
+        horaFin = LocalTime.now();
+        long segundosTranscurridos = horaFin.toSecondOfDay() - horaInicio.toSecondOfDay();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("¡Has ganado!");
+        alert.setHeaderText("¡Enhorabuena!");
+        alert.setContentText("¡Has recogido " + platosRecogidos + " platos de carne! \n" + "Has tardado "
+                + segundosTranscurridos + " segundos en llegar al final.");
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Muestra un diálogo con información sobre la aplicación.
+     */
+    private void mostrarAcercaDe() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Acerca de...");
+        alert.setHeaderText("AppLaberinto v0.3");
+        alert.setContentText("Práctica de JavaFX\n" + "Autor: Óscar" + "Fecha: 24/4/2024");
+        alert.showAndWait();
     }
 
     /**
@@ -164,5 +263,8 @@ public class AppLaberintoV03 extends Application {
         }
         return casillasConCarne;
     }
+
+
+    
 
 }
