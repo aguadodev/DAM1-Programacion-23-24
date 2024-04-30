@@ -1,7 +1,5 @@
 package ud7.javafxpracticas.mapaV03;
 
-import java.io.BufferedInputStream;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -105,6 +103,20 @@ public class MapaFX extends Mapa {
         img.setFitHeight(ALTO_CASILLA);
         img.setFitWidth(ANCHO_CASILLA);
         ((Label) (gridPane.getChildren().get(fil * numCol + col))).setGraphic(img);
+    }
+
+    /**
+     * Dibuja una imagen en las posiciones indicadas por el array de casillas.
+     * 
+     * @param imagen   Imagen a dibujar
+     * @param casillas Array de booleanos que indica las casillas donde dibujar la
+     *                 imagen
+     */
+    public void dibujarImagen(Image imagen, boolean[][] casillas) {
+        for (int i = 0; i < numFil; i++)
+            for (int j = 0; j < numCol; j++)
+                if (casillas[i][j])
+                    dibujarImagen(imagen, i, j);
     }
 
     /**

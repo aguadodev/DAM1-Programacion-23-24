@@ -1,9 +1,8 @@
 package ud7.javafxpracticas.mapaV03;
 
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Arrays;
-
 
 public class Mapa {
     protected char[][] mapa;
@@ -27,6 +26,11 @@ public class Mapa {
             Arrays.fill(mapa[i], ' ');
     }
 
+    /**
+     * Crea un mapa a partir de un array de Strings.
+     * 
+     * @param mapaStr Array de Strings con el mapa
+     */
     public Mapa(String[] mapaStr) {
         this.numFil = mapaStr.length;
         this.numCol = mapaStr[0].length();
@@ -59,7 +63,8 @@ public class Mapa {
     }
 
     /**
-     * NUEVO: Carga un mapa desde un fichero de texto.
+     * Carga un mapa desde un fichero de texto.
+     * 
      * @param fichero Nombre del fichero
      * @return Mapa en formato de matriz de caracteres
      */
@@ -68,7 +73,7 @@ public class Mapa {
         try (BufferedReader in = new BufferedReader(new FileReader(fichero))) {
             String linea = in.readLine();
             while (linea != null) {
-                if (mapaStr == null) 
+                if (mapaStr == null)
                     mapaStr = new String[1];
                 else
                     mapaStr = Arrays.copyOf(mapaStr, mapaStr.length + 1);
@@ -81,17 +86,40 @@ public class Mapa {
         return mapaStr;
     }
 
-    public boolean esMuro(int i, int j) {
-        return mapa[i][j] == 'X';
+    // MÉTODOS QUE COMPRUEBAN EL ESTADO DE LAS CASILLAS
+
+    public boolean esVacia(int f, int c) {
+        return mapa[f][c] == ' ';
     }
 
-    public boolean esInicio(int i, int j) {
-        return i == filInicio && j == colInicio;
+    public boolean esMuro(int f, int c) {
+        return mapa[f][c] == 'X';
     }
 
-    public boolean esFin(int i, int j) {
-        return i == filFin && j == colFin;
+    public boolean esInicio(int f, int c) {
+        return f == filInicio && c == colInicio;
     }
+
+    public boolean esFin(int f, int c) {
+        return f == filFin && c == colFin;
+    }
+
+    /**
+     * Cuenta las casillas vacías de un mapa.
+     * 
+     * @return Número de casillas vacías
+     */
+    public int contarCasillasVacias() {
+        int contador = 0;
+        for (int i = 0; i < numFil; i++)
+            for (int j = 0; j < numCol; j++)
+                if (esVacia(i, j))
+                    contador++;
+        return contador;
+
+    }
+
+    // GETTERS Y SETTERS
 
     public int getFilInicio() {
         return filInicio;

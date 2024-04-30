@@ -16,14 +16,38 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AppLaberintoV03 extends Application {
+    // Atributos de la aplicación JavaFX
     MapaFX mapa;
     PersonajeFX personaje;
+    MenuBar menuBar;
+    Label barraEstado;
+    Image IMAGE_CARNE = new Image("ud7/javafxpracticas/mapaV03/img/carne.jpg");
+    Image IMAGE_PERSONAJE = new Image("ud7/javafxpracticas/mapaV03/img/personaje.png");
+
+    // Atributos principales del juego
     int platosRecogidos = 0;
     boolean[][] casillasConCarne;
     LocalTime horaInicio;
     LocalTime horaFin;
-    MenuBar menuBar;
-    Label barraEstado;
+
+    String[] mapaStr = {
+            "XXXXXXXXXXXXXXXXXXXXXXXXX",
+            "S                 X     X",
+            "X XXXXXXXXX X X X X X X X",
+            "X         X X X X X X X X",
+            "X XXXXXXX X X X X X X X X",
+            "X X       X X X X X X X X",
+            "X X XXXXX X X X X   X X X",
+            "X X X     X X X X X X X X",
+            "X X X XXX X X X X X X X X",
+            "X X X X   X X X X X X X X",
+            "X X X XXXXX X X X X X X X",
+            "X X X       X X X X X   X",
+            "X X XXXXXXXXX X X X X X X",
+            "X X           X X X X X X",
+            "X XXXXXXXXXXX X X X X X X",
+            "X             X X X X X X",
+            "XXXXXXXXXXXXX X X X X X F" };
 
     public static void main(String[] args) {
         launch();
@@ -31,102 +55,41 @@ public class AppLaberintoV03 extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         primaryStage.setTitle("AppLaberinto");
 
-        String[] mapaStr = {
-                "XXXXXXXXXXXXXXXXXXXXXXXXX",
-                "S                 X     X",
-                "X XXXXXXXXX X X X X X X X",
-                "X         X X X X X X X X",
-                "X XXXXXXX X X X X X X X X",
-                "X X       X X X X X X X X",
-                "X X XXXXX X X X X   X X X",
-                "X X X     X X X X X X X X",
-                "X X X XXX X X X X X X X X",
-                "X X X X   X X X X X X X X",
-                "X X X XXXXX X X X X X X X",
-                "X X X       X X X X X   X",
-                "X X XXXXXXXXX X X X X X X",
-                "X X           X X X X X X",
-                "X XXXXXXXXXXX X X X X X X",
-                "X             X X X X X X",
-                "XXXXXXXXXXXXX X X X X X F" };
-
+        // Inicializa un nuevo juego
         mapa = new MapaFX(mapaStr);
+        iniciarJuego(primaryStage);
 
+        // Mostrar la ventana
+        primaryStage.show();
+    }
+
+    /**
+     * Inicializa un nuevo juego.
+     * 
+     * @param primaryStage Escenario principal
+     */
+    private void iniciarJuego(Stage stage) {
+
+        // Crear y dibujar personaje
         personaje = new PersonajeFX(mapa.getFilInicio(), mapa.getColInicio());
-        personaje.setImagen(new Image("ud7/javafxpracticas/mapaV01/img/personaje.png"));
+        personaje.setImagen(IMAGE_PERSONAJE);
         mapa.dibujarPersonaje(personaje);
 
         // Generar y dibujar en el mapa N platos de carne
         // Genera un mapa con un 10% de casillas con carne
-        casillasConCarne = casillasConCarne(mapa, contarCasillasVacias(mapa) / 10);
-
-        dibujarPlatosDeCarne(mapa, casillasConCarne);
+        casillasConCarne = casillasConCarne(mapa, mapa.contarCasillasVacias() / 10);
+        mapa.dibujarImagen(IMAGE_CARNE, casillasConCarne);
 
         // Guarda la hora de inicio
         horaInicio = LocalTime.now();
+        platosRecogidos = 0;
 
         // NUEVO: Menú y barra de estado
-        MenuItem menuItemCargarMapa = new MenuItem("Cargar Mapa");
-        menuItemCargarMapa.setOnAction(e -> cargarMapa(primaryStage));
-
-        MenuItem menuItemCargarPartida = new MenuItem("Cargar Partida");
-        MenuItem menuItemGuardarPartida = new MenuItem("Guardar Partida");
-        Menu menuArchivo = new Menu("Archivo");
-        menuArchivo.getItems().addAll(menuItemCargarMapa, menuItemCargarPartida, menuItemGuardarPartida);
-        MenuItem menuItemAcercaDe = new MenuItem("Acerca de...");
-        menuItemAcercaDe.setOnAction(e -> mostrarAcercaDe());
-        Menu menuAyuda = new Menu("Ayuda");
-        menuAyuda.getItems().add(menuItemAcercaDe);
-        menuBar = new MenuBar(menuArchivo, menuAyuda);
-
+        menuBar = crearMenuBar(stage);
         barraEstado = new Label("Platos recogidos: " + platosRecogidos);
 
-
-        // Crea la escena y sus eventos de teclado
-        Scene scene = new Scene(new VBox(menuBar, mapa.gridPane, barraEstado));
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-            // Mueve el personaje en la dirección indicada por la tecla pulsada
-            mapa.moverPersonaje(personaje, e.getCode());
-
-            int f = personaje.filJugador;
-            int c = personaje.colJugador;
-            System.out.println("Personaje en: " + f + ", " + c);
-
-            // Comprueba si el personaje está en una casilla con carne
-            if (casillasConCarne[f][c]) {
-                System.out.println("¡Has recogido un plato de carne en " + f + ", " + c);
-                platosRecogidos++;
-                casillasConCarne[f][c] = false;
-                // NUEVO: Actualiza la barra de estado
-                barraEstado.setText("Platos recogidos: " + platosRecogidos);
-            }
-
-            // Comprueba si el personaje ha llegado al final del laberinto
-            if (mapa.esFin(f, c)) {
-                mostrarFinJuego();
-                // Cerrar la aplicación
-                primaryStage.close();
-            }
-        });
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-
-    private void cargarMapa(Stage stage) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Abrir mapa");
-        String fichero = fileChooser.showOpenDialog(stage).getAbsolutePath();
-        String[] mapaStrAux = Mapa.cargarMapaStr(fichero);
-        mapa = new MapaFX(mapaStrAux);
-        platosRecogidos = 0;
-        barraEstado.setText("Platos recogidos: " + platosRecogidos);
-        
         Scene scene = new Scene(new VBox(menuBar, mapa.gridPane, barraEstado));
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
@@ -156,19 +119,6 @@ public class AppLaberintoV03 extends Application {
 
         stage.setScene(scene);
 
-        
-        personaje = new PersonajeFX(mapa.getFilInicio(), mapa.getColInicio());
-        personaje.setImagen(new Image("ud7/javafxpracticas/mapaV01/img/personaje.png"));
-        mapa.dibujarPersonaje(personaje);
-
-        // Generar y dibujar en el mapa N platos de carne
-        // Genera un mapa con un 10% de casillas con carne
-        casillasConCarne = casillasConCarne(mapa, contarCasillasVacias(mapa) / 10);
-
-        dibujarPlatosDeCarne(mapa, casillasConCarne);
-
-        // Guarda la hora de inicio
-        horaInicio = LocalTime.now();
     }
 
     /**
@@ -187,6 +137,44 @@ public class AppLaberintoV03 extends Application {
     }
 
     /**
+     * Crear un menú de opciones.
+     * 
+     * @param primaryStage Escenario principal
+     * @return Menú principal
+     */
+    private MenuBar crearMenuBar(Stage primaryStage) {
+        MenuItem menuItemCargarMapa = new MenuItem("Cargar Mapa");
+        menuItemCargarMapa.setOnAction(e -> cargarMapa(primaryStage));
+
+        MenuItem menuItemCargarPartida = new MenuItem("Cargar Partida");
+        MenuItem menuItemGuardarPartida = new MenuItem("Guardar Partida");
+        Menu menuArchivo = new Menu("Archivo");
+        menuArchivo.getItems().addAll(menuItemCargarMapa, menuItemCargarPartida, menuItemGuardarPartida);
+        MenuItem menuItemAcercaDe = new MenuItem("Acerca de...");
+        menuItemAcercaDe.setOnAction(e -> mostrarAcercaDe());
+        Menu menuAyuda = new Menu("Ayuda");
+        menuAyuda.getItems().add(menuItemAcercaDe);
+        return new MenuBar(menuArchivo, menuAyuda);
+    }
+
+    /**
+     * Carga un mapa desde un fichero.
+     * 
+     * @param stage Escenario principal
+     */
+    private void cargarMapa(Stage stage) {
+        // Cargar un mapa desde un fichero
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Abrir mapa");
+        String fichero = fileChooser.showOpenDialog(stage).getAbsolutePath();
+        String[] mapaStrAux = Mapa.cargarMapaStr(fichero);
+
+        // Inicializa un nuevo juego
+        mapa = new MapaFX(mapaStrAux);
+        iniciarJuego(stage);
+    }
+
+    /**
      * Muestra un diálogo con información sobre la aplicación.
      */
     private void mostrarAcercaDe() {
@@ -195,51 +183,6 @@ public class AppLaberintoV03 extends Application {
         alert.setHeaderText("AppLaberinto v0.3");
         alert.setContentText("Práctica de JavaFX\n" + "Autor: Óscar" + "Fecha: 24/4/2024");
         alert.showAndWait();
-    }
-
-    /**
-     * Dibuja los platos de carne en el mapa.
-     * TODO: Incorporar este método a la clase Mapa
-     * 
-     * @param mapa  Mapa
-     * @param carne Matriz booleana con valores true en las casillas con plato de
-     *              carne
-     */
-    private void dibujarPlatosDeCarne(MapaFX mapa, boolean[][] carne) {
-        for (int i = 0; i < mapa.numFil; i++)
-            for (int j = 0; j < mapa.numCol; j++)
-                if (carne[i][j])
-                    mapa.dibujarImagen(new Image("ud7/javafxpracticas/mapaV01/img/carne.jpg"), i, j);
-    }
-
-    /**
-     * Comprueba si una casilla es vacía.
-     * TODO: Incorporar este método a la clase Mapa
-     * 
-     * @param m Mapa
-     * @param f Fila
-     * @param c Columna
-     * @return true si la casilla es vacía, false en caso contrario
-     */
-    static boolean esCasillaVacia(Mapa m, int f, int c) {
-        return !m.esFin(f, c) && !m.esInicio(f, c) && !m.esMuro(f, c);
-    }
-
-    /**
-     * Cuenta las casillas vacías de un mapa.
-     * TODO: Incorporar este método a la clase Mapa??
-     * 
-     * @param m Mapa
-     * @return Número de casillas vacías
-     */
-    static int contarCasillasVacias(Mapa m) {
-        int contador = 0;
-        for (int i = 0; i < m.numFil; i++)
-            for (int j = 0; j < m.numCol; j++)
-                if (esCasillaVacia(m, i, j))
-                    contador++;
-        return contador;
-
     }
 
     /**
@@ -256,15 +199,12 @@ public class AppLaberintoV03 extends Application {
         while (numPlatos > 0) {
             int f = (int) (Math.random() * m.numFil);
             int c = (int) (Math.random() * m.numCol);
-            if (esCasillaVacia(m, f, c) && casillasConCarne[f][c] == false) {
+            if (m.esVacia(f, c) && casillasConCarne[f][c] == false) {
                 casillasConCarne[f][c] = true;
                 numPlatos--;
             }
         }
         return casillasConCarne;
     }
-
-
-    
 
 }
