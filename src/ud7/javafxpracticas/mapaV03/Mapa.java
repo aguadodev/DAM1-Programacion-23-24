@@ -2,9 +2,10 @@ package ud7.javafxpracticas.mapaV03;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Mapa {
+public class Mapa  implements Serializable{
     protected char[][] mapa;
 
     protected int numFil;

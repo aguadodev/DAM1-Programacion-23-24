@@ -1,5 +1,7 @@
 package ud7.javafxpracticas.mapaV03;
 
+import java.io.Serializable;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -7,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 
-public class MapaFX extends Mapa {
+public class MapaFX extends Mapa implements Serializable{
     final int ANCHO_CASILLA = 45;
     final int ALTO_CASILLA = 45;
     /**

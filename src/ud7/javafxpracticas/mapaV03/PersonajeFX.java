@@ -1,8 +1,10 @@
 package ud7.javafxpracticas.mapaV03;
 
+import java.io.Serializable;
+
 import javafx.scene.image.Image;
 
-public class PersonajeFX {
+public class PersonajeFX implements Serializable{
     int filJugador;
     int colJugador;
 

@@ -1,5 +1,10 @@
 package ud7.javafxpracticas.mapaV03;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 
 import javafx.application.Application;
@@ -25,10 +30,11 @@ public class AppLaberintoV03 extends Application {
     Image IMAGE_PERSONAJE = new Image("ud7/javafxpracticas/mapaV03/img/personaje.png");
 
     // Atributos principales del juego
-    int platosRecogidos = 0;
+    int platosRecogidos;
     boolean[][] casillasConCarne;
     LocalTime horaInicio;
     LocalTime horaFin;
+    int segundosTranscurridos;
 
     String[] mapaStr = {
             "XXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -85,6 +91,7 @@ public class AppLaberintoV03 extends Application {
         // Guarda la hora de inicio
         horaInicio = LocalTime.now();
         platosRecogidos = 0;
+        segundosTranscurridos = 0;
 
         // NUEVO: Menú y barra de estado
         menuBar = crearMenuBar(stage);
@@ -92,7 +99,14 @@ public class AppLaberintoV03 extends Application {
 
         Scene scene = new Scene(new VBox(menuBar, mapa.gridPane, barraEstado));
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> teclaPulsada(e, stage));
+
+        stage.setScene(scene);
+
+    }
+
+    private void teclaPulsada(KeyEvent e, Stage stage) {
+        {
             // Mueve el personaje en la dirección indicada por la tecla pulsada
             mapa.moverPersonaje(personaje, e.getCode());
 
@@ -106,7 +120,10 @@ public class AppLaberintoV03 extends Application {
                 platosRecogidos++;
                 casillasConCarne[f][c] = false;
                 // NUEVO: Actualiza la barra de estado
-                barraEstado.setText("Platos recogidos: " + platosRecogidos);
+                horaFin = LocalTime.now();
+                int segundos = segundosTranscurridos + horaFin.toSecondOfDay() - horaInicio.toSecondOfDay();      
+                barraEstado.setText("Platos recogidos: " + platosRecogidos + " - Segundos transcurridos: " + segundos);
+
             }
 
             // Comprueba si el personaje ha llegado al final del laberinto
@@ -115,10 +132,7 @@ public class AppLaberintoV03 extends Application {
                 // Cerrar la aplicación
                 stage.close();
             }
-        });
-
-        stage.setScene(scene);
-
+        }        
     }
 
     /**
@@ -126,7 +140,7 @@ public class AppLaberintoV03 extends Application {
      */
     private void mostrarFinJuego() {
         horaFin = LocalTime.now();
-        long segundosTranscurridos = horaFin.toSecondOfDay() - horaInicio.toSecondOfDay();
+        segundosTranscurridos += horaFin.toSecondOfDay() - horaInicio.toSecondOfDay();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("¡Has ganado!");
         alert.setHeaderText("¡Enhorabuena!");
@@ -147,7 +161,10 @@ public class AppLaberintoV03 extends Application {
         menuItemCargarMapa.setOnAction(e -> cargarMapa(primaryStage));
 
         MenuItem menuItemCargarPartida = new MenuItem("Cargar Partida");
+        menuItemCargarPartida.setOnAction(e -> cargarPartida(primaryStage));
+
         MenuItem menuItemGuardarPartida = new MenuItem("Guardar Partida");
+        menuItemGuardarPartida.setOnAction(e -> guardarPartida(primaryStage));
         Menu menuArchivo = new Menu("Archivo");
         menuArchivo.getItems().addAll(menuItemCargarMapa, menuItemCargarPartida, menuItemGuardarPartida);
         MenuItem menuItemAcercaDe = new MenuItem("Acerca de...");
@@ -155,6 +172,90 @@ public class AppLaberintoV03 extends Application {
         Menu menuAyuda = new Menu("Ayuda");
         menuAyuda.getItems().add(menuItemAcercaDe);
         return new MenuBar(menuArchivo, menuAyuda);
+    }
+
+    private void cargarPartida(Stage stage) {
+        // Pedir ubicación y nombre de fichero al usuario
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Cargar partida...");
+        String fichero = fileChooser.showOpenDialog(stage).getAbsolutePath();
+
+        try (FileInputStream fileIS = new FileInputStream(fichero)) {
+            ObjectInputStream in = new ObjectInputStream(fileIS);
+            // Cargar Mapa
+            mapa.mapa = (char[][]) in.readObject();
+            mapa.numFil = in.readInt();
+            mapa.numCol = in.readInt();
+            mapa.filInicio = in.readInt();
+            mapa.colInicio = in.readInt();
+            mapa.filFin = in.readInt();
+            mapa.colFin = in.readInt();
+
+            // Guardar Personaje
+            personaje.filJugador = in.readInt();
+            personaje.colJugador = in.readInt();
+            personaje.color = (String) in.readObject();
+
+            // Platos de carne
+            platosRecogidos = in.readInt();
+            segundosTranscurridos = in.readInt();
+            casillasConCarne = (boolean[][]) in.readObject();
+        } catch (EOFException e) {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Restaura la escena
+        mapa.gridPane();
+        personaje.setImagen(IMAGE_PERSONAJE);
+        mapa.dibujarPersonaje(personaje);
+        mapa.dibujarImagen(IMAGE_CARNE, casillasConCarne);
+
+        menuBar = crearMenuBar(stage);
+        barraEstado = new Label("Platos recogidos: " + platosRecogidos);
+
+        Scene scene = new Scene(new VBox(menuBar, mapa.gridPane, barraEstado));
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, e -> teclaPulsada(e, stage));
+
+        stage.setScene(scene);
+
+    }
+
+    private void guardarPartida(Stage primaryStage) {
+        // Pedir ubicación y nombre de fichero al usuario
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar partida...");
+        String fichero = fileChooser.showSaveDialog(primaryStage).getAbsolutePath();
+
+        try (FileOutputStream fileOS = new FileOutputStream(fichero)) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOS);
+            // Guardar Mapa
+            out.writeObject(mapa.mapa);
+            out.writeInt(mapa.numFil);
+            out.writeInt(mapa.numCol);
+            out.writeInt(mapa.filInicio);
+            out.writeInt(mapa.colInicio);
+            out.writeInt(mapa.filFin);
+            out.writeInt(mapa.colFin);
+
+            // Guardar Personaje
+            out.writeInt(personaje.filJugador);
+            out.writeInt(personaje.colJugador);
+            out.writeObject(personaje.color);
+
+            // Platos de carne
+            out.writeInt(platosRecogidos);
+            horaFin = LocalTime.now();
+            segundosTranscurridos += horaFin.toSecondOfDay() - horaInicio.toSecondOfDay();            
+            out.writeInt(segundosTranscurridos);
+            out.writeObject(casillasConCarne);            
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
