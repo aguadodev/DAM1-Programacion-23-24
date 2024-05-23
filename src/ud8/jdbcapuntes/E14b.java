@@ -1,4 +1,4 @@
-package ud8;
+package ud8.jdbcapuntes;
 
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class E14a {
+public class E14b {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, BD!");
@@ -45,7 +45,11 @@ public class E14a {
             Statement consulta = conexionBD.createStatement();
 
             for (String nombre : lista) {
-                String sql = "INSERT INTO Alumno (nombre) VALUES ('" + nombre + "')";
+                double nota1 = Math.random() * 10;
+                double nota2 = Math.random() * 10;
+                double nota3 = Math.random() * 10;
+                String sql = "UPDATE Alumno SET nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3
+                        + " WHERE nombre = '" + nombre + "'";
                 consulta.executeUpdate(sql);
             }
 

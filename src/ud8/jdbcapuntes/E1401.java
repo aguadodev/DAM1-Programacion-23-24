@@ -1,4 +1,4 @@
-package ud8;
+package ud8.jdbcapuntes;
 
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class E14b {
+public class E1401 {
 
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, BD!");
@@ -42,19 +42,20 @@ public class E14b {
             System.out.println("Error al conectar con la BD");
         } else {
             // Trabajar con la BD...
-            Statement consulta = conexionBD.createStatement();
-
-            for (String nombre : lista) {
-                double nota1 = Math.random() * 10;
-                double nota2 = Math.random() * 10;
-                double nota3 = Math.random() * 10;
-                String sql = "UPDATE Alumno SET nota1=" + nota1 + ", nota2=" + nota2 + ", nota3=" + nota3
-                        + " WHERE nombre = '" + nombre + "'";
-                consulta.executeUpdate(sql);
-            }
-
+            incNotaCurso(conexionBD, "1B", 100);
             conexionBD.close();
         }
+
+    }
+
+    static void incNotaCurso(Connection con, String curso, double incNota) throws SQLException {
+        Statement consulta = con.createStatement();
+        String sql = "UPDATE Alumno SET "
+                + "nota1 = nota1 + " + incNota
+                + ", nota2 = nota2 + " + incNota
+                + ", nota3 = nota3 + " + incNota
+                + " WHERE curso = '" + curso + "'";
+        consulta.executeUpdate(sql);
 
     }
 

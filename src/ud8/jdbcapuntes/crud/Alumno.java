@@ -1,4 +1,4 @@
-package ud8.crud;
+package ud8.jdbcapuntes.crud;
 
 import java.sql.Connection;
 import java.sql.Date;

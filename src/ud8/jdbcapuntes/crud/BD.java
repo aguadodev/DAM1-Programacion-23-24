@@ -1,4 +1,4 @@
-package ud8.crud;
+package ud8.jdbcapuntes.crud;
 
 public class BD {
     final static String HOST = "localhost";

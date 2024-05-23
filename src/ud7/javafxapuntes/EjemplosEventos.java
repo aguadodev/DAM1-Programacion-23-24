@@ -2,7 +2,6 @@ package ud7.javafxapuntes;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.chart.BubbleChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -30,7 +29,8 @@ public class EjemplosEventos extends Application {
 
         TextField textField = new TextField();
 
-        textField.setOnKeyPressed((KeyEvent evento) -> System.out.println("Se ha pulsado la tecla " + evento.getCode()));
+        textField
+                .setOnKeyPressed((KeyEvent evento) -> System.out.println("Se ha pulsado la tecla " + evento.getCode()));
 
         Button button = new Button("Button");
 
@@ -43,8 +43,6 @@ public class EjemplosEventos extends Application {
         vbox.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> System.out.println("MOUSE_CLICKED - " + e));
 
         scene.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> System.out.println("MOUSE_CLICKED - " + e));
-
-        
 
         primaryStage.show();
     }

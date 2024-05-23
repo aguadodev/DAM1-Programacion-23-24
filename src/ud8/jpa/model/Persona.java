@@ -1,4 +1,4 @@
-package varios.bdremota.modelJPA;
+package ud8.jpa.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 

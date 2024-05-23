@@ -5,9 +5,9 @@
             <properties-file>db.properties</properties-file>
 
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://sql.freedb.tech:3306/freedb_Compartir"/>
-            <property name="jakarta.persistence.jdbc.user" value="freedb_compartir"/>
-            <property name="jakarta.persistence.jdbc.password" value="%3%Y&amp;WWca777X7Y"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/jpa"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
         </properties>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>

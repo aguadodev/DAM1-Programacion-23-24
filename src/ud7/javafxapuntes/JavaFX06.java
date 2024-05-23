@@ -3,7 +3,6 @@ package ud7.javafxapuntes;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -17,7 +16,6 @@ public class JavaFX06 extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("JavaFX06");
-
 
         TextField textField = new TextField("Texto a añadir");
 

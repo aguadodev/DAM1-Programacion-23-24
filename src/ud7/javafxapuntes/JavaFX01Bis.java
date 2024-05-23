@@ -1,8 +1,6 @@
 package ud7.javafxapuntes;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -35,7 +33,6 @@ public class JavaFX01Bis extends Application {
         primaryStage.show();
     }
 
-    
     private void botonpulsado() {
         pulsaciones++;
         String str = "¡Me has pulsado " + pulsaciones + (pulsaciones > 1 ? " veces" : " vez!");
@@ -43,5 +40,3 @@ public class JavaFX01Bis extends Application {
         btn1.setText(str);
     }
 }
-
- 
