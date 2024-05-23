@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,6 +23,7 @@ public class Viaje {
     private PuntoGeografico puntoOrigen;
     private PuntoGeografico puntoDestino;
     private int plazas; // Plazas ofrecidads a pasajeros
+    private List<User> pasajeros;
 
     public Viaje(User conductor, LocalDateTime fechaHora, PuntoGeografico puntoOrigen,
             PuntoGeografico puntoDestino, int plazas) {

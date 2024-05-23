@@ -15,7 +15,5 @@ public class AppJPA {
         emf = Persistence.createEntityManagerFactory("miUnidadDePersistencia");
         EntityManager em;
         em = emf.createEntityManager();
-
-        
     }
 }
