@@ -83,7 +83,7 @@ public class User {
                     // Actualizar lastLogin
                     user.lastLogin = LocalDateTime.now();
                     // Guardar lastLogin en la BD
-                    sentencia.executeUpdate("UPDATE USER SET last_Login = '" + user.lastLogin
+                    sentencia.executeUpdate("UPDATE user SET last_Login = '" + user.lastLogin
                             + "' WHERE username LIKE '" + username + "'");
                 }
             }
@@ -107,7 +107,7 @@ public class User {
             // Consulta SQL
             Statement sentencia = conexion.createStatement();
             // TODO: Cambiar a consulta parametrizada
-            String sql = "SELECT * FROM USER WHERE id = " + id;
+            String sql = "SELECT * FROM user WHERE id = " + id;
 
             ResultSet resultado = sentencia.executeQuery(sql);
 
